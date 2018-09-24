@@ -4,7 +4,7 @@ Important note: This code does not work by itself, you need to have the latinos 
 
 Copy the folders in your_directory/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/ 
 
-In CMSSW_9_4_7/src , write:   eval ` scramv1 runtime -sh `
+In CMSSW_9_4_7/src , write "cmsenv"
 
 Then, move to one of the folders, e.g. code_electron_fakes , and write:
 
@@ -17,5 +17,6 @@ mkShapes.py --pycfg=configuration_fakes.py --inputDir=/eos/cms/store/group/phys_
 And use the programs that make the plots, dividing the histograms:
 
 root -q -b "division_forfakes.C(\"Iso_WP80\")"
+
 (For the rest of the programs you don't need any arguments, e.g. root -q -b "division_promptfakes.C()" ).
 
