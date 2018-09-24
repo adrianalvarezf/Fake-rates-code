@@ -4,7 +4,7 @@ Important note: This code does not work by itself, you need to have the latinos 
 
 Copy the folders in your_directory/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/ 
 
-In CMSSW_9_4_7/src , write:   eval `scramv1 runtime -sh`
+In CMSSW_9_4_7/src , write:   eval ` scramv1 runtime -sh `
 
 Then, move to one of the folders, e.g. code_electron_fakes , and write:
 
