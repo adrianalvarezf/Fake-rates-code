@@ -4,8 +4,9 @@
 # && (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 || HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 || HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 || HLT_Ele8_CaloIdM_TrackIdM_PFJet30 || HLT_Ele17_CaloIdM_TrackIdM_PFJet30 || HLT_Ele23_CaloIdM_TrackIdM_PFJet30) \
 
 #            && (Lepton_pt[0]>10 && fabs(Lepton_eta[0])<2.5) \
+# && (HLT_Mu17_TrkIsoVVL || HLT_Mu8_TrkIsoVVL) \
+
 supercut = 'nLepton>0 \
-            && (HLT_Mu17_TrkIsoVVL || HLT_Mu8_TrkIsoVVL) \
             && MET_pt<20 \
             && mtw1<20 \
             && nMuon>0 \

@@ -26,16 +26,10 @@ XSWeight      = 'baseW* Generator_weight'
 PUWeight      = 'puWeight'
 
 ################################################
-############### Lepton WP ######################
+############### HLT ######################
 ################################################
 
-#... Electron:
-#eleWP='Electron_mvaFall17Iso_WP80'
-
-
-#... Build formula
-
-#LepWPCut        = eleWP+'[Lepton_electronIdx[0]]'
+passHLT = "(HLT_Mu17_TrkIsoVVL || HLT_Mu8_TrkIsoVVL)"
 
 ################################################
 ############### Trigger   ######################
@@ -91,7 +85,7 @@ DataSets = ['DoubleMuon']
 ###########################################
 
 samples['DATA']  = {   'name': [ ] ,     
-                       'weight' : '1' ,
+                       'weight' : passHLT ,
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,

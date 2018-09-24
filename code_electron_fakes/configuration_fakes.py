@@ -1,6 +1,6 @@
 # example of configuration file
 
-date = '_20September_Fakes_Ele12'
+date = '_24September_Fakes_noMCtrigger'
 
 tag = date
 

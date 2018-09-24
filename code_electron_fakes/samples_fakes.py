@@ -26,16 +26,12 @@ XSWeight      = 'baseW* Generator_weight'
 PUWeight      = 'puWeight'
 
 ################################################
-############### Lepton WP ######################
+############### HLT  ######################
 ################################################
 
-#... Electron:
-#eleWP='Electron_mvaFall17Iso_WP80'
 
+passHLT = "(HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30||HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30)"
 
-#... Build formula
-
-#LepWPCut        = eleWP+'[Lepton_electronIdx[0]]'
 
 ################################################
 ############### Trigger   ######################
@@ -95,7 +91,7 @@ DataSets = ['SingleElectron']
 ###########################################
 
 samples['DATA']  = {   'name': [ ] ,     
-                       'weight' : '1' ,
+                       'weight' : passHLT ,
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,
