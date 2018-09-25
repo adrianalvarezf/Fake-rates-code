@@ -16,7 +16,7 @@ mkShapes.py --pycfg=configuration_fakes.py --inputDir=/eos/cms/store/group/phys_
 
 And use the programs that make the plots, dividing the histograms:
 
-root -q -b "division_forfakes.C(\"Iso_WP80\")"
+root -q -b "division_forfakes.C()"
 
-(For the rest of the programs you don't need any arguments, e.g. root -q -b "division_promptfakes.C()" ).
+
 
