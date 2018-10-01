@@ -29,22 +29,31 @@ PUWeight      = 'puWeight'
 ############### HLT  ######################
 ################################################
 
-
-passHLT = "(HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30||HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30)"
-
+passHLT = "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30" if  'Lepton_pt[0]' <= 25. else "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30"
 
 ################################################
 ############### Trigger   ######################
 ################################################
 
-#if Lepton_pt[0] <= 25. :
-#  trigger_weight = 4
-#else :
-#  trigger_weight = 43
+trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.043"
 
-trigger_weight = "0.029" if  'Lepton_pt[0]' <= 25. else "0.043"
+#0.043 fb-1 = 43 pb-1
 
-#0.004 fb-1 =4 pb-1
+################################################
+############### CleanJets   ######################
+################################################
+#lep_1 = ROOT.TLorentzVector()
+#jet_v = ROOT.TLorentzVector()
+
+#pass_cleanjets = 
+
+#for i in range(1,nCleanJet): 
+#  jet_v.SetPtEtaPhiM(CleanJet_pt[i-1], CleanJet_eta[i-1], CleanJet_phi[i-1], 0); 
+#  lep_1.SetPtEtaPhiM(Lepton_pt[0], Lepton_eta[0], Lepton_phi[0], 0); 
+#  if CleanJet_pt[i]>25 and (jet_v.DeltaR(lep_1)>1) :
+#    pass_cleanjets = "1"
+
+
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -55,8 +64,6 @@ trigger_weight = "0.029" if  'Lepton_pt[0]' <= 25. else "0.043"
 
 samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50') ,
                              #   + getSampleFiles(directoryMC,'DYJetsToLL_M-5to50-LO')     ,
-
-                    # 'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
                      'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                      'FilesPerJob' : 2 ,
                  }
@@ -65,7 +72,6 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50') 
 ###### W+jets #######
 
 samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO') ,
-                        #'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
                         'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                         'FilesPerJob' : 2 ,
                  }
@@ -83,7 +89,8 @@ DataRun = [
           ] 
 
 #DataSets = ['MuonEG','DoubleMuon','SingleMuon','DoubleEG','SingleElectron']
-DataSets = ['SingleElectron']
+#DataSets = ['SingleElectron']
+DataSets = ['DoubleEG']
 
 
 ###########################################

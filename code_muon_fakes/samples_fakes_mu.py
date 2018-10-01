@@ -29,7 +29,7 @@ PUWeight      = 'puWeight'
 ############### HLT ######################
 ################################################
 
-passHLT = "(HLT_Mu17_TrkIsoVVL || HLT_Mu8_TrkIsoVVL)"
+passHLT = "HLT_Mu8_TrkIsoVVL"  if  'Lepton_pt[0]' <= 20. else "HLT_Mu17_TrkIsoVVL"
 
 ################################################
 ############### Trigger   ######################
