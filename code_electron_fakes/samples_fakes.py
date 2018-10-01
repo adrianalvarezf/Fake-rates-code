@@ -35,7 +35,7 @@ passHLT = "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30" if  'Lepton_pt[0]' <= 25. e
 ############### Trigger   ######################
 ################################################
 
-trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.043"
+trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.0435"
 
 #0.043 fb-1 = 43 pb-1
 
@@ -62,17 +62,17 @@ trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.043"
 
 ###### DY #######
 
-samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50') ,
+samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__part0') ,
                              #   + getSampleFiles(directoryMC,'DYJetsToLL_M-5to50-LO')     ,
-                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
+                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
                      'FilesPerJob' : 2 ,
                  }
 
 
 ###### W+jets #######
 
-samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO') ,
-                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
+samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO__part0') ,
+                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
                         'FilesPerJob' : 2 ,
                  }
 
@@ -82,15 +82,15 @@ samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO')
 
 DataRun = [ 
             #['B','Run2017B-31Mar2018-v1'] , 
-            ['C','Run2017C-31Mar2018-v1'] , 
-            ['D','Run2017D-31Mar2018-v1'] , 
-            ['E','Run2017E-31Mar2018-v1'] , 
-            ['F','Run2017F-31Mar2018-v1'] , 
+            ['C','Run2017C-31Mar2018-v1__part0'] , 
+            #['D','Run2017D-31Mar2018-v1'] , 
+            #['E','Run2017E-31Mar2018-v1'] , 
+            #['F','Run2017F-31Mar2018-v1'] , 
           ] 
 
 #DataSets = ['MuonEG','DoubleMuon','SingleMuon','DoubleEG','SingleElectron']
-#DataSets = ['SingleElectron']
-DataSets = ['DoubleEG']
+DataSets = ['SingleElectron']
+#DataSets = ['DoubleEG']
 
 
 ###########################################

@@ -1,6 +1,6 @@
 # example of configuration file
 
-date = '_24September_Fake_muons_noMCtrigger'
+date = '_1October_Fake_muons_runCpart0'
 
 tag = date
 
