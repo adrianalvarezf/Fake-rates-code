@@ -6,28 +6,27 @@
 #include <fstream>
 
 
-//void division_forfakes(TString electronWP)
+
 void division_forfakes()
 {
-  //cout<<"ElectronWP: Electron_mvaFall17"<<electronWP<<endl;
-  //if(electronWP==""){
-    /// Use the program like this: root -q -b "division_forfakes.C(\"Iso_WP80\")"
-    //cout<<"Possible working points: Iso_WPL , Iso_WP80, Iso_WP90, noIso_WPL, noIso_WP80 or noIso_WP90"<<endl; 
-  //return 1;
-  //}
-  TFile* file_hadd= new TFile("code_electron_fakes/rootFile_24September_Fakes_noMCtrigger/plots__24September_Fakes_noMCtrigger.root");
-  
-  
 
-  TH1F* h_DATA = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/ele_pt1/histo_DATA"); 
-  TH1F* h_DY = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/ele_pt1/histo_DY"); 
-  TH1F* h_WJets = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/ele_pt1/histo_WJets"); 
+  //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_24September_Fakes_noMCtrigger/plots__24September_Fakes_noMCtrigger.root");
+
+  //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_doubleEG/plots__27September_Fakes_doubleEG.root");
+  //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_triggerhigh/plots__27September_Fakes_triggerhigh.root");
+  //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_triggerlow/plots__27September_Fakes_triggerlow.root");
+  TFile* file_hadd= new TFile("Zenriched/rootFile_27September_Zenriched_high/plots__27September_Zenriched_high.root");
+  //TFile* file_hadd= new TFile("Zenriched/rootFile_27September_Zenriched_low/plots__27September_Zenriched_low.root");
+
+  TH1F* h_DATA = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DATA"); 
+  TH1F* h_DY = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DY"); 
+  TH1F* h_WJets = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_WJets"); 
   TH1F* h_denominator_DATA = (TH1F*)file_hadd->Get("denominator/ele_pt1/histo_DATA"); 
   TH1F* h_denominator_DY = (TH1F*)file_hadd->Get("denominator/ele_pt1/histo_DY"); 
   TH1F* h_denominator_WJets = (TH1F*)file_hadd->Get("denominator/ele_pt1/histo_WJets"); 
-  TH1F* h_DATA_eta = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/abs_ele_eta1/histo_DATA"); 
-  TH1F* h_DY_eta = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/abs_ele_eta1/histo_DY"); 
-  TH1F* h_WJets_eta = (TH1F*)file_hadd->Get("Electron_mvaFall17Iso_WP80/abs_ele_eta1/histo_WJets"); 
+  TH1F* h_DATA_eta = (TH1F*)file_hadd->Get("numerator/abs_ele_eta1/histo_DATA"); 
+  TH1F* h_DY_eta = (TH1F*)file_hadd->Get("numerator/abs_ele_eta1/histo_DY"); 
+  TH1F* h_WJets_eta = (TH1F*)file_hadd->Get("numerator/abs_ele_eta1/histo_WJets"); 
   TH1F* h_denominator_DATA_eta = (TH1F*)file_hadd->Get("denominator/abs_ele_eta1/histo_DATA"); 
   TH1F* h_denominator_DY_eta = (TH1F*)file_hadd->Get("denominator/abs_ele_eta1/histo_DY"); 
   TH1F* h_denominator_WJets_eta = (TH1F*)file_hadd->Get("denominator/abs_ele_eta1/histo_WJets"); 
