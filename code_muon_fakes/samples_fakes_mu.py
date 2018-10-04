@@ -46,10 +46,10 @@ trigger_weight = "0.002903" if  'Lepton_pt[0]' <= 20. else "0.065944"  #0.070 pa
 pass_cleanjets = "0"
 jetn ='nCleanJet' 
 jetpt ='CleanJet_pt[{0}]'
-deltaphi ='abs(CleanJet_phi[{0}]-Lepton_phi[0])>1)'
+deltaR ='sqrt( (CleanJet_phi[{0}]-Lepton_phi[0])*(CleanJet_phi[{0}]-Lepton_phi[0]) + (CleanJet_eta[{0}]-Lepton_eta[0])*(CleanJet_eta[{0}]-Lepton_eta[0]) )'
 
 for i in range(0,10): 
-  if jetn > i and jetpt.format(i) >25 and deltaphi.format(i) >1 :
+  if jetn > i and jetpt.format(i) >25 and deltaR.format(i) >1 :
     pass_cleanjets = "1"
 
 ###########################################

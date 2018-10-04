@@ -12,7 +12,7 @@ supercut = 'nLepton==1 \
             && MET_pt<20 \
             && mtw1<20 \
             && abs(Lepton_pdgId[0]) == 13 \
-            && (Lepton_pt[0]>10 && fabs(Lepton_eta[0])<2.4) \
+            && (Lepton_pt[0]>=10 && fabs(Lepton_eta[0])<=2.4) \
             && ((Lepton_pt[0] <= 20. && HLT_Mu8_TrkIsoVVL > 0.5) || (Lepton_pt[0] > 20. && HLT_Mu17_TrkIsoVVL > 0.5)) \
            '
           # && '+jetcut+'\
