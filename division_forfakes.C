@@ -11,13 +11,11 @@ void division_forfakes()
 {
 
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_24September_Fakes_noMCtrigger/plots__24September_Fakes_noMCtrigger.root");
-
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_doubleEG/plots__27September_Fakes_doubleEG.root");
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_triggerhigh/plots__27September_Fakes_triggerhigh.root");
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_triggerlow/plots__27September_Fakes_triggerlow.root");
-  TFile* file_hadd= new TFile("Zenriched/rootFile_27September_Zenriched_high/plots__27September_Zenriched_high.root");
-  //TFile* file_hadd= new TFile("Zenriched/rootFile_27September_Zenriched_low/plots__27September_Zenriched_low.root");
-
+  //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_2October_Fake_ele_full_MCtrig/plots__2October_Fake_ele_full_MCtrig.root");
+  TFile* file_hadd= new TFile("code_electron_fakes/rootFile_3October_Fakes_full_updated/plots__3October_Fakes_full_updated.root");
   TH1F* h_DATA = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DATA"); 
   TH1F* h_DY = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DY"); 
   TH1F* h_WJets = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_WJets"); 
@@ -55,11 +53,11 @@ void division_forfakes()
   TCanvas *c1= new TCanvas();
   h_num->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_num_pt.gif");
   h_den->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_den_pt.gif");
-  h_div->Draw(); h_div->GetYaxis()->SetRangeUser(-0.4,1); h_div->SetTitle("Electron_mvaFall17Iso_WP80 fake rate"); h_div->SetLineColor(2); h_div->GetXaxis()->SetTitle("Pt1 [GeV]"); h_div->GetYaxis()->SetTitle("Ele fake rate");c1->SetGrid();
+  h_div->Draw(); h_div->GetYaxis()->SetRangeUser(0,1); h_div->SetTitle("Electron_mvaFall17Iso_WP80 fake rate"); h_div->SetLineColor(2); h_div->GetXaxis()->SetTitle("Pt1 [GeV]"); h_div->GetYaxis()->SetTitle("Ele fake rate");c1->SetGrid();
   h_div_noEWKcorr->Draw("same"); h_div_noEWKcorr->SetLineColor(1);
   c1->SaveAs("division_TightElectron_Iso_WP80_pt.gif");
-  h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->SetTitle("Electron EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_numerator.gif");
-  h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->SetTitle("Electron EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_denominator.gif");
+  h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator->SetTitle("Electron EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_numerator.gif");
+  h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_denominator->SetTitle("Electron EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_denominator.gif");
 
   TH1F* h_num_eta = (TH1F*)h_DATA_eta->Clone("h_num_eta");
   h_num_eta->Add(h_DY_eta,-1);

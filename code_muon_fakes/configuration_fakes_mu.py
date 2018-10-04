@@ -1,6 +1,6 @@
 # example of configuration file
 
-date = '_1October_Fake_muons_runCpart0'
+date = '_3October_Fake_muons_runCpart0'
 
 tag = date
 

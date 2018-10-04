@@ -11,10 +11,11 @@ void division_forfakes_mu()
 {
  
   //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_24September_Fake_muons_noMCtrigger/plots__24September_Fake_muons_noMCtrigger.root");
-  
   //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_24September_Fake_muons_triggerhigh/plots__24September_Fake_muons_triggerhigh.root");
- TFile* file_hadd= new TFile("code_muon_fakes/rootFile_27September_Fake_muons_triggerlow/plots__27September_Fake_muons_triggerlow.root");
+  //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_27September_Fake_muons_triggerlow/plots__27September_Fake_muons_triggerlow.root");
 
+  TFile* file_hadd= new TFile("code_muon_fakes/rootFile_3October_Fake_mu_full_updated/plots__3October_Fake_mu_full_updated.root");
+  
   TH1F* h_DATA = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_DATA"); 
   TH1F* h_DY = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_DY"); 
   TH1F* h_WJets = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_WJets"); 
@@ -56,8 +57,8 @@ void division_forfakes_mu()
   h_div->Draw(); h_div->GetYaxis()->SetRangeUser(0,1); h_div->SetTitle("TightMuon_cut_Tight80x_HWWW"); h_div->GetYaxis()->SetTitle("Muon fake rate"); h_div->SetLineColor(2); h_div->GetXaxis()->SetTitle("Pt1 [GeV]");
   h_div_noEWKcorr->Draw("same"); h_div_noEWKcorr->SetLineColor(1);c1->SetGrid();
   c1->SaveAs("division_TightMuon_pt.gif");
-  h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->SetTitle("Muon EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_numerator.gif");
-  h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->SetTitle("Muon EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_denominator.gif");
+  h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator->SetTitle("Muon EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_numerator.gif");
+  h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_denominator->SetTitle("Muon EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_denominator.gif");
 
   TH1F* h_num_eta = (TH1F*)h_DATA_eta->Clone("h_num_eta");
   h_num_eta->Add(h_DY_eta,-1);

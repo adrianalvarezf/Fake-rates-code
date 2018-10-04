@@ -29,16 +29,28 @@ PUWeight      = 'puWeight'
 ############### HLT ######################
 ################################################
 
-passHLT = "HLT_Mu8_TrkIsoVVL"  if  'Lepton_pt[0]' <= 20. else "HLT_Mu17_TrkIsoVVL"
+#passHLT = "HLT_Mu8_TrkIsoVVL"  if  'Lepton_pt[0]' <= 20. else "HLT_Mu17_TrkIsoVVL"
 
 ################################################
 ############### Trigger   ######################
 ################################################
 
 
-trigger_weight = "0.0029" if  'Lepton_pt[0]' <= 20. else "0.0659"  #0.070 para HLT_Mu17
+trigger_weight = "0.002903" if  'Lepton_pt[0]' <= 20. else "0.065944"  #0.070 para HLT_Mu17
 
 #0.004 fb-1 =4 pb-1
+
+################################################
+############### CleanJets   ######################
+################################################
+pass_cleanjets = "0"
+jetn ='nCleanJet' 
+jetpt ='CleanJet_pt[{0}]'
+deltaphi ='abs(CleanJet_phi[{0}]-Lepton_phi[0])>1)'
+
+for i in range(0,10): 
+  if jetn > i and jetpt.format(i) >25 and deltaphi.format(i) >1 :
+    pass_cleanjets = "1"
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -51,7 +63,8 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
                              #   + getSampleFiles(directoryMC,'DYJetsToLL_M-5to50-LO')     ,
 
                     # 'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
-                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
+                    # 'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT+'*'+pass_cleanjets ,
+                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
                      'FilesPerJob' : 2 ,
                  }
 
@@ -60,7 +73,8 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
 
 samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO__part0') ,
                         #'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
-                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
+                        #'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT+'*'+pass_cleanjets ,
+                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
                         'FilesPerJob' : 2 ,
                  }
 
@@ -85,7 +99,8 @@ DataSets = ['DoubleMuon']
 ###########################################
 
 samples['DATA']  = {   'name': [ ] ,     
-                       'weight' : passHLT ,
+                  #     'weight' : passHLT+'*'+pass_cleanjets ,
+                       'weight' : pass_cleanjets ,
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,

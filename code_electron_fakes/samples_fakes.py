@@ -29,31 +29,28 @@ PUWeight      = 'puWeight'
 ############### HLT  ######################
 ################################################
 
-passHLT = "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30" if  'Lepton_pt[0]' <= 25. else "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30"
+#passHLT = "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30" if  'Lepton_pt[0]' <= 25. else "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30"
 
 ################################################
 ############### Trigger   ######################
 ################################################
 
-trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.0435"
+trigger_weight = "0.027699" if  'Lepton_pt[0]' <= 25. else "0.043469"
 
 #0.043 fb-1 = 43 pb-1
 
 ################################################
 ############### CleanJets   ######################
 ################################################
-#lep_1 = ROOT.TLorentzVector()
-#jet_v = ROOT.TLorentzVector()
+pass_cleanjets = "0"
+jetn ='nCleanJet' 
+jetpt ='CleanJet_pt[{0}]'
+deltaphi ='abs(CleanJet_phi[{0}]-Lepton_phi[0])>1)'
 
-#pass_cleanjets = 
-
-#for i in range(1,nCleanJet): 
-#  jet_v.SetPtEtaPhiM(CleanJet_pt[i-1], CleanJet_eta[i-1], CleanJet_phi[i-1], 0); 
-#  lep_1.SetPtEtaPhiM(Lepton_pt[0], Lepton_eta[0], Lepton_phi[0], 0); 
-#  if CleanJet_pt[i]>25 and (jet_v.DeltaR(lep_1)>1) :
-#    pass_cleanjets = "1"
-
-
+for i in range(0,10): 
+  if jetn > i :
+    if jetpt.format(i) >25 and deltaphi.format(i) >1 :
+      pass_cleanjets = "1"
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -64,7 +61,7 @@ trigger_weight = "0.0277" if  'Lepton_pt[0]' <= 25. else "0.0435"
 
 samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__part0') ,
                              #   + getSampleFiles(directoryMC,'DYJetsToLL_M-5to50-LO')     ,
-                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
+                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
                      'FilesPerJob' : 2 ,
                  }
 
@@ -72,7 +69,7 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
 ###### W+jets #######
 
 samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO__part0') ,
-                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT ,
+                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
                         'FilesPerJob' : 2 ,
                  }
 
@@ -98,7 +95,7 @@ DataSets = ['SingleElectron']
 ###########################################
 
 samples['DATA']  = {   'name': [ ] ,     
-                       'weight' : passHLT ,
+                       'weight' : pass_cleanjets ,
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,

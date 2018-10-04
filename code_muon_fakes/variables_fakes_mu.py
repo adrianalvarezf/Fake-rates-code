@@ -17,7 +17,7 @@ variables['events']  = { 'name': '1',
 #                        'fold' : 0
 #                        }
 
-variables['mu_pt1']  = {   'name': 'Muon_pt[Lepton_muonIdx[0]]',     
+variables['mu_pt1']  = {   'name': 'Lepton_pt[0]',     
                         'range' : (8,10,50),   
                         'xaxis' : 'p_{T} 1st muon',
                         'fold'  : 0                         
@@ -29,7 +29,7 @@ variables['mu_pt1']  = {   'name': 'Muon_pt[Lepton_muonIdx[0]]',
 #                        'fold'  : 0                         
 #                        }
 
-variables['abs_mu_eta1']  = {  'name': 'fabs(Muon_eta[Lepton_muonIdx[0]])',     
+variables['abs_mu_eta1']  = {  'name': 'fabs(Lepton_eta[0])',     
                         'range' : (5,0,2.5),   
                         'xaxis' : 'eta 1st muon',
                         'fold'  : 0                         

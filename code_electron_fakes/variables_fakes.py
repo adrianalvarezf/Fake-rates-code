@@ -17,7 +17,7 @@ variables['events']  = { 'name': '1',
 #                        'fold' : 0
 #                        }
 
-variables['ele_pt1']  = {   'name': 'Electron_pt[Lepton_electronIdx[0]]',     
+variables['ele_pt1']  = {   'name': 'Lepton_pt[0]',     
                         'range' : (8,10,50),   
                         'xaxis' : 'p_{T} 1st electron',
                         'fold'  : 0                         
@@ -29,7 +29,7 @@ variables['ele_pt1']  = {   'name': 'Electron_pt[Lepton_electronIdx[0]]',
 #                        'fold'  : 0                         
 #                        }
 
-variables['abs_ele_eta1']  = {  'name': 'fabs(Electron_eta[Lepton_electronIdx[0]])',     
+variables['abs_ele_eta1']  = {  'name': 'fabs(Lepton_eta[0])',     
                         'range' : (5,0,2.5),   
                         'xaxis' : 'eta 1st electron',
                         'fold'  : 0                         
