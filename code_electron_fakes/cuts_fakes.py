@@ -14,6 +14,7 @@ supercut = 'nLepton==1 \
             && abs(Lepton_pdgId[0]) == 11 \
             && (Lepton_pt[0]>=13 && fabs(Lepton_eta[0])<=2.5) \
             && ((Lepton_pt[0] <= 25. && HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) || (Lepton_pt[0] > 25. && HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5)) \
+            && (nCleanJet>0 && CleanJet_pt[0]>25. && sqrt((CleanJet_phi[0]-Lepton_phi[0])*(CleanJet_phi[0]-Lepton_phi[0])+(CleanJet_eta[0]-Lepton_eta[0])*(CleanJet_eta[0]-Lepton_eta[0]))>1.) \
            '
          #   && '+jetcut+')\
          #  '

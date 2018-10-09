@@ -42,15 +42,15 @@ trigger_weight = "0.027699" if  'Lepton_pt[0]' <= 25. else "0.043469"
 ################################################
 ############### CleanJets   ######################
 ################################################
-pass_cleanjets = "0"
-jetn ='nCleanJet' 
-jetpt ='CleanJet_pt[{0}]'
-deltaR ='sqrt( (CleanJet_phi[{0}]-Lepton_phi[0])*(CleanJet_phi[{0}]-Lepton_phi[0]) + (CleanJet_eta[{0}]-Lepton_eta[0])*(CleanJet_eta[{0}]-Lepton_eta[0]) )'
+#pass_cleanjets = "0"
+#jetn ='nCleanJet' 
+#jetpt ='CleanJet_pt[{0}]'
+#deltaR ='sqrt( (CleanJet_phi[{0}]-Lepton_phi[0])*(CleanJet_phi[{0}]-Lepton_phi[0]) + (CleanJet_eta[{0}]-Lepton_eta[0])*(CleanJet_eta[{0}]-Lepton_eta[0]) )'
 
-for i in range(0,10): 
-  if jetn > i :
-    if jetpt.format(i) >25 and deltaR.format(i) >1 :
-      pass_cleanjets = "1"
+#for i in range(0,10): 
+#  if jetn > i :
+#    if jetpt.format(i) >25 and deltaR.format(i) >1 :
+#      pass_cleanjets = "1"
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -61,7 +61,7 @@ for i in range(0,10):
 
 samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__part0') ,
                              #   + getSampleFiles(directoryMC,'DYJetsToLL_M-5to50-LO')     ,
-                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                      'FilesPerJob' : 2 ,
                  }
 
@@ -69,7 +69,7 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
 ###### W+jets #######
 
 samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO__part0') ,
-                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                         'FilesPerJob' : 2 ,
                  }
 
@@ -95,7 +95,8 @@ DataSets = ['SingleElectron']
 ###########################################
 
 samples['DATA']  = {   'name': [ ] ,     
-                       'weight' : pass_cleanjets ,
+                       #'weight' : pass_cleanjets ,
+                       'weight' : "1" ,
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,

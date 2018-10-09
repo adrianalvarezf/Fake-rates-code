@@ -1,6 +1,7 @@
 import os
 import subprocess
 import string
+import math
 from LatinoAnalysis.Tools.commonTools import *
 
 # samples
@@ -43,14 +44,31 @@ trigger_weight = "0.002903" if  'Lepton_pt[0]' <= 20. else "0.065944"  #0.070 pa
 ################################################
 ############### CleanJets   ######################
 ################################################
-pass_cleanjets = "0"
-jetn ='nCleanJet' 
-jetpt ='CleanJet_pt[{0}]'
-deltaR ='sqrt( (CleanJet_phi[{0}]-Lepton_phi[0])*(CleanJet_phi[{0}]-Lepton_phi[0]) + (CleanJet_eta[{0}]-Lepton_eta[0])*(CleanJet_eta[{0}]-Lepton_eta[0]) )'
 
-for i in range(0,10): 
-  if jetn > i and jetpt.format(i) >25 and deltaR.format(i) >1 :
-    pass_cleanjets = "1"
+  #jetn = nCleanJet  
+  #jetpt = 'CleanJet_pt[{0}]'
+  #deltaR ='sqrt( (CleanJet_phi[{0}]-Lepton_phi[0])**2. + (CleanJet_eta[{0}]-Lepton_eta[0])**2. )'
+
+#pass_cleanjets = "0" if 'nCleanJet' ==0. or 'CleanJet_pt[0]' <25. or 'sqrt((CleanJet_phi[0]-Lepton_phi[0])**2. +(CleanJet_eta[0]-Lepton_eta[0])**2.)'<= 1. else "1"
+
+#def jet_func():
+#  passjet = False
+#  for i in range(0,nCleanJet): 
+#    if CleanJet_pt[0] >25. and sqrt((CleanJet_phi[i]-Lepton_phi[0])**2. +(CleanJet_eta[i]-Lepton_eta[0])**2.)> 1. :
+#      passjet = True
+#  if passjet == True :
+#    return "1"
+#  else :
+#    return "0"
+
+#pass_cleanjets = jet_func()
+
+
+
+
+
+
+
 
 ###########################################
 #############  BACKGROUNDS  ###############
@@ -64,7 +82,8 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
 
                     # 'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
                     # 'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT+'*'+pass_cleanjets ,
-                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                    # 'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                     'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                      'FilesPerJob' : 2 ,
                  }
 
@@ -74,7 +93,8 @@ samples['DY'] = {    'name'   :   getSampleFiles(directoryMC,'DYJetsToLL_M-50__p
 samples['WJets'] = {    'name'   :   getSampleFiles(directoryMC,'WJetsToLNu-LO__part0') ,
                         #'weight' : XSWeight+'*'+LepWPCut+'*'+PUWeight ,
                         #'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+passHLT+'*'+pass_cleanjets ,
-                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                        #'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight+'*'+pass_cleanjets ,
+                        'weight' : XSWeight+'*'+PUWeight+'*'+trigger_weight ,
                         'FilesPerJob' : 2 ,
                  }
 
@@ -100,7 +120,8 @@ DataSets = ['DoubleMuon']
 
 samples['DATA']  = {   'name': [ ] ,     
                   #     'weight' : passHLT+'*'+pass_cleanjets ,
-                       'weight' : pass_cleanjets ,
+                  #     'weight' : pass_cleanjets ,
+                       'weight' : "1",
                        'weights' : [ ],
                        'isData': ['all'],                            
                        'FilesPerJob' : 6 ,
