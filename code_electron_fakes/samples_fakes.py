@@ -35,7 +35,7 @@ PUWeight      = 'puWeight'
 ############### Trigger   ######################
 ################################################
 
-trigger_weight = "0.027699" if  'Lepton_pt[0]' <= 25. else "0.043469"
+trigger_weight = "0.027699" if  'Lepton_pt[0]' < 25. else "0.043469"
 
 #0.043 fb-1 = 43 pb-1
 
