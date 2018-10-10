@@ -37,9 +37,10 @@ PUWeight      = 'puWeight'
 ################################################
 
 
-trigger_weight = "0.002903" if  'Lepton_pt[0]' < 20. else "0.065944"  #0.070 para HLT_Mu17
+#trigger_weight = "0.002903 if  Lepton_pt[0] <= 20. else 0.065944"  #0.070 para HLT_Mu17
+trigger_weight = "(0.002903*(Lepton_pt[0]<=20.)+0.065944*(Lepton_pt[0]>20.))"  #0.070 para HLT_Mu17
+#trigger_weight = "((0.002903*Lepton_pt[0]<=20.)+(0.065944*Lepton_pt[0]>20.))"  #0.070 para HLT_Mu17
 
-#0.004 fb-1 =4 pb-1
 
 ################################################
 ############### CleanJets   ######################

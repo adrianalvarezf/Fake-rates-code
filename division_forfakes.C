@@ -16,7 +16,7 @@ void division_forfakes()
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_27September_Fakes_triggerlow/plots__27September_Fakes_triggerlow.root");
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_2October_Fake_ele_full_MCtrig/plots__2October_Fake_ele_full_MCtrig.root");
   //TFile* file_hadd= new TFile("code_electron_fakes/rootFile_3October_Fakes_full_updated/plots__3October_Fakes_full_updated.root");
-  TFile* file_hadd= new TFile("code_electron_fakes/rootFile_8October_Fakes_full_updated/plots__8October_Fakes_full_updated.root");
+  TFile* file_hadd= new TFile("code_electron_fakes/rootFile_10October_Fakes_full_updated/plots__10October_Fakes_full_updated.root");
   TH1F* h_DATA = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DATA"); 
   TH1F* h_DY = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_DY"); 
   TH1F* h_WJets = (TH1F*)file_hadd->Get("numerator/ele_pt1/histo_WJets"); 
@@ -74,7 +74,7 @@ void division_forfakes()
   TCanvas *c2= new TCanvas();
   h_num_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_num_eta.gif");
   h_den_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_den_eta.gif");
-  h_div_eta->Draw(); h_div_eta->GetYaxis()->SetRangeUser(-0.4,1); h_div_eta->SetTitle("Electron_mvaFall17Iso_WP80fake rate"); h_div_eta->SetLineColor(2); h_div_eta->GetXaxis()->SetTitle("|Eta1|"); h_div_eta->GetYaxis()->SetTitle("Ele fake rate");c2->SetGrid();
+  h_div_eta->Draw(); h_div_eta->GetYaxis()->SetRangeUser(0,1); h_div_eta->SetTitle("Electron_mvaFall17Iso_WP80fake rate"); h_div_eta->SetLineColor(2); h_div_eta->GetXaxis()->SetTitle("|Eta1|"); h_div_eta->GetYaxis()->SetTitle("Ele fake rate");c2->SetGrid();
   h_div_noEWKcorr_eta->Draw("same"); h_div_noEWKcorr_eta->SetLineColor(1);
   c2->SaveAs("division_TightElectron_Iso_WP80_eta.gif");
  

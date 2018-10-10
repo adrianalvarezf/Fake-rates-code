@@ -13,7 +13,7 @@ supercut = 'nLepton==1 \
             && mtw1<20 \
             && abs(Lepton_pdgId[0]) == 13 \
             && (Lepton_pt[0]>=10 && fabs(Lepton_eta[0])<=2.4) \
-            && ((Lepton_pt[0] < 20. && HLT_Mu8_TrkIsoVVL > 0.5) || (Lepton_pt[0] >= 20. && HLT_Mu17_TrkIsoVVL > 0.5)) \
+            && ((Lepton_pt[0] <= 20. && HLT_Mu8_TrkIsoVVL > 0.5) || (Lepton_pt[0] > 20. && HLT_Mu17_TrkIsoVVL > 0.5)) \
             && (nCleanJet>0 && CleanJet_pt[0]>25. && sqrt((CleanJet_phi[0]-Lepton_phi[0])*(CleanJet_phi[0]-Lepton_phi[0])+(CleanJet_eta[0]-Lepton_eta[0])*(CleanJet_eta[0]-Lepton_eta[0]))>1.) \
            '
           # && '+jetcut+'\
