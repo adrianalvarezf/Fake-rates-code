@@ -51,12 +51,17 @@ void division_forfakes()
   TH1F* h_relEWKcont_denominator = (TH1F*)h_relEWKcont2->Clone("h_relEWKcont_denominator");
   h_relEWKcont_denominator->Divide(h_denominator_DATA);
 
+
+  TLegend *leg= new TLegend(0.1,0.7,0.48,0.9);
+  leg->AddEntry(h_div_noEWKcorr,"Without EWK correction");
+  leg->AddEntry(h_div,"With EWK correction");
+  
   TCanvas *c1= new TCanvas();
-  h_num->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_num_pt.gif");
-  h_den->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_den_pt.gif");
+  //h_num->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_num_pt.gif");
+  //h_den->Draw();//c1->SaveAs("division_TightElectron_Iso_WP80_den_pt.gif");
   h_div->Draw(); h_div->GetYaxis()->SetRangeUser(0,1); h_div->SetTitle("Electron_mvaFall17Iso_WP80 fake rate"); h_div->SetLineColor(2); h_div->GetXaxis()->SetTitle("Pt1 [GeV]"); h_div->GetYaxis()->SetTitle("Ele fake rate");c1->SetGrid();
   h_div_noEWKcorr->Draw("same"); h_div_noEWKcorr->SetLineColor(1);
-  c1->SaveAs("division_TightElectron_Iso_WP80_pt.gif");
+  leg->Draw();c1->SaveAs("division_TightElectron_Iso_WP80_pt.gif");
   h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator->SetTitle("Electron EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_numerator.gif");
   h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_denominator->SetTitle("Electron EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_Iso_WP80_denominator.gif");
 
@@ -72,11 +77,11 @@ void division_forfakes()
   h_div_noEWKcorr_eta->Divide(h_denominator_DATA_eta);
   
   TCanvas *c2= new TCanvas();
-  h_num_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_num_eta.gif");
-  h_den_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_den_eta.gif");
+  //h_num_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_num_eta.gif");
+  //h_den_eta->Draw();//c2->SaveAs("division_TightElectron_Iso_WP80_den_eta.gif");
   h_div_eta->Draw(); h_div_eta->GetYaxis()->SetRangeUser(0,1); h_div_eta->SetTitle("Electron_mvaFall17Iso_WP80fake rate"); h_div_eta->SetLineColor(2); h_div_eta->GetXaxis()->SetTitle("|Eta1|"); h_div_eta->GetYaxis()->SetTitle("Ele fake rate");c2->SetGrid();
   h_div_noEWKcorr_eta->Draw("same"); h_div_noEWKcorr_eta->SetLineColor(1);
-  c2->SaveAs("division_TightElectron_Iso_WP80_eta.gif");
+  leg->Draw();c2->SaveAs("division_TightElectron_Iso_WP80_eta.gif");
  
   cout<<"THE END"<<endl;
  

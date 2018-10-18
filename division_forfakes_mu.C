@@ -13,9 +13,9 @@ void division_forfakes_mu()
   //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_24September_Fake_muons_noMCtrigger/plots__24September_Fake_muons_noMCtrigger.root");
   //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_24September_Fake_muons_triggerhigh/plots__24September_Fake_muons_triggerhigh.root");
   //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_27September_Fake_muons_triggerlow/plots__27September_Fake_muons_triggerlow.root");
-
-  TFile* file_hadd= new TFile("code_muon_fakes/rootFile_5October_Fake_mu_full_updated/plots__5October_Fake_mu_full_updated.root");
-  
+  //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_10October_Fake_muons_runCpart0_test/plots__10October_Fake_muons_runCpart0_test.root");
+  TFile* file_hadd= new TFile("code_muon_fakes/rootFile_10October_Fake_mu_full_updated/plots__10October_Fake_mu_full_updated.root");
+  //TFile* file_hadd= new TFile("code_muon_fakes/rootFile_8october_Fake_muons_triggerlow_full/plots__8october_Fake_muons_triggerlow_full.root");  
   TH1F* h_DATA = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_DATA"); 
   TH1F* h_DY = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_DY"); 
   TH1F* h_WJets = (TH1F*)file_hadd->Get("numerator/mu_pt1/histo_WJets"); 
@@ -50,13 +50,17 @@ void division_forfakes_mu()
   h_relEWKcont2->Add(h_denominator_WJets,1);
   TH1F* h_relEWKcont_denominator = (TH1F*)h_relEWKcont2->Clone("h_relEWKcont_denominator");
   h_relEWKcont_denominator->Divide(h_denominator_DATA);
+
+  TLegend *leg= new TLegend(0.1,0.7,0.48,0.9);
+  leg->AddEntry(h_div_noEWKcorr,"Without EWK correction");
+  leg->AddEntry(h_div,"With EWK correction");
   
   TCanvas *c1= new TCanvas();
-  h_num->Draw();//c1->SaveAs("division_TightMuon_num_pt.gif");
-  h_den->Draw();//c1->SaveAs("division_TightMuon_den_pt.gif");
+  //h_num->Draw();//c1->SaveAs("division_TightMuon_num_pt.gif");
+  //h_den->Draw();//c1->SaveAs("division_TightMuon_den_pt.gif");
   h_div->Draw(); h_div->GetYaxis()->SetRangeUser(0,1); h_div->SetTitle("TightMuon_cut_Tight80x_HWWW"); h_div->GetYaxis()->SetTitle("Muon fake rate"); h_div->SetLineColor(2); h_div->GetXaxis()->SetTitle("Pt1 [GeV]");
   h_div_noEWKcorr->Draw("same"); h_div_noEWKcorr->SetLineColor(1);c1->SetGrid();
-  c1->SaveAs("division_TightMuon_pt.gif");
+  leg->Draw();c1->SaveAs("division_TightMuon_pt.gif");
   h_relEWKcont_numerator->Draw();h_relEWKcont_numerator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator->SetTitle("Muon EWK contamination"); h_relEWKcont_numerator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_numerator.gif");
   h_relEWKcont_denominator->Draw();h_relEWKcont_denominator->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_denominator->SetTitle("Muon EWK contamination"); h_relEWKcont_denominator->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator->GetXaxis()->SetTitle("Pt1 [GeV]");c1->SaveAs("EWK_contamination_muonTightWP_denominator.gif");
 
@@ -72,11 +76,11 @@ void division_forfakes_mu()
   h_div_noEWKcorr_eta->Divide(h_denominator_DATA_eta);
   
   TCanvas *c2= new TCanvas();
-  h_num_eta->Draw();//c2->SaveAs("division_TightMuon_num_eta.gif");
-  h_den_eta->Draw();//c2->SaveAs("division_TightMuon_den_eta.gif");
+  //h_num_eta->Draw();//c2->SaveAs("division_TightMuon_num_eta.gif");
+  //h_den_eta->Draw();//c2->SaveAs("division_TightMuon_den_eta.gif");
   h_div_eta->Draw(); h_div_eta->GetYaxis()->SetRangeUser(0,1); h_div_eta->SetTitle("TightMuon_cut_Tight80x_HWWW"); h_div_eta->GetYaxis()->SetTitle("Muon fake rate"); h_div_eta->SetLineColor(2); h_div_eta->GetXaxis()->SetTitle("|Eta1|");
   h_div_noEWKcorr_eta->Draw("same"); h_div_noEWKcorr_eta->SetLineColor(1);c2->SetGrid();
-  c2->SaveAs("division_TightMuon_eta.gif");
+  leg->Draw();c2->SaveAs("division_TightMuon_eta.gif");
  
   cout<<"THE END"<<endl;
  
