@@ -24,8 +24,8 @@ supercut = 'nLepton==1 \
 
 #Numerator
 cuts['numerator']  = 'Lepton_electronIdx[0]>=0 && Electron_mvaFall17Iso_WP80[Lepton_electronIdx[0]] \
-                      && Electron_dz[Lepton_electronIdx[0]]< 0.1 \
-                      && ((Electron_pt[Lepton_electronIdx[0]]>20 && Electron_dxy[Lepton_electronIdx[0]]< 0.02)||(Electron_pt[Lepton_electronIdx[0]]<=20 && Electron_dxy[Lepton_electronIdx[0]]< 0.01)) \
+                      && fabs(Electron_dz[Lepton_electronIdx[0]])< 0.1 \
+                      && ((Lepton_pt[0]>20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.02)||(Lepton_pt[0]<=20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.01)) \
                      '
 
 #Denominator
