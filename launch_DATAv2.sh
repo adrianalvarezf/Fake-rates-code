@@ -1,0 +1,332 @@
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part12   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part37   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part5   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part11   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part41   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part0   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part20   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part18   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part35   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part2   mu
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part1   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part28   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part6   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part11   mu
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part26   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part6   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part8   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part16   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part25   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part3   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part21   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part22   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part10   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part17   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part40   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part7   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part4   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part19   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part8   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part9   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part15   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part0   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part24   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part11   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part42   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part23   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part34   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part39   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part6   mu
+
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part13   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part23   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part27   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part3   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part8   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part12   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part10   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part36   mu
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part14   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part17   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part4   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part9   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part38   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part24   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part1   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part10   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part9   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part26   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part21   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part18   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part31   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part16   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part3   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part44   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part0   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part27   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part24   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part12   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part18   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part3   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part33   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part13   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part45   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part2   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part7   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part46   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part16   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part32   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part11   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part2   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part8   mu
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part9   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part10   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part5   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part23   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part13   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part6   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part21   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part14   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part19   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part22   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part7   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part17   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part29   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part22   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part29   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part2   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part15   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part20   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part14   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part1   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part12   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017C-31Mar2018-v1__part19   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part28   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part25   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part5   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part1   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part15   mu
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part4   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part30   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part43   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017D-31Mar2018-v1__part7   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part0   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017F-31Mar2018-v1__part5   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part4   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  DoubleMuon_Run2017E-31Mar2018-v1__part20   mu
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part17   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part49   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part25   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part13   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part0   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part8   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part28   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part20   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part41   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part23   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part30   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part13   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part23   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part2   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part4   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part5   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part40   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part3   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part30   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part37   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part21   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part53   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part0   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part36   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part29   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part61   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part16   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part32   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part6   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part18   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part57   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part1   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part11   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part34   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part19   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part27   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part55   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part16   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part24   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part12   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part35   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part0   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part32   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part52   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part56   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part10   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part23   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part60   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part21   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part0   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part26   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part8   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part57   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part8   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part6   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part28   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part25   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part43   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part6   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part9   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part37   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part20   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part36   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part51   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part11   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part48   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part34   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part17   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part42   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part20   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part36   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part2   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part47   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part39   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part44   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part23   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part9   ele
+
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part14   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part22   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part1   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part29   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part16   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part48   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part56   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part33   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part33   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part42   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part5   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part15   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part15   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part19   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part53   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part15   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part28   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part3   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part18   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part18   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part62   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part11   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part31   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part13   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part22   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part35   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part26   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part41   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part21   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part17   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part45   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part7   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part1   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part19   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part37   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part10   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part12   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part27   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part47   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part19   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part38   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part45   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part8   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part17   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part9   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part27   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part39   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part4   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part9   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part18   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part4   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part13   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part49   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part25   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part5   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part30   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part64   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part34   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part5   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part35   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part63   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part12   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part20   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part16   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part38   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part24   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part1   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part12   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part22   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part10   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part3   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part21   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part14   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part7   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part26   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part14   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part2   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part33   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part59   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part46   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part14   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part46   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part31   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part7   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part15   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part50   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part24   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part2   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part44   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part32   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part31   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part10   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part4   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part50   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part52   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part7   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part29   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part51   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part55   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part6   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part54   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part22   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017D-31Mar2018-v1__part11   ele
+
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017E-31Mar2018-v1__part3   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part58   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part54   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017F-31Mar2018-v1__part40   ele
+bsub -q 2nd -u alvareza submit_batch_FR.sh  SingleElectron_Run2017C-31Mar2018-v1__part43   ele
