@@ -1,5 +1,5 @@
 
-cd outputsFR_round2
+cd outputsFR_17dec
 
 rm -r WJets_mu.root
 rm -r DY_mu.root

@@ -12,35 +12,7 @@ Double_t deltaPhi(Double_t Phi0, Double_t Phi1) {
   return dphi;
 } 
 
-Double_t Inv_mass(Int_t A, Int_t B){
 
-  const Double_t MUON_MASS     = 0.106;     // [GeV]
-  const Double_t ELECTRON_MASS = 0.000511; // [GeV]
-  TLorentzVector lep1;
-  TLorentzVector lep2;
-  TLorentzVector ll;
-  Double_t mass_1,mass_2;
-
-  if (Lepton_electronIdx[A] >= 0){
-    mass_1  = ELECTRON_MASS;
-  }  
-  else if (Lepton_muonIdx[A] >= 0){
-    mass_1  = MUON_MASS;
-  }
-  if (Lepton_electronIdx[B] >= 0){
-    mass_2  = ELECTRON_MASS;
-  }  
-  else if (Lepton_muonIdx[B] >= 0){
-    mass_2  = MUON_MASS;
-  }
-
-  lep1.SetPtEtaPhiM(Lepton_pt[A], Lepton_eta[A], Lepton_phi[A], mass_1); 
-  lep2.SetPtEtaPhiM(Lepton_pt[B], Lepton_eta[B], Lepton_phi[B], mass_2); 
-  ll = lep1 + lep2;
-
-  return ll.M();
-
-}
 
 void Fake_ratesZ(TString sample) {
 
@@ -62,7 +34,7 @@ void Fake_ratesZ(TString sample) {
   if(sample.Contains("Run")){ file = myFolderData + "nanoLatino_" + sample + ".root"; isData=true; }
   else{ file = myFolder + "nanoLatino_" +sample + ".root"; if(sample.Contains("DY"))isDY=true; }
 
-  TFile* root_output = new TFile(outputdir +"output_" + sample +"_"+channel+".root", "recreate");
+  TFile* root_output = new TFile(outputdir +"output_" + sample +".root", "recreate");
 
   cout<<file<<endl;
   if(ifstream(file))tree->Add(file);
@@ -143,10 +115,6 @@ void Fake_ratesZ(TString sample) {
   Bool_t HLT_Mu17_TrkIsoVVL;
   tree->SetBranchAddress("HLT_Mu17_TrkIsoVVL",&HLT_Mu17_TrkIsoVVL);
 
-
-  TLorentzVector lep1;
-  TLorentzVector lep2;
-  TLorentzVector ll;
   TLorentzVector MET;
   TLorentzVector trkMET;
   Float_t mass_1;
@@ -201,7 +169,11 @@ void Fake_ratesZ(TString sample) {
   TH1F* h_pt1_loose_high  = new TH1F("h_pt1_loose_high","h_pt1_loose_high",8,10,50);
   TH1F* h_eta1_loose_high = new TH1F("h_eta1_loose_high","h_eta1_loose_high",5,0,2.5);
   
-  
+  const Double_t MUON_MASS     = 0.106;     // [GeV]
+  const Double_t ELECTRON_MASS = 0.000511; // [GeV]
+  TLorentzVector lep1,lep2,lep3,l1l2,l1l3;
+  Double_t mass[3];
+ 
   // Loop over the tree events
   //--------------------------------------------------------------------------------------------------------------------------------------
 
@@ -210,6 +182,20 @@ void Fake_ratesZ(TString sample) {
     tree->GetEntry(j);
     int nentries = tree->GetEntriesFast();
     if(fmod(j,100000)==0) Printf(" ..... event %d of %d", int(j), int(nentries));
+
+    for(int a=0;a<3;a++){
+      if (Lepton_electronIdx[a] >= 0){
+	mass[a]  = ELECTRON_MASS;
+      }  
+      else if (Lepton_muonIdx[a] >= 0){
+	mass[a]  = MUON_MASS;
+      }
+    }
+    lep1.SetPtEtaPhiM(Lepton_pt[0], Lepton_eta[0], Lepton_phi[0], mass[0]); 
+    lep2.SetPtEtaPhiM(Lepton_pt[1], Lepton_eta[1], Lepton_phi[1], mass[1]); 
+    lep3.SetPtEtaPhiM(Lepton_pt[2], Lepton_eta[2], Lepton_phi[2], mass[2]); 
+    l1l2 = lep1 + lep2;
+    l1l3 = lep1 + lep3;
 
     // if(j > MaxEvents){
     //   cout << "finished for " << MaxEvents << " events" << endl;
@@ -222,9 +208,9 @@ void Fake_ratesZ(TString sample) {
     
     int fakelep;
     TString channel="";
-    if (fabs(Inv_mass(0,1)-91.18) <= fabs(Inv_mass(0,2)-91.18) ) fakelep=1;
-    else fakelep=2;
-    if(fabs(Inv_mass(0,fakelep)-91.18)>15){continue;}
+    if ((fabs(l1l2.M()-91.18) <= fabs(l1l3.M()-91.18))&& fabs(l1l2.M()-91.18)<=15) fakelep=1;
+    else if((fabs(l1l3.M()-91.18) <= fabs(l1l2.M()-91.18))&& fabs(l1l3.M()-91.18)<=15)fakelep=2;
+    else {continue;}
     if (Lepton_electronIdx[fakelep] >= 0) channel="ele";
     else channel="mu"; 
 
@@ -299,23 +285,18 @@ void Fake_ratesZ(TString sample) {
   root_output->Close();
  
   //Print number of events
-  
-  if(channel=="mu"){
-    printf(" With jet cut \n");
-    printf("loose muons, low pt: %f \n",  mulooselow);
-    printf("loose muons, high pt: %f \n", muloosehigh);
-    printf("tight muons, low pt: %f \n",  mutightlow);
-    printf("tight muons, high pt: %f \n", mutighthigh);
-  }  
-  
-  if(channel=="ele"){
-    printf(" With jet cut \n");
-    printf("loose electrons, low pt: %f \n",  elelooselow);
-    printf("loose electrons, high pt: %f \n", eleloosehigh);
-    printf("tight electrons, low pt: %f \n",  eletightlow);
-    printf("tight electrons, high pt: %f \n", eletighthigh);
-  }
-  
+   
+  printf(" With jet cut \n");
+  printf("loose muons, low pt: %f \n",  mulooselow);
+  printf("loose muons, high pt: %f \n", muloosehigh);
+  printf("tight muons, low pt: %f \n",  mutightlow);
+  printf("tight muons, high pt: %f \n", mutighthigh);
+ 
+  printf(" With jet cut \n");
+  printf("loose electrons, low pt: %f \n",  elelooselow);
+  printf("loose electrons, high pt: %f \n", eleloosehigh);
+  printf("tight electrons, low pt: %f \n",  eletightlow);
+  printf("tight electrons, high pt: %f \n", eletighthigh);
   
   cout << endl;
   cout << "-------- Done ---------";
