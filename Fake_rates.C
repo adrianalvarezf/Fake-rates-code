@@ -254,18 +254,18 @@ void Fake_rates(TString sample,  TString channel ,TString nojetcut) {
 	  if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5)continue;
 	  else {	
 	    if(isData==false)weight*=0.027699;
-	    elelooselow+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(Lepton_eta[0],weight); h_pt1_loose_low->Fill(Lepton_pt[0],weight); h_eta1_loose_low->Fill(Lepton_eta[0],weight);
+	    elelooselow+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low->Fill(Lepton_pt[0],weight); h_eta1_loose_low->Fill(fabs(Lepton_eta[0]),weight);
 	    if(Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5 && fabs(Electron_dz[Lepton_electronIdx[0]])< 0.1 && ((Lepton_pt[0]>20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.02)||(Lepton_pt[0]<=20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.01))){
-	      eletightlow+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(Lepton_eta[0],weight); h_pt1_tight_low->Fill(Lepton_pt[0],weight); h_eta1_tight_low->Fill(Lepton_eta[0],weight);}
+	      eletightlow+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_low->Fill(Lepton_pt[0],weight); h_eta1_tight_low->Fill(fabs(Lepton_eta[0]),weight);}
 	  }
 	}
 	if (Lepton_pt[0] > 25.){
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5)continue;
 	  else{ 
 	    if(isData==false)weight*=0.043469;
-	    eleloosehigh+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(Lepton_eta[0],weight); h_pt1_loose_high->Fill(Lepton_pt[0],weight); h_eta1_loose_high->Fill(Lepton_eta[0],weight);
+	    eleloosehigh+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high->Fill(Lepton_pt[0],weight); h_eta1_loose_high->Fill(fabs(Lepton_eta[0]),weight);
 	    if(Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5 && fabs(Electron_dz[Lepton_electronIdx[0]])< 0.1 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.02){
-	      eletighthigh+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(Lepton_eta[0],weight); h_pt1_tight_high->Fill(Lepton_pt[0],weight); h_eta1_tight_high->Fill(Lepton_eta[0],weight);}
+	      eletighthigh+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high->Fill(Lepton_pt[0],weight); h_eta1_tight_high->Fill(fabs(Lepton_eta[0]),weight);}
 	  } 
 	}
       }
@@ -277,16 +277,16 @@ void Fake_rates(TString sample,  TString channel ,TString nojetcut) {
 	  if (HLT_Mu8_TrkIsoVVL < 0.5)continue;
 	  else {
 	    if(isData==false)weight*=0.002903;
-	    mulooselow+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(Lepton_eta[0],weight); h_pt1_loose_low->Fill(Lepton_pt[0],weight); h_eta1_loose_low->Fill(Lepton_eta[0],weight);
-	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5) {mutightlow+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(Lepton_eta[0],weight); h_pt1_tight_low->Fill(Lepton_pt[0],weight); h_eta1_tight_low->Fill(Lepton_eta[0],weight);}
+	    mulooselow+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low->Fill(Lepton_pt[0],weight); h_eta1_loose_low->Fill(fabs(Lepton_eta[0]),weight);
+	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5) {mutightlow+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_low->Fill(Lepton_pt[0],weight); h_eta1_tight_low->Fill(fabs(Lepton_eta[0]),weight);}
 	  }
 	}
 	if (Lepton_pt[0] > 20.){
 	  if (HLT_Mu17_TrkIsoVVL < 0.5)continue;
 	  else{
 	    if(isData==false)weight*=0.065944;
-	    muloosehigh+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(Lepton_eta[0],weight); h_pt1_loose_high->Fill(Lepton_pt[0],weight); h_eta1_loose_high->Fill(Lepton_eta[0],weight);
-	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5) {mutighthigh+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(Lepton_eta[0],weight); h_pt1_tight_high->Fill(Lepton_pt[0],weight); h_eta1_tight_high->Fill(Lepton_eta[0],weight);}
+	    muloosehigh+=weight; h_pt1_loose->Fill(Lepton_pt[0],weight); h_eta1_loose->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high->Fill(Lepton_pt[0],weight); h_eta1_loose_high->Fill(fabs(Lepton_eta[0]),weight);
+	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5) {mutighthigh+=weight; h_pt1_tight->Fill(Lepton_pt[0],weight); h_eta1_tight->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high->Fill(Lepton_pt[0],weight); h_eta1_tight_high->Fill(fabs(Lepton_eta[0]),weight);}
 	  } 
 	}
       }
@@ -306,18 +306,18 @@ void Fake_rates(TString sample,  TString channel ,TString nojetcut) {
 	if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5)continue;
 	else {
 	  if(isData==false)weight*=0.027699;
-	  elelooselowjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(Lepton_eta[0],weight); h_pt1_loose_low_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_low_jet->Fill(Lepton_eta[0],weight);
+	  elelooselowjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_low_jet->Fill(fabs(Lepton_eta[0]),weight);
 	  if(Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5 && fabs(Electron_dz[Lepton_electronIdx[0]])< 0.1 && ((Lepton_pt[0]>20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.02)||(Lepton_pt[0]<=20 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.01))){
-	    eletightlowjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(Lepton_eta[0],weight); h_pt1_tight_low_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_low_jet->Fill(Lepton_eta[0],weight);}
+	    eletightlowjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_low_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_low_jet->Fill(fabs(Lepton_eta[0]),weight);}
 	}
       }
       if (Lepton_pt[0] > 25.){
 	if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5)continue;
 	else{
 	    if(isData==false)weight*=0.043469;
-	  eleloosehighjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(Lepton_eta[0],weight); h_pt1_loose_high_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_high_jet->Fill(Lepton_eta[0],weight);
+	  eleloosehighjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_high_jet->Fill(fabs(Lepton_eta[0]),weight);
 	  if(Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5 && fabs(Electron_dz[Lepton_electronIdx[0]])< 0.1 && fabs(Electron_dxy[Lepton_electronIdx[0]])< 0.02){
-	    eletighthighjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(Lepton_eta[0],weight); h_pt1_tight_high_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_high_jet->Fill(Lepton_eta[0],weight);}
+	    eletighthighjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_high_jet->Fill(fabs(Lepton_eta[0]),weight);}
 	} 
       }
     }
@@ -329,18 +329,18 @@ void Fake_rates(TString sample,  TString channel ,TString nojetcut) {
 	if (HLT_Mu8_TrkIsoVVL < 0.5)continue;
 	else {
 	    if(isData==false)weight*=0.002903;
-	  mulooselowjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(Lepton_eta[0],weight); h_pt1_loose_low_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_low_jet->Fill(Lepton_eta[0],weight);
+	  mulooselowjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_low_jet->Fill(fabs(Lepton_eta[0]),weight);
 	  if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5){
-	    mutightlowjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(Lepton_eta[0],weight); h_pt1_tight_low_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_low_jet->Fill(Lepton_eta[0],weight);}
+	    mutightlowjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_low_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_low_jet->Fill(fabs(Lepton_eta[0]),weight);}
 	}
       }
       if (Lepton_pt[0] > 20.){
 	if (HLT_Mu17_TrkIsoVVL < 0.5)continue;
 	else{
 	    if(isData==false)weight*=0.065944;
-	  muloosehighjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(Lepton_eta[0],weight); h_pt1_loose_high_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_high_jet->Fill(Lepton_eta[0],weight);
+	  muloosehighjet+=weight; h_pt1_loose_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high_jet->Fill(Lepton_pt[0],weight); h_eta1_loose_high_jet->Fill(fabs(Lepton_eta[0]),weight);
 	  if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5){
-	    mutighthighjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(Lepton_eta[0],weight); h_pt1_tight_high_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_high_jet->Fill(Lepton_eta[0],weight);}
+	    mutighthighjet+=weight; h_pt1_tight_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_jet->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high_jet->Fill(Lepton_pt[0],weight); h_eta1_tight_high_jet->Fill(fabs(Lepton_eta[0]),weight);}
 	} 
       }
     }
