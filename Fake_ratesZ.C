@@ -216,14 +216,14 @@ void Fake_ratesZ(TString sample) {
     // }
 
     //------------------------------ Preselection --------------------------------------
-
+    //cout<<"start preselection"<<endl;
     if (nLepton!=3){continue;}
     //if (nCleanJet>0) {if (CleanJet_pt[0]>40){continue;}}
     if (MET_pt>20){continue;}
 
-    if (isData==false){weight=baseW*Generator_weight*puWeight*0.041527;}
+    if (isData==false){weight=baseW*Generator_weight*puWeight*41.527;}
     else weight=1;
-       
+    //cout<<"after weights declaration"<<endl;
     int fakelep;
     TString channel="";
 
@@ -251,7 +251,7 @@ void Fake_ratesZ(TString sample) {
       }
     }
     else {continue;}
-
+    //cout<<"after filling mZ histograms"<<endl;
     if  (Lepton_electronIdx[fakelep] >= 0) channel="ele";
     else if (Lepton_muonIdx[fakelep] >= 0) channel="mu"; 
     if (Lepton_pt[fakelep]<10||fabs(Lepton_eta[fakelep])>2.5)continue;
@@ -298,10 +298,10 @@ void Fake_ratesZ(TString sample) {
 	    leptight_mutrig_fakemu+=weight; h_pt1_tight_mutrig_fakemu->Fill(Lepton_pt[fakelep],weight); h_eta1_tight_mutrig_fakemu->Fill(fabs(Lepton_eta[fakelep]),weight);}
 	}
       }
-
+      //cout<<"after filling tight/loose histograms"<<endl;
     }//close if MC
   }//close event loop
-
+  //cout<<"before writing"<<endl;
   //Write histograms in root output
   if(isData==1){
     h_pt1_tight_fakemu ->Write();  
