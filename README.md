@@ -1,3 +1,6 @@
+
+THIS README IS OUTDATED , I no longer use mkShapes
+
 # How to use: 
 
 Important note: This code does not work by itself, you need to have the latinos code (it uses mkShapes.py).
