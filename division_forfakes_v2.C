@@ -5,14 +5,12 @@
 #include <iostream>
 #include <fstream>
 
-
-
 void division_forfakes_v2()
 {
 
-  TFile* file_Data= new TFile("outputsFR_17dec/Data_ele.root");
-  TFile* file_DY= new TFile("outputsFR_17dec/DY_ele.root");
-  TFile* file_WJets= new TFile("outputsFR_17dec/WJets_ele.root");
+  TFile* file_Data= new TFile("outputsFR_24jan_jetbins/Data_ele.root");
+  TFile* file_DY= new TFile("outputsFR_24jan_jetbins/DY_ele.root");
+  TFile* file_WJets= new TFile("outputsFR_24jan_jetbins/WJets_ele.root");
 
   TH1F* h_DATA = (TH1F*)file_Data->Get("afterjetcut/h_pt1_tight_jet"); 
   TH1F* h_DY = (TH1F*)file_DY->Get("afterjetcut/h_pt1_tight_jet"); 
