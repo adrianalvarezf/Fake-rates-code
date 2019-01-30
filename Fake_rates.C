@@ -170,12 +170,10 @@ void Fake_rates(TString sample,  TString channel ) {
     if (nLepton!=1){continue;}
     if (MET_pt>20){continue;}
     if (mtw1>20){continue;}
-
-    if(isData==false) weight=baseW*Generator_weight*puWeight;
      
     //-------------------- jet cuts------------------------------------------
     for(int jetcut=0;jetcut<5;jetcut++){
-
+      if(isData==false) weight=baseW*Generator_weight*puWeight;
       int passjets =0;
       for (int jet=0; jet<nCleanJet; jet++){
 	if(CleanJet_pt[jet]>=20.+5*jetcut && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
