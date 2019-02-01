@@ -210,7 +210,7 @@ void division_forfakes_jetbins()
    
   }
   /////////////////////////////////////////////
-     
+  /*
   TCanvas *c[3][2][5];
   for(int j=0;j<5;j++){
     c[0][0][j]= new TCanvas();c[0][0][j]->cd();
@@ -240,7 +240,37 @@ void division_forfakes_jetbins()
     leg->Draw();c[2][1][j]->SaveAs(Form("muFR_eta_jet%d.gif",j*5+20));
 
   }
- 
+  */
+  /////////////Combined plots//////////////////////
+
+  TLegend *combinedleg= new TLegend(0.1,0.7,0.48,0.9);
+  combinedleg->AddEntry(h_div_ele[0],"jet pt>20 GeV");
+  combinedleg->AddEntry(h_div_ele[1],"jet pt>25 GeV");
+  combinedleg->AddEntry(h_div_ele[2],"jet pt>30 GeV");
+  combinedleg->AddEntry(h_div_ele[3],"jet pt>35 GeV");
+  combinedleg->AddEntry(h_div_ele[4],"jet pt>40 GeV");
+
+  TCanvas* combined_pt_ele= new TCanvas();
+  combined_pt_ele->cd();
+  h_div_ele[0]->Draw(); h_div_ele[0]->GetYaxis()->SetRangeUser(0,1); h_div_ele[0]->SetTitle("Electron fake rate"); h_div_ele[0]->GetXaxis()->SetTitle("Pt [GeV]"); h_div_ele[0]->GetYaxis()->SetTitle("Ele fake rate");combined_pt_ele->SetGridx(1);combined_pt_ele->SetGridy(1); h_div_ele[0]->SetLineWidth(2);  h_div_ele[0]->SetMarkerStyle(kFullCircle); h_div_ele[0]->SetLineColor(6); h_div_ele[0]->SetMarkerColor(6);
+  for(int j=1;j<5;j++){h_div_ele[j]->Draw("same"); h_div_ele[j]->SetLineColor(j); h_div_ele[j]->SetMarkerColor(j); h_div_ele[j]->SetLineWidth(2);  h_div_ele[j]->SetMarkerStyle(kFullCircle);}
+  combinedleg->Draw(); combined_pt_ele->SaveAs("combined_pt_eleFR.gif");
+  TCanvas* combined_pt_mu= new TCanvas();
+  combined_pt_mu->cd();
+  h_div_mu[0]->Draw(); h_div_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_mu[0]->SetTitle("Muon fake rate"); h_div_mu[0]->GetXaxis()->SetTitle("Pt [GeV]"); h_div_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_pt_mu->SetGridx(1);combined_pt_mu->SetGridy(1); h_div_mu[0]->SetLineWidth(2);  h_div_mu[0]->SetMarkerStyle(kFullCircle); h_div_mu[0]->SetLineColor(6); h_div_mu[0]->SetMarkerColor(6);
+  for(int j=1;j<5;j++){h_div_mu[j]->Draw("same"); h_div_mu[j]->SetLineColor(j); h_div_mu[j]->SetMarkerColor(j); h_div_mu[j]->SetLineWidth(2);  h_div_mu[j]->SetMarkerStyle(kFullCircle);}
+  combinedleg->Draw();combined_pt_mu->SaveAs("combined_pt_muFR.gif");
+  TCanvas* combined_eta_ele= new TCanvas(); 
+  combined_eta_ele->cd();
+  h_div_eta_ele[0]->Draw(); h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_ele[0]->SetTitle("Electron fake rate"); h_div_eta_ele[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_ele[0]->GetYaxis()->SetTitle("Ele fake rate");combined_eta_ele->SetGridx(1);combined_eta_ele->SetGridy(1); h_div_eta_ele[0]->SetLineWidth(2);  h_div_eta_ele[0]->SetMarkerStyle(kFullCircle); h_div_eta_ele[0]->SetLineColor(6); h_div_eta_ele[0]->SetMarkerColor(6);
+  for(int j=1;j<5;j++){h_div_eta_ele[j]->Draw("same"); h_div_eta_ele[j]->SetLineColor(j); h_div_eta_ele[j]->SetMarkerColor(j); h_div_eta_ele[j]->SetLineWidth(2);  h_div_eta_ele[j]->SetMarkerStyle(kFullCircle);}
+  combinedleg->Draw();combined_eta_ele->SaveAs("combined_eta_eleFR.gif");
+  TCanvas* combined_eta_mu= new TCanvas();
+  combined_eta_mu->cd();
+  h_div_eta_mu[0]->Draw(); h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_mu[0]->SetTitle("Muon fake rate"); h_div_eta_mu[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_eta_mu->SetGridx(1);combined_eta_mu->SetGridy(1); h_div_eta_mu[0]->SetLineWidth(2);  h_div_eta_mu[0]->SetMarkerStyle(kFullCircle); h_div_eta_mu[0]->SetLineColor(6); h_div_eta_mu[0]->SetMarkerColor(6);
+  for(int j=1;j<5;j++){h_div_eta_mu[j]->Draw("same"); h_div_eta_mu[j]->SetLineColor(j); h_div_eta_mu[j]->SetMarkerColor(j); h_div_eta_mu[j]->SetLineWidth(2);  h_div_eta_mu[j]->SetMarkerStyle(kFullCircle);}
+  combinedleg->Draw();combined_eta_mu->SaveAs("combined_eta_muFR.gif");
+
   cout<<"THE END"<<endl;
  
 }
