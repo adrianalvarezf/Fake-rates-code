@@ -1,5 +1,5 @@
 
-cd outputsFR_31jan_jetbins
+cd outputsFR_1feb_jetbins
 
 #rm -r TT_mu.root
 rm -r WJets_mu.root
