@@ -9,6 +9,7 @@ def submit():
 		
 		if 'DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
 		elif 'WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
+	
 
 	print "MC file list loaded..."		
 
