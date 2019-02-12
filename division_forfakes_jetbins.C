@@ -8,13 +8,21 @@
 
 void division_forfakes_jetbins()
 {
-  TFile* file_Data_ele= new TFile("outputsFR_4feb_moreplots/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_4feb_moreplots/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_4feb_moreplots/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_4feb_moreplots/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_4feb_moreplots/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_4feb_moreplots/WJets_mu.root");
-
+  /*
+    TFile* file_Data_ele= new TFile("outputsFR_4feb_moreplots/Data_ele.root");
+    TFile* file_DY_ele= new TFile("outputsFR_4feb_moreplots/DY_ele.root");
+    TFile* file_WJets_ele= new TFile("outputsFR_4feb_moreplots/WJets_ele.root");
+    TFile* file_Data_mu= new TFile("outputsFR_4feb_moreplots/Data_mu.root");
+    TFile* file_DY_mu= new TFile("outputsFR_4feb_moreplots/DY_mu.root");
+    TFile* file_WJets_mu= new TFile("outputsFR_4feb_moreplots/WJets_mu.root");
+  */
+  TFile* file_Data_ele= new TFile("outputsFR_2018/Data_ele.root");
+  TFile* file_DY_ele= new TFile("outputsFR_2018/DY_ele.root");
+  TFile* file_WJets_ele= new TFile("outputsFR_2018/WJets_ele.root");
+  TFile* file_Data_mu= new TFile("outputsFR_2018/Data_mu.root");
+  TFile* file_DY_mu= new TFile("outputsFR_2018/DY_mu.root");
+  TFile* file_WJets_mu= new TFile("outputsFR_2018/WJets_mu.root");
+ 
   TH1F* h_DATA_ele[6];
   TH1F* h_DY_ele[6]; 
   TH1F* h_WJets_ele[6];
@@ -83,67 +91,67 @@ void division_forfakes_jetbins()
 
   TH1F* h_num_mu[6];TH1F* h_den_mu[6];TH1F* h_div_mu[6];TH1F* h_div_noEWKcorr_mu[6];
   for(int j=0;j<6;j++){
-    h_num_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_num_mu_%d",1));
+    h_num_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_num_mu_%d",j));
     h_num_mu[j]->Add(h_DY_mu[j],-1);
     h_num_mu[j]->Add(h_WJets_mu[j],-1);
-    h_den_mu[j] = (TH1F*)h_denominator_DATA_mu[j]->Clone(Form("h_den_mu_%d",1));
+    h_den_mu[j] = (TH1F*)h_denominator_DATA_mu[j]->Clone(Form("h_den_mu_%d",j));
     h_den_mu[j]->Add(h_denominator_DY_mu[j],-1);
     h_den_mu[j]->Add(h_denominator_WJets_mu[j],-1);
-    h_div_mu[j] = (TH1F*)h_num_mu[j]->Clone(Form("h_div_mu_%d",1));
+    h_div_mu[j] = (TH1F*)h_num_mu[j]->Clone(Form("h_div_mu_%d",j));
     h_div_mu[j]->Divide(h_den_mu[j]);
-    h_div_noEWKcorr_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_div_noEWKcorr_mu_%d",1));
+    h_div_noEWKcorr_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_div_noEWKcorr_mu_%d",j));
     h_div_noEWKcorr_mu[j]->Divide(h_denominator_DATA_mu[j]);
   }  
 
   TH1F* h_relEWKcont_ele[6];TH1F* h_relEWKcont_numerator_ele[6];TH1F* h_relEWKcont2_ele[6];TH1F* h_relEWKcont_denominator_ele[6];
   for(int j=0;j<6;j++){
-    h_relEWKcont_ele[j] = (TH1F*)h_DY_ele[j]->Clone(Form("h_relEWKcont_ele_%d",1));
+    h_relEWKcont_ele[j] = (TH1F*)h_DY_ele[j]->Clone(Form("h_relEWKcont_ele_%d",j));
     h_relEWKcont_ele[j]->Add(h_WJets_ele[j],1);
-    h_relEWKcont_numerator_ele[j] = (TH1F*)h_relEWKcont_ele[j]->Clone(Form("h_relEWKcont_numerator_ele_%d",1));
+    h_relEWKcont_numerator_ele[j] = (TH1F*)h_relEWKcont_ele[j]->Clone(Form("h_relEWKcont_numerator_ele_%d",j));
     h_relEWKcont_numerator_ele[j]->Divide(h_DATA_ele[j]);
-    h_relEWKcont2_ele[j] = (TH1F*)h_denominator_DY_ele[j]->Clone(Form("h_relEWKcont2_ele_%d",1));
+    h_relEWKcont2_ele[j] = (TH1F*)h_denominator_DY_ele[j]->Clone(Form("h_relEWKcont2_ele_%d",j));
     h_relEWKcont2_ele[j]->Add(h_denominator_WJets_ele[j],1);
-    h_relEWKcont_denominator_ele[j] = (TH1F*)h_relEWKcont2_ele[j]->Clone(Form("h_relEWKcont_denominator_ele_%d",1));
+    h_relEWKcont_denominator_ele[j] = (TH1F*)h_relEWKcont2_ele[j]->Clone(Form("h_relEWKcont_denominator_ele_%d",j));
     h_relEWKcont_denominator_ele[j]->Divide(h_denominator_DATA_ele[j]);
   }
 
   TH1F* h_relEWKcont_mu[6];TH1F* h_relEWKcont_numerator_mu[6];TH1F* h_relEWKcont2_mu[6];TH1F* h_relEWKcont_denominator_mu[6];
   for(int j=0;j<6;j++){
-    h_relEWKcont_mu[j] = (TH1F*)h_DY_mu[j]->Clone(Form("h_relEWKcont_mu_%d",1));
+    h_relEWKcont_mu[j] = (TH1F*)h_DY_mu[j]->Clone(Form("h_relEWKcont_mu_%d",j));
     h_relEWKcont_mu[j]->Add(h_WJets_mu[j],1);
-    h_relEWKcont_numerator_mu[j] = (TH1F*)h_relEWKcont_mu[j]->Clone(Form("h_relEWKcont_numerator_mu_%d",1));
+    h_relEWKcont_numerator_mu[j] = (TH1F*)h_relEWKcont_mu[j]->Clone(Form("h_relEWKcont_numerator_mu_%d",j));
     h_relEWKcont_numerator_mu[j]->Divide(h_DATA_mu[j]);
-    h_relEWKcont2_mu[j] = (TH1F*)h_denominator_DY_mu[j]->Clone(Form("h_relEWKcont2_mu_%d",1));
+    h_relEWKcont2_mu[j] = (TH1F*)h_denominator_DY_mu[j]->Clone(Form("h_relEWKcont2_mu_%d",j));
     h_relEWKcont2_mu[j]->Add(h_denominator_WJets_mu[j],1);
-    h_relEWKcont_denominator_mu[j] = (TH1F*)h_relEWKcont2_mu[j]->Clone(Form("h_relEWKcont_denominator_mu_%d",1));
+    h_relEWKcont_denominator_mu[j] = (TH1F*)h_relEWKcont2_mu[j]->Clone(Form("h_relEWKcont_denominator_mu_%d",j));
     h_relEWKcont_denominator_mu[j]->Divide(h_denominator_DATA_mu[j]);
   }
 
   TH1F* h_num_eta_ele[6];TH1F* h_den_eta_ele[6];TH1F* h_div_eta_ele[6];TH1F* h_div_noEWKcorr_eta_ele[6];
   for(int j=0;j<6;j++){
-    h_num_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_num_eta_ele_%d",1));
+    h_num_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_num_eta_ele_%d",j));
     h_num_eta_ele[j]->Add(h_DY_eta_ele[j],-1);
     h_num_eta_ele[j]->Add(h_WJets_eta_ele[j],-1);
-    h_den_eta_ele[j] = (TH1F*)h_denominator_DATA_eta_ele[j]->Clone(Form("h_den_eta_ele_%d",1));
+    h_den_eta_ele[j] = (TH1F*)h_denominator_DATA_eta_ele[j]->Clone(Form("h_den_eta_ele_%d",j));
     h_den_eta_ele[j]->Add(h_denominator_DY_eta_ele[j],-1);
     h_den_eta_ele[j]->Add(h_denominator_WJets_eta_ele[j],-1);
-    h_div_eta_ele[j] = (TH1F*)h_num_eta_ele[j]->Clone(Form("h_div_eta_ele_%d",1));
+    h_div_eta_ele[j] = (TH1F*)h_num_eta_ele[j]->Clone(Form("h_div_eta_ele_%d",j));
     h_div_eta_ele[j]->Divide(h_den_eta_ele[j]);
-    h_div_noEWKcorr_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_div_noEWKcorr_eta_ele_%d",1));
+    h_div_noEWKcorr_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_div_noEWKcorr_eta_ele_%d",j));
     h_div_noEWKcorr_eta_ele[j]->Divide(h_denominator_DATA_eta_ele[j]);
   }
 
   TH1F* h_num_eta_mu[6];TH1F* h_den_eta_mu[6];TH1F* h_div_eta_mu[6];TH1F* h_div_noEWKcorr_eta_mu[6];
   for(int j=0;j<6;j++){
-    h_num_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_num_eta_mu_%d",1));
+    h_num_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_num_eta_mu_%d",j));
     h_num_eta_mu[j]->Add(h_DY_eta_mu[j],-1);
     h_num_eta_mu[j]->Add(h_WJets_eta_mu[j],-1);
-    h_den_eta_mu[j] = (TH1F*)h_denominator_DATA_eta_mu[j]->Clone(Form("h_den_eta_mu_%d",1));
+    h_den_eta_mu[j] = (TH1F*)h_denominator_DATA_eta_mu[j]->Clone(Form("h_den_eta_mu_%d",j));
     h_den_eta_mu[j]->Add(h_denominator_DY_eta_mu[j],-1);
     h_den_eta_mu[j]->Add(h_denominator_WJets_eta_mu[j],-1);
-    h_div_eta_mu[j] = (TH1F*)h_num_eta_mu[j]->Clone(Form("h_div_eta_mu_%d",1));
+    h_div_eta_mu[j] = (TH1F*)h_num_eta_mu[j]->Clone(Form("h_div_eta_mu_%d",j));
     h_div_eta_mu[j]->Divide(h_den_eta_mu[j]);
-    h_div_noEWKcorr_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_div_noEWKcorr_eta_mu_%d",1));
+    h_div_noEWKcorr_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_div_noEWKcorr_eta_mu_%d",j));
     h_div_noEWKcorr_eta_mu[j]->Divide(h_denominator_DATA_eta_mu[j]);
   }
 

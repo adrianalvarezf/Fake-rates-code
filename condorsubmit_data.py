@@ -6,12 +6,14 @@ def submit():
 	SAMPLESMU= set()
         SAMPLESELE= set()
 
-        for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):
-
-                if   'DoubleMuon_Run' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
-                elif 'SingleElectron_Run' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
-
-
+	#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017
+        #        if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
+        #        elif 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
+	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/"):          #2018      
+		if   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
+                elif 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
+		
+	
         print "Data file list loaded..."
 
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor/"
@@ -20,6 +22,8 @@ def submit():
         elesamples=0
 	
 	for s in SAMPLESMU:
+		if '2017' in s: year="2017"
+		elif '2018' in s: year="2018"
 		CH="mu"
 		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
 		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
@@ -32,7 +36,7 @@ def submit():
 		jobFile.write("#!/bin/sh \n")
 		jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
 		jobFile.write("eval `scramv1 runtime -sh` \n")
-		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\")'")
+		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\")'")
 		jobFile.close()
 
 		subFile = open(subFileName, "w+")
@@ -51,6 +55,8 @@ def submit():
 	print "muon data submission finished, "+ str(musamples) +" jobs have been submitted. \n"
 	
 	for s in SAMPLESELE:
+		if '2017' in s: year="2017"
+		elif '2018' in s: year="2018"
 		CH="ele"
 		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
 		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
@@ -63,7 +69,7 @@ def submit():
 		jobFile.write("#!/bin/sh \n")
 		jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
 		jobFile.write("eval `scramv1 runtime -sh` \n")
-		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\")'")
+		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\")'")
 		jobFile.close()
 
 		subFile = open(subFileName, "w+")

@@ -10,6 +10,7 @@ def submit():
 		if 'DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
 		elif 'WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
 	
+	year="2017"
 
 	print "MC file list loaded..."		
 
@@ -32,7 +33,7 @@ def submit():
 			jobFile.write("#!/bin/sh \n")
 			jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
 			jobFile.write("eval `scramv1 runtime -sh` \n")
-			jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+ ch+"\")'")
+			jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+ ch+"\",\""+ year +"\")'")
 			jobFile.close()
 
 			subFile = open(subFileName, "w+")
