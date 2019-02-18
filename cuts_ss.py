@@ -17,19 +17,19 @@ def addcut(name, exprs):
     cuts[name] = ' && '.join(exprs)
 
 # Jet_btagDeepB
-
+'''
 _tmp = [
      'Lepton_pdgId[0]*Lepton_pdgId[1] == 11*13',
      'Alt$(CleanJet_pt[0],0)<30',
        ]
-addcut('SS_0j_of', _tmp)
+addcut('SS_0j_df', _tmp)
 
 _tmp = [
      'Lepton_pdgId[0]*Lepton_pdgId[1] == 11*13',
      'Alt$(CleanJet_pt[0],0)>30',
      'Alt$(CleanJet_pt[1],0)<30',
        ]
-addcut('SS_1j_of', _tmp)
+addcut('SS_1j_df', _tmp)
 
 _tmp = [
      'Lepton_pdgId[0]*Lepton_pdgId[1] == 11*13',
@@ -37,8 +37,8 @@ _tmp = [
      'Alt$(CleanJet_pt[1],0)>30',
      'Alt$(CleanJet_pt[2],0)<30',
        ]
-addcut('SS_2j_of', _tmp)
-
+addcut('SS_2j_df', _tmp)
+'''
 _tmp = [
      'fabs(Lepton_pdgId[0])== 11',
      'fabs(Lepton_pdgId[1])== 13',
@@ -164,4 +164,5 @@ _tmp = [
      'fabs(mll-91.2) > 20.',
      ]
 addcut('SS_2j_sf', _tmp)
+
 
