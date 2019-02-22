@@ -5,13 +5,13 @@ import sys
 def submit():
 	SAMPLESMC= set()
 	
-	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):
-		
-		if 'DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-		elif 'WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
-	
 	year="2017"
 
+	if year=="2017":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):        #2017
+			if 'DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+			elif 'WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
+	
 	print "MC file list loaded..."		
 
 	CHANNEL={"ele","mu"}

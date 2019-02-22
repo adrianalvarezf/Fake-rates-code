@@ -31,14 +31,17 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   TString myFolderData ="";
   if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/";  //2018
   if(year=="2017") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"; //2017
+  if(year=="2016") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"; //2016
 
   //MC
   TString myFolderMC ="";
-  // if(year==2017) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017test__fakeSelMC/";
-  if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";
-  // if(year==2017) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";
+  if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";
+  //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";
+  //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";
   
-  TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/outputsFR_2018/";
+  if(year!="2016"&&year!="2017"&&year!="2018"){cout<<"ERROR, year is not valid!"<<endl;return 0;}
+
+  TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/outputsFR_"+year+"_22feb_with10and15cuts/";
 
   TString file = "";
   bool isData = false;  bool isDY =false;  bool isWj =false; bool isQCD =false; bool isMC =false;
@@ -96,6 +99,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   tree->SetBranchAddress("Lepton_phi",&Lepton_phi);
   Float_t MET_pt;
   tree->SetBranchAddress("MET_pt",&MET_pt);
+  Float_t PuppiMET_pt;
+  tree->SetBranchAddress("PuppiMET_pt",&PuppiMET_pt);
   Float_t MET_phi;
   tree->SetBranchAddress("MET_phi",&MET_phi);
   Float_t mtw1;
@@ -156,18 +161,18 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   Float_t mth;
   Float_t mtw2;
 
-  Float_t eletight[6] = {0};
-  Float_t eleloose[6] = {0};
-  Float_t mutight[6] = {0};
-  Float_t muloose[6] = {0};
-  Float_t eletight_low[6] = {0};
-  Float_t eleloose_low[6] = {0};
-  Float_t mutight_low[6] = {0};
-  Float_t muloose_low[6] = {0};
-  Float_t eletight_high[6] = {0};
-  Float_t eleloose_high[6] = {0};
-  Float_t mutight_high[6] = {0};
-  Float_t muloose_high[6] = {0};
+  Float_t eletight[8] = {0};
+  Float_t eleloose[8] = {0};
+  Float_t mutight[8] = {0};
+  Float_t muloose[8] = {0};
+  Float_t eletight_low[8] = {0};
+  Float_t eleloose_low[8] = {0};
+  Float_t mutight_low[8] = {0};
+  Float_t muloose_low[8] = {0};
+  Float_t eletight_high[8] = {0};
+  Float_t eleloose_high[8] = {0};
+  Float_t mutight_high[8] = {0};
+  Float_t muloose_high[8] = {0};
 
   cout<<"Begin..."<<endl;
 
@@ -175,32 +180,37 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   //--------------------------------------------------------------------------------------------------------------------------------------
   TH1::SetDefaultSumw2();
 
-  TH1F* h_pt1_tight[6];
-  TH1F* h_eta1_tight[6];
-  TH1F* h_pt1_loose[6];
-  TH1F* h_eta1_loose[6];
-  TH1F* h_pt1_tight_low[6];
-  TH1F* h_eta1_tight_low[6];
-  TH1F* h_pt1_loose_low[6];
-  TH1F* h_eta1_loose_low[6];
-  TH1F* h_pt1_tight_high[6];
-  TH1F* h_eta1_tight_high[6];
-  TH1F* h_pt1_loose_high[6];
-  TH1F* h_eta1_loose_high[6];
+  TH1F* h_pt1_tight[8];
+  TH1F* h_eta1_tight[8];
+  TH1F* h_pt1_loose[8];
+  TH1F* h_eta1_loose[8];
+  TH1F* h_pt1_tight_low[8];
+  TH1F* h_eta1_tight_low[8];
+  TH1F* h_pt1_loose_low[8];
+  TH1F* h_eta1_loose_low[8];
+  TH1F* h_pt1_tight_high[8];
+  TH1F* h_eta1_tight_high[8];
+  TH1F* h_pt1_loose_high[8];
+  TH1F* h_eta1_loose_high[8];
 
-  TH1F* h_associated_jet_flavour_tight[6];
-  TH1F* h_associated_jet_flavour_loose[6];
-  TH1F* h_associated_genjet_flavour_tight[6];
-  TH1F* h_associated_genjet_flavour_loose[6];
-  TH1F* h_associated_jet_pt_tight[6];
-  TH1F* h_associated_jet_pt_loose[6];
-  TH1F* h_leppt_dividedby_jet_pt_tight[6];
-  TH1F* h_leppt_dividedby_jet_pt_loose[6];
-  TH2D *h_lepptvsjetpt_tight[6];
-  TH2D *h_lepptvsjetpt_loose[6];
+  TH1F* h_associated_jet_flavour_tight[8];
+  TH1F* h_associated_jet_flavour_loose[8];
+  TH1F* h_associated_genjet_flavour_tight[8];
+  TH1F* h_associated_genjet_flavour_loose[8];
+  TH1F* h_associated_jet_pt_tight[8];
+  TH1F* h_associated_jet_pt_loose[8];
+  TH1F* h_leppt_dividedby_jet_pt_tight[8];
+  TH1F* h_leppt_dividedby_jet_pt_loose[8];
+  TH2D *h_lepptvsjetpt_tight[8];
+  TH2D *h_lepptvsjetpt_loose[8];
+
+  TH2F * FR_pt_eta_loose_ele[8];
+  TH2F * FR_pt_eta_tight_ele[8];
+  TH2F * FR_pt_eta_loose_mu[8];
+  TH2F * FR_pt_eta_tight_mu[8];
 
 
-  for(int jet=0;jet<6;jet++){
+  for(int jet=0;jet<8;jet++){
     h_pt1_tight[jet]   = new TH1F(Form("h_pt1_tight_%d",jet),Form("h_pt1_tight_%d",jet),8,10,50);
     h_eta1_tight[jet]  = new TH1F(Form("h_eta1_tight_%d",jet),Form("h_eta1_tight_%d",jet),5,0,2.5);
     h_pt1_loose[jet]   = new TH1F(Form("h_pt1_loose_%d",jet),Form("h_pt1_loose_%d",jet),8,10,50);
@@ -223,6 +233,11 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
     h_associated_jet_flavour_loose[jet]= new TH1F(Form("h_associated_jet_flavour_loose_%d",jet),Form("h_associated_jet_flavour_loose_%d",jet),25,0,25);
     h_associated_genjet_flavour_tight[jet]= new TH1F(Form("h_associated_genjet_flavour_tight_%d",jet),Form("h_associated_genjet_flavour_tight_%d",jet),25,0,25);
     h_associated_genjet_flavour_loose[jet]= new TH1F(Form("h_associated_genjet_flavour_loose_%d",jet),Form("h_associated_genjet_flavour_loose_%d",jet),25,0,25);
+
+    FR_pt_eta_tight_ele[jet]= new TH2F(Form("h_FR_pt_eta_tight_ele_%d",jet),Form("h_FR_pt_eta_tight_ele_%d",jet),8,10,50,5,0,2.5);
+    FR_pt_eta_loose_ele[jet]= new TH2F(Form("h_FR_pt_eta_loose_ele_%d",jet),Form("h_FR_pt_eta_loose_ele_%d",jet),8,10,50,5,0,2.5);
+    FR_pt_eta_tight_mu[jet]= new TH2F(Form("h_FR_pt_eta_tight_mu_%d",jet),Form("h_FR_pt_eta_tight_mu_%d",jet),8,10,50,5,0,2.5);
+    FR_pt_eta_loose_mu[jet]= new TH2F(Form("h_FR_pt_eta_loose_mu_%d",jet),Form("h_FR_pt_eta_loose_mu_%d",jet),8,10,50,5,0,2.5);
   }
 
   // Loop over the tree events
@@ -234,15 +249,15 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 
     //------------------------------ Preselection --------------------------------------
     if (nLepton!=1){continue;}
-    if (MET_pt>20){continue;}
+    if (PuppiMET_pt>20){continue;}
     if (mtw1>20){continue;}
      
     //-------------------- jet cuts------------------------------------------
-    for(int jetcut=0;jetcut<6;jetcut++){
+    for(int jetcut=0;jetcut<8;jetcut++){
       if(isWj==true || isDY==true) weight=baseW*Generator_weight*puWeight;
       int passjets =0;
       for (int jet=0; jet<nCleanJet; jet++){
-	if(CleanJet_pt[jet]>=20.+5*jetcut && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
+	if(CleanJet_pt[jet]>=(10.+5*jetcut) && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
       }
       if (passjets==0)continue;
 
@@ -254,7 +269,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  else {
 	    if(isWj==true || isDY==true)weight*=0.027699;
 	    eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0 && (isData==true || isQCD==true)){
+	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -263,7 +279,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    }
 	    if((year=="2017" && Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5)||(year=="2018" && Electron_mvaFall17V1Iso_WP90[Lepton_electronIdx[0]]>0.5)){
 	      eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0 && (isData==true || isQCD==true)){
+	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -278,7 +295,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  else{
 	    if(isWj==true || isDY==true)weight*=0.043469;
 	    eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); 
-	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0 && (isData==true || isQCD==true)){
+	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -287,7 +305,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    }
 	    if((year=="2017" && Electron_mvaFall17Iso_WP90[Lepton_electronIdx[0]]>0.5)||(year=="2018" && Electron_mvaFall17V1Iso_WP90[Lepton_electronIdx[0]]>0.5)){
 	      eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0 && (isData==true || isQCD==true)){
+	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -307,7 +326,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  else {
 	    if(isWj==true || isDY==true)weight*=0.002903;
 	    muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0 && (isData==true || isQCD==true)){ 
+	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -316,7 +336,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    }
 	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5){
 	      mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0 && (isData==true || isQCD==true)){
+	    FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -331,7 +352,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  else{
 	    if(isWj==true || isDY==true)weight*=0.065944;
 	    muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); 
-	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0 && (isData==true || isQCD==true)){
+	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -340,12 +362,13 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    }
 	    if(Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5){
 	      mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
-	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0 && (isData==true || isQCD==true)){
+	      FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
 		if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-		if(isMC==true) h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+		if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	      }
 	    } 
 	  } 
@@ -356,8 +379,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   }//Close loop in entries
 
   //Write histograms in root output
-  TDirectory *dir[6];
-  for(int jetcut=0;jetcut<6;jetcut++){
+  TDirectory *dir[8];
+  for(int jetcut=0;jetcut<8;jetcut++){
     dir[jetcut] = root_output->mkdir(Form("jetcut_%d",jetcut));
     dir[jetcut]->cd();
     h_pt1_tight[jetcut] ->Write();
@@ -372,14 +395,19 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
     h_eta1_tight_high[jetcut]->Write();
     h_pt1_loose_high[jetcut] ->Write();
     h_eta1_loose_high[jetcut]->Write();
-    if(isData==true || isQCD==true){
-      h_associated_jet_pt_tight[jetcut]->Write();
-      h_associated_jet_pt_loose[jetcut]->Write();
-      h_leppt_dividedby_jet_pt_tight[jetcut]->Write();
-      h_leppt_dividedby_jet_pt_loose[jetcut]->Write();
-      h_lepptvsjetpt_tight[jetcut]->Write();
-      h_lepptvsjetpt_loose[jetcut]->Write();
-      }
+
+    FR_pt_eta_tight_mu[jetcut]->Write();
+    FR_pt_eta_loose_mu[jetcut]->Write();
+    FR_pt_eta_tight_ele[jetcut]->Write();
+    FR_pt_eta_loose_ele[jetcut]->Write();
+  
+    h_associated_jet_pt_tight[jetcut]->Write();
+    h_associated_jet_pt_loose[jetcut]->Write();
+    h_leppt_dividedby_jet_pt_tight[jetcut]->Write();
+    h_leppt_dividedby_jet_pt_loose[jetcut]->Write();
+    h_lepptvsjetpt_tight[jetcut]->Write();
+    h_lepptvsjetpt_loose[jetcut]->Write();
+  
     if (isMC==true){
      h_associated_genjet_flavour_tight[jetcut]->Write();
      h_associated_genjet_flavour_loose[jetcut]->Write();
@@ -390,8 +418,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   root_output->Close();
  
   //Print number of events
-  for(int jetcut=0;jetcut<6;jetcut++){
-    cout<< "-----------Jet pt >"<<jetcut*5+20<<"-------"<<endl;
+  for(int jetcut=0;jetcut<8;jetcut++){
+    cout<< "-----------Jet pt >"<<jetcut*5+10<<"-------"<<endl;
     if(channel=="mu"){
       printf("loose muons: %f \n", muloose[jetcut]);
       printf("loose muons low: %f \n", muloose_low[jetcut]);

@@ -3,15 +3,28 @@ import sys
 
 
 def submit():
-	SAMPLESMU= set()
+	if len(sys.argv)==1 :
+		print "You need to provide the year as an argument"
+		return 1	
+        SAMPLESMU= set()
         SAMPLESELE= set()
+	
+	year =	sys.argv[1]
 
-	#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017
-        #        if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
-        #        elif 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
-	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/"):          #2018      
-		if   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
-                elif 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
+	if year == "2016":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"):   #2016
+			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
+			elif 'SingleElectron_Run2016' in ii : SAMPLESELE.add(ii)
+ 
+	if year == "2017":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017
+			if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
+			elif 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
+
+	if year == "2018":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/"):          #2018      
+			if   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
+			elif 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
 		
 	
         print "Data file list loaded..."
@@ -22,8 +35,6 @@ def submit():
         elesamples=0
 	
 	for s in SAMPLESMU:
-		if '2017' in s: year="2017"
-		elif '2018' in s: year="2018"
 		CH="mu"
 		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
 		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
@@ -55,8 +66,6 @@ def submit():
 	print "muon data submission finished, "+ str(musamples) +" jobs have been submitted. \n"
 	
 	for s in SAMPLESELE:
-		if '2017' in s: year="2017"
-		elif '2018' in s: year="2018"
 		CH="ele"
 		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
 		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
