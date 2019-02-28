@@ -14,7 +14,7 @@ def submit():
 	if year == "2016":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"):   #2016
 			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
-			elif 'SingleElectron_Run2016' in ii : SAMPLESELE.add(ii)
+                        elif 'SingleElectron_Run2016' in ii : SAMPLESELE.add(ii)
  
 	if year == "2017":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017
