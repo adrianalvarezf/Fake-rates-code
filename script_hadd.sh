@@ -1,6 +1,6 @@
 
-#cd outputsFR_2018
-cd outputsFR_2017_21feb
+cd $1
+
 pwd
 
 rm -r WJets_mu.root
@@ -28,3 +28,5 @@ hadd -f -k Data_ele.root *ele*SingleElectron*.root
 #hadd -f -k QCD_mu.root *QCD*Mu*.root
 #hadd -f -k QCD_DoubleEM.root *QCD*DoubleEM*.root
 #hadd -f -k QCD_EM.root *QCD*_EM*.root
+
+cd -

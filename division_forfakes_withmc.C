@@ -9,12 +9,12 @@
 void division_forfakes_withmc()
 {
   
-  TFile* file_Data_ele= new TFile("outputsFR_2017_27feb_with10and15cuts/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_2017_27feb_with10and15cuts/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_2017_27feb_with10and15cuts/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_2017_27feb_with10and15cuts/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_2017_27feb_with10and15cuts/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_2017_27feb_with10and15cuts/WJets_mu.root");
+  TFile* file_Data_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/Data_ele.root");
+  TFile* file_DY_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/DY_ele.root");
+  TFile* file_WJets_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/WJets_ele.root");
+  TFile* file_Data_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/Data_mu.root");
+  TFile* file_DY_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/DY_mu.root");
+  TFile* file_WJets_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/WJets_mu.root");
   
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 
@@ -354,7 +354,7 @@ void division_forfakes_withmc()
 
   /////////Rootfiles with 2D histograms//////////
   
-  for(int j=1;j<8;j++){
+  for(int j=0;j<8;j++){
     TFile* root_elefile = new TFile(Form("EleFR_jet%d.root",10+j*5), "recreate");
     FR_pt_eta_ele[j]->Write();  
     FR_pt_eta_numerator_ele[j]->Write(); 

@@ -28,6 +28,9 @@ def submit():
 		
 	
         print "Data file list loaded..."
+	print " Year ", year
+	print " Number of muon data files ", len(SAMPLESMU)
+	print " Number of electron data files ", len(SAMPLESELE)
 
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor/"
         queue="tomorrow"
