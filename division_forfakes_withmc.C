@@ -6,15 +6,15 @@
 #include <fstream>
 #include <stdio.h>
 
-void division_forfakes_withmc()
+void division_forfakes_withmc(TString year)
 {
   
-  TFile* file_Data_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_2016_27feb_with10and15cuts/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_2016_27feb_with10and15cuts/WJets_mu.root");
+  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_ele.root");
+  TFile* file_DY_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/DY_ele.root");
+  TFile* file_WJets_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/WJets_ele.root");
+  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_mu.root");
+  TFile* file_DY_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/DY_mu.root");
+  TFile* file_WJets_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/WJets_mu.root");
   
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 

@@ -39,12 +39,12 @@ def submit():
 	
 	for s in SAMPLESMU:
 		CH="mu"
-		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
-		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
-		errFileName = outputDir+s[:-5]+"_"+CH+".err"
-		outFileName = outputDir+s[:-5]+"_"+CH+".out"
-		logFileName = outputDir+s[:-5]+"_"+CH+".log"
-		jidFileName = outputDir+s[:-5]+"_"+CH+".jid"
+		jobFileName = outputDir+s[:-5]+"_"+CH+"_FR.sh"
+		subFileName = outputDir+s[:-5]+"_"+CH+"_FR.sub"
+		errFileName = outputDir+s[:-5]+"_"+CH+"_FR.err"
+		outFileName = outputDir+s[:-5]+"_"+CH+"_FR.out"
+		logFileName = outputDir+s[:-5]+"_"+CH+"_FR.log"
+		jidFileName = outputDir+s[:-5]+"_"+CH+"_FR.jid"
 
 		jobFile = open(jobFileName, "w+")
 		jobFile.write("#!/bin/sh \n")
@@ -70,12 +70,12 @@ def submit():
 	
 	for s in SAMPLESELE:
 		CH="ele"
-		jobFileName = outputDir+s[:-5]+"_"+CH+".sh"
-		subFileName = outputDir+s[:-5]+"_"+CH+".sub"
-		errFileName = outputDir+s[:-5]+"_"+CH+".err"
-		outFileName = outputDir+s[:-5]+"_"+CH+".out"
-		logFileName = outputDir+s[:-5]+"_"+CH+".log"
-		jidFileName = outputDir+s[:-5]+"_"+CH+".jid"
+		jobFileName = outputDir+s[:-5]+"_"+CH+"_FR.sh"
+		subFileName = outputDir+s[:-5]+"_"+CH+"_FR.sub"
+		errFileName = outputDir+s[:-5]+"_"+CH+"_FR.err"
+		outFileName = outputDir+s[:-5]+"_"+CH+"_FR.out"
+		logFileName = outputDir+s[:-5]+"_"+CH+"_FR.log"
+		jidFileName = outputDir+s[:-5]+"_"+CH+"_FR.jid"
 
 		jobFile = open(jobFileName, "w+")
 		jobFile.write("#!/bin/sh \n")

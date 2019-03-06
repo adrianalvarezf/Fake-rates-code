@@ -17,10 +17,11 @@ def submit():
                         elif '_WJetsToLNu__' in ii : SAMPLESMC.add(ii)
 			
 	if year=="2017":
-                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):        #2017
-			if '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):        #2017
+			if '_DYJetsToLL_M-10to50-LO' in ii : SAMPLESMC.add(ii)
+                        elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
 			elif '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
-			elif '_TTToSemiLeptonic__' in ii : SAMPLESMC.add(ii) 
+			#elif '_TTToSemiLeptonic__' in ii : SAMPLESMC.add(ii) 
 
 	print "MC file list loaded..."		
 	print " Year " ,year
@@ -34,12 +35,12 @@ def submit():
 	for s in SAMPLESMC:
 		for ch in CHANNEL:
 
-			jobFileName = outputDir+s[:-5]+"_"+ch+".sh"
-			subFileName = outputDir+s[:-5]+"_"+ch+".sub"
-			errFileName = outputDir+s[:-5]+"_"+ch+".err"
-			outFileName = outputDir+s[:-5]+"_"+ch+".out"
-			logFileName = outputDir+s[:-5]+"_"+ch+".log"
-			jidFileName = outputDir+s[:-5]+"_"+ch+".jid"
+			jobFileName = outputDir+s[:-5]+"_"+ch+"_FR.sh"
+			subFileName = outputDir+s[:-5]+"_"+ch+"_FR.sub"
+			errFileName = outputDir+s[:-5]+"_"+ch+"_FR.err"
+			outFileName = outputDir+s[:-5]+"_"+ch+"_FR.out"
+			logFileName = outputDir+s[:-5]+"_"+ch+"_FR.log"
+			jidFileName = outputDir+s[:-5]+"_"+ch+"_FR.jid"
 
 			jobFile = open(jobFileName, "w+")
 			jobFile.write("#!/bin/sh \n")
