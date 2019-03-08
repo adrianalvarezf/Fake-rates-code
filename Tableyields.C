@@ -9,12 +9,12 @@
 
 void Tableyields(int jetcut)
 {
-  TFile* file_DY_ele= new TFile("outputsFR_1feb_jetbins/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_1feb_jetbins/WJets_ele.root");
-  TFile* file_data_ele= new TFile("outputsFR_1feb_jetbins/Data_ele.root");
-  TFile* file_DY_mu= new TFile("outputsFR_1feb_jetbins/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_1feb_jetbins/WJets_mu.root");
-  TFile* file_data_mu= new TFile("outputsFR_1feb_jetbins/Data_mu.root");
+  TFile* file_DY_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/DY_ele.root");
+  TFile* file_WJets_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/WJets_ele.root");
+  TFile* file_data_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_ele.root");
+  TFile* file_DY_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/DY_mu.root");
+  TFile* file_WJets_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/WJets_mu.root");
+  TFile* file_data_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_mu.root");
   TH1::SetDefaultSumw2();
 
   Double_t y_data_ele_tight_low =((TH1F*)file_data_ele->Get(Form("jetcut_%d/h_eta1_tight_low_%d",jetcut,jetcut)))->Integral();
@@ -79,7 +79,7 @@ void Tableyields(int jetcut)
   Double_t y_WJets_ele_loose_high_ratio =y_WJets_ele_loose_high/y_WJets_ele_loose_high_noweight;
   Double_t y_WJets_mu_loose_high_ratio =y_WJets_mu_loose_high/y_WJets_mu_loose_high_noweight;
 
-  ofstream Table(Form("yields_jetcut%d.txt",jetcut*5+20));
+  ofstream Table(Form("yields_jetcut%d.txt",jetcut*5+10));
   Table<< " ...............Trigger...........Data.....................W+Jets...............................Z+Jets................. "  <<endl;
   Table<< " ............................................w/o noweight.....with....Ratio........w/o noweight.....with.....Ratio..... "  <<endl;
   Table<<"Loose Muons"<<"     low pt            "<<Form("%.0f",y_data_mu_loose_low)<<"     "<<Form("%.0f",y_WJets_mu_loose_low_noweight)<<"         "<<Form("%.0f",y_WJets_mu_loose_low)<<"         "<<Form("%.3f",y_WJets_mu_loose_low_ratio)<<"          "<<Form("%.0f",y_DY_mu_loose_low_noweight)<<"          "<<Form("%.0f",y_DY_mu_loose_low)<<"         "<<Form("%.3f",y_DY_mu_loose_low_ratio)<<"    "<<endl;

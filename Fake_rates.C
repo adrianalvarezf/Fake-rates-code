@@ -40,7 +40,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_94X_nAODv3_Full2016v2/MCl1loose2016__MCCorr2016__fakeSelMC/";  //2016
 
 
-  TString dirname ="outputsFR_"+year+"_6mar_Lepton_isTightElectron";
+  TString dirname ="outputsFR_"+year+"_7mar_8L_eletrigger";
   TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/";
 
   TString file = "";
@@ -142,8 +142,12 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   tree->SetBranchAddress("baseW",&baseW);
   Float_t Generator_weight;
   tree->SetBranchAddress("Generator_weight",&Generator_weight);
+  Int_t PV_npvsGood; 
+  tree->SetBranchAddress("PV_npvsGood",&PV_npvsGood);
   Int_t event;
   tree->SetBranchAddress("event",&event);
+  Bool_t HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30;
+  tree->SetBranchAddress("HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30",&HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30);
   Bool_t HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30;
   tree->SetBranchAddress("HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30",&HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30);
   Bool_t HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30;
@@ -216,6 +220,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   TH1F* h_leppt_dividedby_jet_pt_loose[8];
   TH2D *h_lepptvsjetpt_tight[8];
   TH2D *h_lepptvsjetpt_loose[8];
+  TH1F *h_PV_tight[8];
+  TH1F *h_PV_loose[8];
 
   TH2F * FR_pt_eta_loose_ele[8];
   TH2F * FR_pt_eta_tight_ele[8];
@@ -246,6 +252,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
     h_associated_jet_flavour_loose[jet]= new TH1F(Form("h_associated_jet_flavour_loose_%d",jet),Form("h_associated_jet_flavour_loose_%d",jet),25,0,25);
     h_associated_genjet_flavour_tight[jet]= new TH1F(Form("h_associated_genjet_flavour_tight_%d",jet),Form("h_associated_genjet_flavour_tight_%d",jet),25,0,25);
     h_associated_genjet_flavour_loose[jet]= new TH1F(Form("h_associated_genjet_flavour_loose_%d",jet),Form("h_associated_genjet_flavour_loose_%d",jet),25,0,25);
+    h_PV_tight[jet]   = new TH1F(Form("h_PV_tight_%d",jet),Form("h_PV_tight_%d",jet),25,0,50);
+    h_PV_loose[jet]   = new TH1F(Form("h_PV_loose_%d",jet),Form("h_PV_loose_%d",jet),25,0,50);
 
     FR_pt_eta_tight_ele[jet]= new TH2F(Form("h_FR_pt_eta_tight_ele_%d",jet),Form("h_FR_pt_eta_tight_ele_%d",jet),8,10,50,5,0,2.5);
     FR_pt_eta_loose_ele[jet]= new TH2F(Form("h_FR_pt_eta_loose_ele_%d",jet),Form("h_FR_pt_eta_loose_ele_%d",jet),8,10,50,5,0,2.5);
@@ -270,7 +278,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
       if(isMC==true && isQCD==false) weight=baseW*Generator_weight*puWeight;
       int passjets =0;
       for (int jet=0; jet<nCleanJet; jet++){
-	if(CleanJet_pt[jet]>=(10.+5*jetcut) && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
+	if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
       }
       if (passjets==0)continue;
 
@@ -278,10 +286,12 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (abs(Lepton_pdgId[0])!=11) continue;
 	if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>=2.5)continue;
 	if (Lepton_pt[0] <= 25.){
-	  if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
+	  //if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
+	  if (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  else {
-	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;}
-	    eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	    //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;}
+	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;}
+	    eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -291,7 +301,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	    }
 	    if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	      eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	      eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -307,7 +317,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  else{
 	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
-	    eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); 
+	    eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -317,7 +327,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
 	    }
 	    if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	      eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	      eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -338,7 +348,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  if (HLT_Mu8_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  else {
 	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.003910;}
-	    muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	    muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -348,7 +358,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	    }
 	    if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	      mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	      mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -364,7 +374,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	  if (HLT_Mu17_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  else{
 	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.281989;}
-	    muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); 
+	    muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -374,7 +384,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	    }
 	    if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	      mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
+	      mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	      FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -408,6 +418,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
     h_eta1_tight_high[jetcut]->Write();
     h_pt1_loose_high[jetcut] ->Write();
     h_eta1_loose_high[jetcut]->Write();
+    h_PV_loose[jetcut]->Write();
+    h_PV_tight[jetcut]->Write();
 
     FR_pt_eta_tight_mu[jetcut]->Write();
     FR_pt_eta_loose_mu[jetcut]->Write();

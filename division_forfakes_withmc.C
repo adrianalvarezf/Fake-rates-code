@@ -8,13 +8,12 @@
 
 void division_forfakes_withmc(TString year)
 {
-  
-  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/WJets_mu.root");
+  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/Data_ele.root");
+  TFile* file_DY_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/DY_ele.root");
+  TFile* file_WJets_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/WJets_ele.root");
+  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/Data_mu.root");
+  TFile* file_DY_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/DY_mu.root");
+  TFile* file_WJets_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/WJets_mu.root");
   
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 
@@ -193,30 +192,32 @@ void division_forfakes_withmc(TString year)
   TH2F* FR_pt_eta_EWKcorr_denominator_mu[8];
 
   for(int j=0;j<8;j++){
-    FR_pt_eta_EWKcorr_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone(Form("FR_pt_eta_EWKcorr_numerator_ele_%d",j));
+
+    FR_pt_eta_EWKcorr_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone("FR_pt_eta_EWKcorr_numerator");
     FR_pt_eta_EWKcorr_numerator_ele[j]->Add(FR_pt_eta_num_DY_ele[j],-1);
     FR_pt_eta_EWKcorr_numerator_ele[j]->Add(FR_pt_eta_num_WJets_ele[j],-1);
-    FR_pt_eta_EWKcorr_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone(Form("FR_pt_eta_EWKcorr_denominator_ele_%d",j));
+    FR_pt_eta_EWKcorr_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone("FR_pt_eta_EWKcorr_denominator");
     FR_pt_eta_EWKcorr_denominator_ele[j]->Add(FR_pt_eta_den_DY_ele[j],-1);
     FR_pt_eta_EWKcorr_denominator_ele[j]->Add(FR_pt_eta_den_WJets_ele[j],-1);
-    FR_pt_eta_EWKcorr_ele[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_ele[j]->Clone(Form("FR_pt_eta_EWKcorr_ele_%d",j));
+    FR_pt_eta_EWKcorr_ele[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_ele[j]->Clone("FR_pt_eta_EWKcorr");
     FR_pt_eta_EWKcorr_ele[j]->Divide(FR_pt_eta_EWKcorr_denominator_ele[j]);
-    FR_pt_eta_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone(Form("FR_pt_eta_numerator_ele_%d",j));
-    FR_pt_eta_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone(Form("FR_pt_eta_denominator_ele_%d",j));
-    FR_pt_eta_ele[j]= (TH2F*) FR_pt_eta_numerator_ele[j]->Clone(Form("FR_pt_eta_ele_%d",j));
+    FR_pt_eta_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone("FR_pt_eta_numerator");
+    FR_pt_eta_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone("FR_pt_eta_denominator");
+    FR_pt_eta_ele[j]= (TH2F*) FR_pt_eta_numerator_ele[j]->Clone("FR_pt_eta");
     FR_pt_eta_ele[j]->Divide(FR_pt_eta_denominator_ele[j]);
-    FR_pt_eta_EWKcorr_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone(Form("FR_pt_eta_EWKcorr_numerator_mu_%d",j));
+    FR_pt_eta_EWKcorr_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone("FR_pt_eta_EWKcorr_numerator");
     FR_pt_eta_EWKcorr_numerator_mu[j]->Add(FR_pt_eta_num_DY_mu[j],-1);
     FR_pt_eta_EWKcorr_numerator_mu[j]->Add(FR_pt_eta_num_WJets_mu[j],-1);
-    FR_pt_eta_EWKcorr_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone(Form("FR_pt_eta_EWKcorr_denominator_mu_%d",j));
+    FR_pt_eta_EWKcorr_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone("FR_pt_eta_EWKcorr_denominator");
     FR_pt_eta_EWKcorr_denominator_mu[j]->Add(FR_pt_eta_den_DY_mu[j],-1);
     FR_pt_eta_EWKcorr_denominator_mu[j]->Add(FR_pt_eta_den_WJets_mu[j],-1);
-    FR_pt_eta_EWKcorr_mu[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_mu[j]->Clone(Form("FR_pt_eta_EWKcorr_mu_%d",j));
+    FR_pt_eta_EWKcorr_mu[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_mu[j]->Clone("FR_pt_eta_EWKcorr");
     FR_pt_eta_EWKcorr_mu[j]->Divide(FR_pt_eta_EWKcorr_denominator_mu[j]);
-    FR_pt_eta_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone(Form("FR_pt_eta_numerator_mu_%d",j));
-    FR_pt_eta_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone(Form("FR_pt_eta_denominator_mu_%d",j));
-    FR_pt_eta_mu[j]= (TH2F*) FR_pt_eta_numerator_mu[j]->Clone(Form("FR_pt_eta_mu_%d",j));
+    FR_pt_eta_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone("FR_pt_eta_numerator");
+    FR_pt_eta_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone("FR_pt_eta_denominator");
+    FR_pt_eta_mu[j]= (TH2F*) FR_pt_eta_numerator_mu[j]->Clone("FR_pt_eta_mu");
     FR_pt_eta_mu[j]->Divide(FR_pt_eta_denominator_mu[j]);
+     
   }
 
   /////////////Efficiency errors //////////////////
@@ -356,21 +357,21 @@ void division_forfakes_withmc(TString year)
   
   for(int j=0;j<8;j++){
     TFile* root_elefile = new TFile(Form("EleFR_jet%d.root",10+j*5), "recreate");
-    FR_pt_eta_ele[j]->Write();  
-    FR_pt_eta_numerator_ele[j]->Write(); 
-    FR_pt_eta_denominator_ele[j]->Write();
-    FR_pt_eta_EWKcorr_ele[j]->Write();
-    FR_pt_eta_EWKcorr_numerator_ele[j]->Write();
-    FR_pt_eta_EWKcorr_denominator_ele[j]->Write();
+    FR_pt_eta_ele[j]->SetTitle(Form("FR_pt_eta_ele_jet%d",10+j*5));                                            FR_pt_eta_ele[j]->Write();  
+    FR_pt_eta_numerator_ele[j]->SetTitle(Form("FR_pt_eta_numerator_ele_jet%d",10+j*5));                        FR_pt_eta_numerator_ele[j]->Write(); 
+    FR_pt_eta_denominator_ele[j]->SetTitle(Form("FR_pt_eta_denominator_ele_jet%d",10+j*5));                    FR_pt_eta_denominator_ele[j]->Write();
+    FR_pt_eta_EWKcorr_ele[j]->SetTitle(Form("FR_pt_eta_EWKcorr_ele_jet%d",10+j*5));                            FR_pt_eta_EWKcorr_ele[j]->Write();
+    FR_pt_eta_EWKcorr_numerator_ele[j]->SetTitle(Form("FR_pt_eta_EWKcorr_numerator_ele_jet%d",10+j*5));        FR_pt_eta_EWKcorr_numerator_ele[j]->Write();
+    FR_pt_eta_EWKcorr_denominator_ele[j]->SetTitle(Form("FR_pt_eta_EWKcorr_denominator_ele_jet%d",10+j*5));    FR_pt_eta_EWKcorr_denominator_ele[j]->Write();
     root_elefile->Close();
 
     TFile* root_mufile = new TFile(Form("MuFR_jet%d.root",10+j*5), "recreate");
-    FR_pt_eta_mu[j]->Write();  
-    FR_pt_eta_numerator_mu[j]->Write(); 
-    FR_pt_eta_denominator_mu[j]->Write();
-    FR_pt_eta_EWKcorr_mu[j]->Write();
-    FR_pt_eta_EWKcorr_numerator_mu[j]->Write();
-    FR_pt_eta_EWKcorr_denominator_mu[j]->Write();
+    FR_pt_eta_mu[j]->SetTitle(Form("FR_pt_eta_mu_jet%d",10+j*5));                                            FR_pt_eta_mu[j]->Write();  
+    FR_pt_eta_numerator_mu[j]->SetTitle(Form("FR_pt_eta_numerator_mu_jet%d",10+j*5));                        FR_pt_eta_numerator_mu[j]->Write(); 
+    FR_pt_eta_denominator_mu[j]->SetTitle(Form("FR_pt_eta_denominator_mu_jet%d",10+j*5));                    FR_pt_eta_denominator_mu[j]->Write();
+    FR_pt_eta_EWKcorr_mu[j]->SetTitle(Form("FR_pt_eta_EWKcorr_mu_jet%d",10+j*5));                            FR_pt_eta_EWKcorr_mu[j]->Write();
+    FR_pt_eta_EWKcorr_numerator_mu[j]->SetTitle(Form("FR_pt_eta_EWKcorr_numerator_mu_jet%d",10+j*5));        FR_pt_eta_EWKcorr_numerator_mu[j]->Write();
+    FR_pt_eta_EWKcorr_denominator_mu[j]->SetTitle(Form("FR_pt_eta_EWKcorr_denominator_mu_jet%d",10+j*5));    FR_pt_eta_EWKcorr_denominator_mu[j]->Write();
     root_mufile->Close();
   }
   
