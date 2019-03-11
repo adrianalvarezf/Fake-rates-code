@@ -9,10 +9,11 @@
 void division_forfakes_dataonly(TString year)
 {
 
-  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_27feb_with10and15cuts/Data_mu.root");
-  TFile* file_Data_ele17= new TFile("outputsFR_2017_27feb_with10and15cuts/Data_ele.root");
-  TFile* file_Data_mu17= new TFile("outputsFR_2017_27feb_with10and15cuts/Data_mu.root");
+  TFile* file_Data_ele= new TFile("outputsFR_2017_6mar_eleHLT_test/Data_ele.root");
+  //TFile* file_Data_ele= new TFile("outputsFR_"+year+"_6mar_Lepton_isTightElectron/Data_ele.root");
+  TFile* file_Data_mu = new TFile("outputsFR_"+year+"_6mar_Lepton_isTightElectron/Data_mu.root");
+  TFile* file_Data_ele17= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_ele.root");
+  TFile* file_Data_mu17 = new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_mu.root");
 
   TH1F* h_DATA_ele[8];
   TH1F* h_denominator_DATA_ele[8];
@@ -32,10 +33,23 @@ void division_forfakes_dataonly(TString year)
   TH1F* h_denominator_DATA_eta_mu17;
   
   for(int j=0;j<8;j++){
-    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
-    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
-    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
-    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
+    /*
+    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_noHLT_%d",j,j)); 
+    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_noHLT_%d",j,j));
+    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_noHLT_%d",j,j));
+    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_noHLT_%d",j,j));
+    */   
+    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_12_%d",j,j)); 
+    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_12_%d",j,j));
+    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_12_%d",j,j));
+    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_12_%d",j,j));
+    
+    /* 
+       h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
+       h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
+       h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
+       h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
+    */   
     h_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_denominator_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_DATA_eta_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
@@ -141,6 +155,7 @@ void division_forfakes_dataonly(TString year)
   }
   ////////////////////////////////////
   ///Plots 2017 vs 2018-> 25GeV for muons, 35 GeV for electrons////  
+  /*
   TLegend *yearleg= new TLegend(0.1,0.7,0.48,0.9);
   yearleg->AddEntry(h_div_noEWKcorr_ele[5], year+" Data");
   yearleg->AddEntry(h_div_noEWKcorr_ele17 ,"2017 Data");  
@@ -172,7 +187,7 @@ void division_forfakes_dataonly(TString year)
   h_div_noEWKcorr_eta_mu[3]->Draw(); h_div_noEWKcorr_eta_mu[3]->GetYaxis()->SetRangeUser(0,1); h_div_noEWKcorr_eta_mu[3]->SetTitle("Muon fake rate"); h_div_noEWKcorr_eta_mu[3]->GetXaxis()->SetTitle("|#eta|");  h_div_noEWKcorr_eta_mu[3]->GetYaxis()->SetTitle("Mu fake rate");c_eta_mu->SetGridx(1);c_eta_mu->SetGridy(1); h_div_noEWKcorr_eta_mu[3]->SetLineWidth(2); h_div_noEWKcorr_eta_mu[3]->SetMarkerStyle(kFullCircle) ; h_div_noEWKcorr_eta_mu[3]->SetLineColor(1); h_div_noEWKcorr_eta_mu[3]->SetMarkerColor(1);
   h_div_noEWKcorr_eta_mu17->Draw("same"); h_div_noEWKcorr_eta_mu17->SetLineColor(2); h_div_noEWKcorr_eta_mu17->SetMarkerColor(2); h_div_noEWKcorr_eta_mu17->SetLineWidth(2); 
   h_div_noEWKcorr_eta_mu17->SetMarkerStyle(kFullCircle); yearleg->Draw(); c_eta_mu->SaveAs("years2017and"+year+"_eta_muFR.gif");
-
+  */
   /////////////Combined plots//////////////////////
   
   TLegend *combinedleg= new TLegend(0.1,0.7,0.48,0.9);
@@ -192,13 +207,6 @@ void division_forfakes_dataonly(TString year)
   h_div_noEWKcorr_ele[5]->Draw("same"); h_div_noEWKcorr_ele[5]->SetLineColor(17); h_div_noEWKcorr_ele[5]->SetMarkerColor(17); h_div_noEWKcorr_ele[5]->SetLineWidth(2);  h_div_noEWKcorr_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_noEWKcorr_ele[j]->Draw("same"); h_div_noEWKcorr_ele[j]->SetLineColor(j+1); h_div_noEWKcorr_ele[j]->SetMarkerColor(j+1); h_div_noEWKcorr_ele[j]->SetLineWidth(2);  h_div_noEWKcorr_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw(); combined_pt_ele->SaveAs("combined_pt_"+year+"_eleFR.gif");
-  TCanvas* combined_pt_mu= new TCanvas();
-  combined_pt_mu->cd();
-  h_div_noEWKcorr_mu[0]->Draw(); h_div_noEWKcorr_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_noEWKcorr_mu[0]->SetTitle("Muon fake rate"); h_div_noEWKcorr_mu[0]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_noEWKcorr_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_pt_mu->SetGridx(1);combined_pt_mu->SetGridy(1); h_div_noEWKcorr_mu[0]->SetLineWidth(2);  h_div_noEWKcorr_mu[0]->SetMarkerStyle(kFullCircle); h_div_noEWKcorr_mu[0]->SetLineColor(6); h_div_noEWKcorr_mu[0]->SetMarkerColor(6);
-  for(int j=1;j<5;j++){h_div_noEWKcorr_mu[j]->Draw("same"); h_div_noEWKcorr_mu[j]->SetLineColor(j); h_div_noEWKcorr_mu[j]->SetMarkerColor(j); h_div_noEWKcorr_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_mu[j]->SetMarkerStyle(kFullCircle);}
-  h_div_noEWKcorr_mu[5]->Draw("same"); h_div_noEWKcorr_mu[5]->SetLineColor(17); h_div_noEWKcorr_mu[5]->SetMarkerColor(17); h_div_noEWKcorr_mu[5]->SetLineWidth(2);  h_div_noEWKcorr_mu[5]->SetMarkerStyle(kFullCircle);
-  for(int j=6;j<8;j++){h_div_noEWKcorr_mu[j]->Draw("same"); h_div_noEWKcorr_mu[j]->SetLineColor(j+1); h_div_noEWKcorr_mu[j]->SetMarkerColor(j+1); h_div_noEWKcorr_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_mu[j]->SetMarkerStyle(kFullCircle);}
-  combinedleg->Draw();combined_pt_mu->SaveAs("combined_pt_"+year+"_muFR.gif");
   TCanvas* combined_eta_ele= new TCanvas(); 
   combined_eta_ele->cd();
   h_div_noEWKcorr_eta_ele[0]->Draw(); h_div_noEWKcorr_eta_ele[0]->GetYaxis()->SetRangeUser(0,1); h_div_noEWKcorr_eta_ele[0]->SetTitle("Electron fake rate"); h_div_noEWKcorr_eta_ele[0]->GetXaxis()->SetTitle("|#eta|"); h_div_noEWKcorr_eta_ele[0]->GetYaxis()->SetTitle("Ele fake rate");combined_eta_ele->SetGridx(1);combined_eta_ele->SetGridy(1); h_div_noEWKcorr_eta_ele[0]->SetLineWidth(2);  h_div_noEWKcorr_eta_ele[0]->SetMarkerStyle(kFullCircle); h_div_noEWKcorr_eta_ele[0]->SetLineColor(6); h_div_noEWKcorr_eta_ele[0]->SetMarkerColor(6);
@@ -206,14 +214,22 @@ void division_forfakes_dataonly(TString year)
   h_div_noEWKcorr_eta_ele[5]->Draw("same"); h_div_noEWKcorr_eta_ele[5]->SetLineColor(17); h_div_noEWKcorr_eta_ele[5]->SetMarkerColor(17); h_div_noEWKcorr_eta_ele[5]->SetLineWidth(2);  h_div_noEWKcorr_eta_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_noEWKcorr_eta_ele[j]->Draw("same"); h_div_noEWKcorr_eta_ele[j]->SetLineColor(j+1); h_div_noEWKcorr_eta_ele[j]->SetMarkerColor(j+1); h_div_noEWKcorr_eta_ele[j]->SetLineWidth(2);  h_div_noEWKcorr_eta_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_ele->SaveAs("combined_eta_"+year+"_eleFR.gif");
-  TCanvas* combined_eta_mu= new TCanvas();
+  /*
+TCanvas* combined_pt_mu= new TCanvas();
+  combined_pt_mu->cd();
+  h_div_noEWKcorr_mu[0]->Draw(); h_div_noEWKcorr_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_noEWKcorr_mu[0]->SetTitle("Muon fake rate"); h_div_noEWKcorr_mu[0]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_noEWKcorr_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_pt_mu->SetGridx(1);combined_pt_mu->SetGridy(1); h_div_noEWKcorr_mu[0]->SetLineWidth(2);  h_div_noEWKcorr_mu[0]->SetMarkerStyle(kFullCircle); h_div_noEWKcorr_mu[0]->SetLineColor(6); h_div_noEWKcorr_mu[0]->SetMarkerColor(6);
+  for(int j=1;j<5;j++){h_div_noEWKcorr_mu[j]->Draw("same"); h_div_noEWKcorr_mu[j]->SetLineColor(j); h_div_noEWKcorr_mu[j]->SetMarkerColor(j); h_div_noEWKcorr_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_mu[j]->SetMarkerStyle(kFullCircle);}
+  h_div_noEWKcorr_mu[5]->Draw("same"); h_div_noEWKcorr_mu[5]->SetLineColor(17); h_div_noEWKcorr_mu[5]->SetMarkerColor(17); h_div_noEWKcorr_mu[5]->SetLineWidth(2);  h_div_noEWKcorr_mu[5]->SetMarkerStyle(kFullCircle);
+  for(int j=6;j<8;j++){h_div_noEWKcorr_mu[j]->Draw("same"); h_div_noEWKcorr_mu[j]->SetLineColor(j+1); h_div_noEWKcorr_mu[j]->SetMarkerColor(j+1); h_div_noEWKcorr_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_mu[j]->SetMarkerStyle(kFullCircle);}
+  combinedleg->Draw();combined_pt_mu->SaveAs("combined_pt_"+year+"_muFR.gif");
+   TCanvas* combined_eta_mu= new TCanvas();
   combined_eta_mu->cd();
   h_div_noEWKcorr_eta_mu[0]->Draw(); h_div_noEWKcorr_eta_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_noEWKcorr_eta_mu[0]->SetTitle("Muon fake rate"); h_div_noEWKcorr_eta_mu[0]->GetXaxis()->SetTitle("|#eta|"); h_div_noEWKcorr_eta_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_eta_mu->SetGridx(1);combined_eta_mu->SetGridy(1); h_div_noEWKcorr_eta_mu[0]->SetLineWidth(2);  h_div_noEWKcorr_eta_mu[0]->SetMarkerStyle(kFullCircle); h_div_noEWKcorr_eta_mu[0]->SetLineColor(6); h_div_noEWKcorr_eta_mu[0]->SetMarkerColor(6);
   for(int j=1;j<5;j++){h_div_noEWKcorr_eta_mu[j]->Draw("same"); h_div_noEWKcorr_eta_mu[j]->SetLineColor(j); h_div_noEWKcorr_eta_mu[j]->SetMarkerColor(j); h_div_noEWKcorr_eta_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_eta_mu[j]->SetMarkerStyle(kFullCircle);}
   h_div_noEWKcorr_eta_mu[5]->Draw("same"); h_div_noEWKcorr_eta_mu[5]->SetLineColor(17); h_div_noEWKcorr_eta_mu[5]->SetMarkerColor(17); h_div_noEWKcorr_eta_mu[5]->SetLineWidth(2);  h_div_noEWKcorr_eta_mu[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_noEWKcorr_eta_mu[j]->Draw("same"); h_div_noEWKcorr_eta_mu[j]->SetLineColor(j+1); h_div_noEWKcorr_eta_mu[j]->SetMarkerColor(j+1); h_div_noEWKcorr_eta_mu[j]->SetLineWidth(2);  h_div_noEWKcorr_eta_mu[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_mu->SaveAs("combined_eta_"+year+"_muFR.gif");
-  
+  */
   cout<<"THE END"<<endl;
 }
 
