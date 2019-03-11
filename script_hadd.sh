@@ -23,8 +23,12 @@ hadd -f -k Data_mu.root *mu*DoubleMuon*.root
 #hadd -f -k TT_mu.root *mu*TTToSemiLeptonic*.root
 hadd -f -k WJets_ele.root *ele*WJets*.root
 hadd -f -k DY_ele.root *ele*DY*.root
-hadd -f -k Data_ele.root *ele*SingleElectron*.root 
-#hadd -f -k Data_ele.root *ele*EGamma*.root 
+
+hadd -f -k Data_ele.roo  *ele*DoubleEG*.root         #2016
+#hadd -f -k Data_ele.root *ele*SingleElectron*.root   #2017
+#hadd -f -k Data_ele.root *ele*EGamma*.root           #2018
+
+
 #hadd -f -k TT_ele.root *ele*TTToSemiLeptonic*.root
 
 #hadd -f -k QCD_mu.root *QCD*Mu*.root

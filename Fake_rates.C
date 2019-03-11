@@ -290,117 +290,113 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (Lepton_pt[0] <= 25.){
 	  //if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  if (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
-	  else {
-	    //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;}
-	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;}
-	    eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
-	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;}
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;}
+	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
+	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
+	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
+	  }
+	  //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
-	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-	    }
-	    //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	    if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	      eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
-	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
-		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-		if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-	      }
+	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
+	      if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	    }
 	  }
 	}
+
 	if (Lepton_pt[0] > 25.){
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
-	  else{
-	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
-	    eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
-	    FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
+	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
+	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
+	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
+	  }
+	  //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
-	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-	      if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
+	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
+	      if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
+	      if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	     
 	    }
-	    //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	    if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	      eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
-	      FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	      if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
-		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
-		if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
-		if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	     
-	      }
-	    }
-	  } 
+	  }
 	}
-      }
+
+      }// Close ele channel
 
       if (channel=="mu"){
 	if (abs(Lepton_pdgId[0])!=13) continue;
 	if (Lepton_pt[0]<10 || fabs(Lepton_eta[0])>=2.4)continue;
 	if (Lepton_pt[0] <= 20.){
 	  if (HLT_Mu8_TrkIsoVVL < 0.5 && isQCD==false)continue;
-	  else {
-	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.003910;}
-	    muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
-	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
-	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-	    }
-	    if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	      mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.003910;}
+	  muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
+	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	  }
+	  if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
+	    mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
-		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-		if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-	      }
+	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
+	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	      if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	    }
 	  }
 	}
+
 	if (Lepton_pt[0] > 20.){
 	  if (HLT_Mu17_TrkIsoVVL < 0.5 && isQCD==false)continue;
-	  else{
-	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.281989;}
-	    muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
-	    FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.281989;}
+	  muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
+	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	  }
+	  if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
+	    mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
-	      h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      h_leppt_dividedby_jet_pt_loose[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      h_lepptvsjetpt_loose[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-	      if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-	      if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
+	      if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
+	      if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	    }
-	    if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	      mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
-	      FR_pt_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	      if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
-		h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		h_lepptvsjetpt_tight[jetcut]->Fill(Lepton_pt[0],Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
-		if(isMC==true)h_associated_jet_flavour_tight[jetcut]->Fill(fabs(Jet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-		if(isMC==true)h_associated_genjet_flavour_tight[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
-	      }
-	    } 
 	  } 
-	}
-      }
+	}   
+	
+      }//Close mu channel
 
     }//Close loop in jetcut
   }//Close loop in entries
