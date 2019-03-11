@@ -6,23 +6,15 @@
 #include <fstream>
 #include <stdio.h>
 
-void division_forfakes_withmc(TString year)
+void division_forfakes_withmc(TString year, TString dir)
 {
-  /*
-  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_"+year+"_7mar_8L_eletrigger/WJets_mu.root");
-  */
 
-  TFile* file_Data_ele= new TFile("outputsFR_"+year+"_8mar_triggermatching/Data_ele.root");
-  TFile* file_DY_ele= new TFile("outputsFR_"+year+"_8mar_triggermatching/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_"+year+"_8mar_triggermatching/WJets_ele.root");
-  TFile* file_Data_mu= new TFile("outputsFR_"+year+"_8mar_triggermatching/Data_mu.root");
-  TFile* file_DY_mu= new TFile("outputsFR_"+year+"_8mar_triggermatching/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_"+year+"_8mar_triggermatching/WJets_mu.root");
+  TFile* file_Data_ele= new TFile(dir+"/Data_ele.root");
+  TFile* file_DY_ele= new TFile(dir+"/DY_ele.root");
+  TFile* file_WJets_ele= new TFile(dir+"/WJets_ele.root");
+  TFile* file_Data_mu= new TFile(dir+"/Data_mu.root");
+  TFile* file_DY_mu= new TFile(dir+"/DY_mu.root");
+  TFile* file_WJets_mu= new TFile(dir+"/WJets_mu.root");
  
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 

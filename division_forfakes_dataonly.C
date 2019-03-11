@@ -6,12 +6,13 @@
 #include <fstream>
 #include <stdio.h>
 
-void division_forfakes_dataonly(TString year)
+void division_forfakes_dataonly(TString year, TString dir)
 {
-
-  TFile* file_Data_ele= new TFile("outputsFR_2017_6mar_eleHLT_test/Data_ele.root");
-  //TFile* file_Data_ele= new TFile("outputsFR_"+year+"_6mar_Lepton_isTightElectron/Data_ele.root");
-  TFile* file_Data_mu = new TFile("outputsFR_"+year+"_6mar_Lepton_isTightElectron/Data_mu.root");
+  if (dir.find(year) == string::npos) {
+    cout<<"ERROR : Are you sure that folder is from that year?"<<endl;
+  } 
+  TFile* file_Data_ele= new TFile(dir+"/Data_ele.root");
+  TFile* file_Data_mu = new TFile(dir+"/Data_mu.root");
   TFile* file_Data_ele17= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_ele.root");
   TFile* file_Data_mu17 = new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_mu.root");
 
@@ -33,23 +34,10 @@ void division_forfakes_dataonly(TString year)
   TH1F* h_denominator_DATA_eta_mu17;
   
   for(int j=0;j<8;j++){
-    /*
-    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_noHLT_%d",j,j)); 
-    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_noHLT_%d",j,j));
-    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_noHLT_%d",j,j));
-    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_noHLT_%d",j,j));
-    */   
-    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_12_%d",j,j)); 
-    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_12_%d",j,j));
-    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_12_%d",j,j));
-    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_12_%d",j,j));
-    
-    /* 
-       h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
-       h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
-       h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
-       h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
-    */   
+    h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
+    h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
+    h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
+    h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_denominator_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_DATA_eta_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));

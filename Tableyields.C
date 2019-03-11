@@ -7,14 +7,15 @@
 #include <stdio.h>
 #include "TMath.h"
 
-void Tableyields(int jetcut)
+void Tableyields(int jetcut, TString dir)
 {
-  TFile* file_DY_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/DY_ele.root");
-  TFile* file_WJets_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/WJets_ele.root");
-  TFile* file_data_ele= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_ele.root");
-  TFile* file_DY_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/DY_mu.root");
-  TFile* file_WJets_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/WJets_mu.root");
-  TFile* file_data_mu= new TFile("outputsFR_2017_6mar_Lepton_isTightElectron/Data_mu.root");
+
+  TFile* file_DY_ele= new TFile(dir+"/DY_ele.root");
+  TFile* file_WJets_ele= new TFile(dir+"/WJets_ele.root");
+  TFile* file_data_ele= new TFile(dir+"/Data_ele.root");
+  TFile* file_DY_mu= new TFile(dir+"/DY_mu.root");
+  TFile* file_WJets_mu= new TFile(dir+"/WJets_mu.root");
+  TFile* file_data_mu= new TFile(dir+"/Data_mu.root");
   TH1::SetDefaultSumw2();
 
   Double_t y_data_ele_tight_low =((TH1F*)file_data_ele->Get(Form("jetcut_%d/h_eta1_tight_low_%d",jetcut,jetcut)))->Integral();
