@@ -11,7 +11,7 @@ Then you use
   
 to merge the files and with 
 
-  root -q -b "division_forfakes_withmc.C(\"2017\",\"foldername\")"
+  root -q -b "division_forfakes_withmc.C(\"foldername\")"
 
 you get the plots. 
 If there is no MC available or you only want to use data, there is also division_forfakes_dataonly.C , which can also make comparison plots between two years, like 2017 vs 2018.

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <stdio.h>
 #include <string>
 #include <TLorentzVector.h>
 #include "TMath.h"
@@ -12,36 +13,40 @@ Double_t deltaPhi(Double_t Phi0, Double_t Phi1) {
         return dphi;
       } 
 
-void Fake_rates(TString sample,  TString channel, TString year ) {
+void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) {
 
-  //if (argc<3) {
-  //  printf('Ejemplo: root -b -q "Fake_rates(sample , mu , year)" ');
+  //if (argc<4) {
+  //  printf('Ejemplo: root -b -q "Fake_rates(\"nanoLatino_SingleElectron_Run2017F-31Mar2018-v1__part50.root\" , \"mu\" , \"2017\" , \"loose\")" ');
   //  return -1;
   // }
 
   //Options
   //--------------------------------------------------------------------------------------------------------------------------------------
-  if (channel != "ele" && channel != "mu") {printf("channel must be ele or mu \n");return -1;}
-  if(year!="2016"&&year!="2017"&&year!="2018"){cout<<"ERROR: Year is not valid!"<<endl;return 0;}
+  if (channel != "ele" && channel != "mu") {printf("ERROR: Channel must be ele or mu \n");return -1;}
+  if (year!="2016"&&year!="2017"&&year!="2018"){cout<<"ERROR: Year is not valid!"<<endl;return -1;}
+  if (btagWP!="loose"&&btagWP!="medium"&&btagWP!="tight"&&btagWP!="no"){cout<<"ERROR: BtagWP not valid!"<<endl;return -1;}
 
   // Import the nanoLatino Tree
   //--------------------------------------------------------------------------------------------------------------------------------------
   TChain* tree = new TChain("Events");
   //DATA
   TString myFolderData ="";
-  if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/";  //2018
+  if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/";  //2018
+  //if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/";  //2018
   if(year=="2017") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"; //2017
   if(year=="2016") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"; //2016
 
   //MC
   TString myFolderMC ="";
+  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/";  //2018
   //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017
   if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_94X_nAODv3_Full2016v2/MCl1loose2016__MCCorr2016__fakeSelMC/";  //2016
 
 
-  TString dirname ="outputsFR_"+year+"_11mar";
+  TString dirname ="outputsFR_"+year+"_23apr_DeepCSV_"+btagWP+"btag_exclusive";
   TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/";
+  system("mkdir -p "+outputdir);
 
   TString file = "";
   bool isData = false; bool isQCD =false; bool isMC =false;
@@ -49,10 +54,19 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   if(sample.Contains("Run")){ file = myFolderData + sample ; isData=true; }
   else{ file = myFolderMC +sample ; isMC=true; if(sample.Contains("QCD"))isQCD=true; }
  
-  //int check = mkdir(dirname);
-  //if (!check) printf("Directory "+dirname+" created\n");
-  //else  {printf("ERROR : Could not create an output directory\n");return 0;}
   TFile* root_output = new TFile(outputdir +"output_" +channel+"_"+ sample, "recreate");
+
+  //BTagWP///////////////////////////////
+  double btagdown; double btagup;
+  bool useDeepCSV=true;
+  //DeepCSV 
+  if(useDeepCSV==true){  
+    if(btagWP=="no"){btagdown=0;btagup=0.1522;} 
+    if(btagWP=="loose"){btagdown=0.1522;btagup=0.4941;}  
+    if(btagWP=="medium"){btagdown=0.4941;btagup=0.8001;} 
+    if(btagWP=="tight"){btagdown=0.8001;btagup=1;}  
+  }  
+  ////////////////////////////////////////////
 
   cout<<file<<endl;
   if(ifstream(file))tree->Add(file);
@@ -77,23 +91,23 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   Int_t Lepton_pdgId[200];
   tree->SetBranchAddress("Lepton_pdgId",&Lepton_pdgId);
   Bool_t Lepton_isTightElectron_mvaFall17Iso_WP90[200];
-  tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17Iso_WP90",&Lepton_isTightElectron_mvaFall17Iso_WP90);
+  if (tree->GetBranch("Lepton_isTightElectron_mvaFall17Iso_WP90"))  tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17Iso_WP90",&Lepton_isTightElectron_mvaFall17Iso_WP90);
   Bool_t Lepton_isTightElectron_mvaFall17Iso_WP90_SS[200];
-  tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17Iso_WP90_SS",&Lepton_isTightElectron_mvaFall17Iso_WP90_SS);
+  if (tree->GetBranch("Lepton_isTightElectron_mvaFall17Iso_WP90_SS"))tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17Iso_WP90_SS",&Lepton_isTightElectron_mvaFall17Iso_WP90_SS);
   Bool_t Lepton_isTightElectron_mvaFall17V1Iso_WP90[200];
-  tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17V1Iso_WP90",&Lepton_isTightElectron_mvaFall17V1Iso_WP90);
+  if (tree->GetBranch("Lepton_isTightElectron_mvaFall17V1Iso_WP90"))tree->SetBranchAddress("Lepton_isTightElectron_mvaFall17V1Iso_WP90",&Lepton_isTightElectron_mvaFall17V1Iso_WP90);
   Bool_t Lepton_isTightElectron_mva_90p_Iso2016[200];
-  tree->SetBranchAddress("Lepton_isTightElectron_mva_90p_Iso2016",&Lepton_isTightElectron_mva_90p_Iso2016);
+  if (tree->GetBranch("Lepton_isTightElectron_mva_90p_Iso2016"))tree->SetBranchAddress("Lepton_isTightElectron_mva_90p_Iso2016",&Lepton_isTightElectron_mva_90p_Iso2016);
   Bool_t Lepton_isTightMuon_cut_Tight_HWWW[200];
-  tree->SetBranchAddress("Lepton_isTightMuon_cut_Tight_HWWW",&Lepton_isTightMuon_cut_Tight_HWWW);
+  if (tree->GetBranch("Lepton_isTightMuon_cut_Tight_HWWW"))tree->SetBranchAddress("Lepton_isTightMuon_cut_Tight_HWWW",&Lepton_isTightMuon_cut_Tight_HWWW);
   Bool_t Lepton_isTightMuon_cut_Tight80x[200];
-  tree->SetBranchAddress("Lepton_isTightMuon_cut_Tight80x",&Lepton_isTightMuon_cut_Tight80x);
+  if (tree->GetBranch("Lepton_isTightMuon_cut_Tight80x"))tree->SetBranchAddress("Lepton_isTightMuon_cut_Tight80x",&Lepton_isTightMuon_cut_Tight80x);
   Bool_t Electron_mvaFall17Iso_WP90[200];
-  tree->SetBranchAddress("Electron_mvaFall17Iso_WP90",&Electron_mvaFall17Iso_WP90);
+  if (tree->GetBranch("Electron_mvaFall17Iso_WP90"))tree->SetBranchAddress("Electron_mvaFall17Iso_WP90",&Electron_mvaFall17Iso_WP90);
   Bool_t Electron_mvaFall17V1Iso_WP90[200];
-  tree->SetBranchAddress("Electron_mvaFall17V1Iso_WP90",&Electron_mvaFall17V1Iso_WP90);
+  if (tree->GetBranch("Electron_mvaFall17V1Iso_WP90"))tree->SetBranchAddress("Electron_mvaFall17V1Iso_WP90",&Electron_mvaFall17V1Iso_WP90);
   Bool_t Electron_mva_90p_Iso2016[200];
-  tree->SetBranchAddress("Electron_mva_90p_Iso2016",&Electron_mva_90p_Iso2016);
+  if (tree->GetBranch("Electron_mva_90p_Iso2016"))tree->SetBranchAddress("Electron_mva_90p_Iso2016",&Electron_mva_90p_Iso2016);
   Int_t Electron_cutBased[200];
   tree->SetBranchAddress("Electron_cutBased",&Electron_cutBased);
   UChar_t Electron_lostHits[200];
@@ -126,6 +140,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   tree->SetBranchAddress("TkMET_phi",&TkMET_phi);
   Float_t Jet_btagCSVV2[200];
   tree->SetBranchAddress("Jet_btagCSVV2",&Jet_btagCSVV2);
+  Float_t Jet_btagDeepB[200];
+  tree->SetBranchAddress("Jet_btagDeepB",&Jet_btagDeepB);
   Float_t CleanJet_pt[200];
   tree->SetBranchAddress("CleanJet_pt",&CleanJet_pt);
   Float_t Jet_pt[200];
@@ -135,15 +151,15 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   Float_t CleanJet_phi[200];
   tree->SetBranchAddress("CleanJet_phi",&CleanJet_phi);
   Int_t Jet_partonFlavour[200];
-  tree->SetBranchAddress("Jet_partonFlavour",&Jet_partonFlavour);
+  if (tree->GetBranch("Jet_partonFlavour"))tree->SetBranchAddress("Jet_partonFlavour",&Jet_partonFlavour);
   Int_t GenJet_partonFlavour[200];
-  tree->SetBranchAddress("GenJet_partonFlavour",&GenJet_partonFlavour);
+  if (tree->GetBranch("GenJet_partonFlavour"))tree->SetBranchAddress("GenJet_partonFlavour",&GenJet_partonFlavour);
   Float_t puWeight;
-  tree->SetBranchAddress("puWeight",&puWeight);
+  if (tree->GetBranch("puWeight"))tree->SetBranchAddress("puWeight",&puWeight);
   Float_t baseW;
-  tree->SetBranchAddress("baseW",&baseW);
+  if (tree->GetBranch("baseW"))tree->SetBranchAddress("baseW",&baseW);
   Float_t Generator_weight;
-  tree->SetBranchAddress("Generator_weight",&Generator_weight);
+  if (tree->GetBranch("Generator_weight"))tree->SetBranchAddress("Generator_weight",&Generator_weight);
   Int_t PV_npvsGood; 
   tree->SetBranchAddress("PV_npvsGood",&PV_npvsGood);
   Int_t event;
@@ -158,6 +174,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
   tree->SetBranchAddress("HLT_Mu8_TrkIsoVVL",&HLT_Mu8_TrkIsoVVL);
   Bool_t HLT_Mu17_TrkIsoVVL;
   tree->SetBranchAddress("HLT_Mu17_TrkIsoVVL",&HLT_Mu17_TrkIsoVVL);
+
 
   TLorentzVector lep1;
   TLorentzVector lep2;
@@ -280,7 +297,8 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
       if(isMC==true && isQCD==false) weight=baseW*Generator_weight*puWeight;
       int passjets =0;
       for (int jet=0; jet<nCleanJet; jet++){
-	if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
+	//if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1. && Jet_btagCSVV2[CleanJet_jetIdx[jet]]>btagcut) passjets=1;
+if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
       }
       if (passjets==0)continue;
 
@@ -290,8 +308,11 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (Lepton_pt[0] <= 25.){
 	  //if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  if (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
-	  //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;}
-	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;}
+	  //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;} 
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;} //Weights for ele12 trigger 2017 (FIXME: 2016 has to be changed)
+	  
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
+	 
 	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -301,8 +322,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	  }
-	  //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
 	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -318,6 +338,9 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (Lepton_pt[0] > 25.){
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
+
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
+
 	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pt_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -327,8 +350,7 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	    if(isMC==true)h_associated_jet_flavour_loose[jetcut]->Fill(fabs(Jet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
 	  }
-	  //if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90_SS[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
 	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pt_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -349,6 +371,9 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (Lepton_pt[0] <= 20.){
 	  if (HLT_Mu8_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.003910;}
+
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
+
 	  muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
@@ -374,6 +399,9 @@ void Fake_rates(TString sample,  TString channel, TString year ) {
 	if (Lepton_pt[0] > 20.){
 	  if (HLT_Mu17_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.281989;}
+
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
+
 	  muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pt_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){

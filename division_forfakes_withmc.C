@@ -5,102 +5,134 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include <unistd.h>
 
-void division_forfakes_withmc(TString year, TString dir)
+void division_forfakes_withmc(TString dir)
 {
 
   TFile* file_Data_ele= new TFile(dir+"/Data_ele.root");
   TFile* file_DY_ele= new TFile(dir+"/DY_ele.root");
   TFile* file_WJets_ele= new TFile(dir+"/WJets_ele.root");
+  TFile* file_TT_ele= new TFile(dir+"/TT_ele.root");
   TFile* file_Data_mu= new TFile(dir+"/Data_mu.root");
   TFile* file_DY_mu= new TFile(dir+"/DY_mu.root");
   TFile* file_WJets_mu= new TFile(dir+"/WJets_mu.root");
+  TFile* file_TT_mu= new TFile(dir+"/TT_mu.root");
  
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 
   TH1F* h_WJets_ele[8];
+  TH1F* h_TT_ele[8];
   TH1F* h_denominator_DATA_ele[8];
   TH1F* h_denominator_DY_ele[8];
   TH1F* h_denominator_WJets_ele[8];
+  TH1F* h_denominator_TT_ele[8];
   TH1F* h_DATA_eta_ele[8];
   TH1F* h_DY_eta_ele[8];
   TH1F* h_WJets_eta_ele[8];
+  TH1F* h_TT_eta_ele[8];
   TH1F* h_denominator_DATA_eta_ele[8];
   TH1F* h_denominator_DY_eta_ele[8];
   TH1F* h_denominator_WJets_eta_ele[8];
+  TH1F* h_denominator_TT_eta_ele[8];  
   TH1F* h_DATA_mu[8];
   TH1F* h_DY_mu[8]; 
   TH1F* h_WJets_mu[8];
+  TH1F* h_TT_mu[8];  
   TH1F* h_denominator_DATA_mu[8];
   TH1F* h_denominator_DY_mu[8];
   TH1F* h_denominator_WJets_mu[8];
+  TH1F* h_denominator_TT_mu[8];
   TH1F* h_DATA_eta_mu[8];
   TH1F* h_DY_eta_mu[8];
   TH1F* h_WJets_eta_mu[8];
+  TH1F* h_TT_eta_mu[8];
   TH1F* h_denominator_DATA_eta_mu[8];
   TH1F* h_denominator_DY_eta_mu[8];
   TH1F* h_denominator_WJets_eta_mu[8];
-  
+  TH1F* h_denominator_TT_eta_mu[8];
+
   TH2F* FR_pt_eta_num_DATA_ele[8];
   TH2F* FR_pt_eta_num_DY_ele[8];  
   TH2F* FR_pt_eta_num_WJets_ele[8];
+  TH2F* FR_pt_eta_num_TT_ele[8];
   TH2F* FR_pt_eta_num_DATA_mu[8];
   TH2F* FR_pt_eta_num_DY_mu[8];  
   TH2F* FR_pt_eta_num_WJets_mu[8];
+  TH2F* FR_pt_eta_num_TT_mu[8];
   TH2F* FR_pt_eta_den_DATA_ele[8];
   TH2F* FR_pt_eta_den_DY_ele[8];  
   TH2F* FR_pt_eta_den_WJets_ele[8];
+  TH2F* FR_pt_eta_den_TT_ele[8];
   TH2F* FR_pt_eta_den_DATA_mu[8];
   TH2F* FR_pt_eta_den_DY_mu[8];  
   TH2F* FR_pt_eta_den_WJets_mu[8];
+  TH2F* FR_pt_eta_den_TT_mu[8];
 
   for(int j=0;j<8;j++){
     h_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_DY_ele[j] = (TH1F*)file_DY_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_WJets_ele[j] = (TH1F*)file_WJets_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
+    h_TT_ele[j] = (TH1F*)file_TT_ele->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_denominator_DATA_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_denominator_DY_ele[j] = (TH1F*)file_DY_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_denominator_WJets_ele[j] = (TH1F*)file_WJets_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
+    h_denominator_TT_ele[j] = (TH1F*)file_TT_ele->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_DY_eta_ele[j] = (TH1F*)file_DY_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_WJets_eta_ele[j] = (TH1F*)file_WJets_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
+    h_TT_eta_ele[j] = (TH1F*)file_TT_ele->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_denominator_DATA_eta_ele[j] = (TH1F*)file_Data_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_denominator_DY_eta_ele[j] = (TH1F*)file_DY_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_denominator_WJets_eta_ele[j] = (TH1F*)file_WJets_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
+    h_denominator_TT_eta_ele[j] = (TH1F*)file_TT_ele->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_DY_mu[j] = (TH1F*)file_DY_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_WJets_mu[j] = (TH1F*)file_WJets_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
+    h_TT_mu[j] = (TH1F*)file_TT_mu->Get(Form("jetcut_%d/h_pt1_tight_%d",j,j)); 
     h_denominator_DATA_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_denominator_DY_mu[j] = (TH1F*)file_DY_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_denominator_WJets_mu[j] = (TH1F*)file_WJets_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
+    h_denominator_TT_mu[j] = (TH1F*)file_TT_mu->Get(Form("jetcut_%d/h_pt1_loose_%d",j,j));
     h_DATA_eta_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_DY_eta_mu[j] = (TH1F*)file_DY_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_WJets_eta_mu[j] = (TH1F*)file_WJets_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
+    h_TT_eta_mu[j] = (TH1F*)file_TT_mu->Get(Form("jetcut_%d/h_eta1_tight_%d",j,j));
     h_denominator_DATA_eta_mu[j] = (TH1F*)file_Data_mu->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_denominator_DY_eta_mu[j] = (TH1F*)file_DY_mu->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     h_denominator_WJets_eta_mu[j] = (TH1F*)file_WJets_mu->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
+    h_denominator_TT_eta_mu[j] = (TH1F*)file_TT_mu->Get(Form("jetcut_%d/h_eta1_loose_%d",j,j));
     FR_pt_eta_num_DATA_ele[j] = (TH2F*)file_Data_ele->Get(Form("jetcut_%d/h_FR_pt_eta_tight_ele_%d",j,j));
     FR_pt_eta_num_DY_ele[j] = (TH2F*)file_DY_ele->Get(Form("jetcut_%d/h_FR_pt_eta_tight_ele_%d",j,j));
     FR_pt_eta_num_WJets_ele[j] = (TH2F*)file_WJets_ele->Get(Form("jetcut_%d/h_FR_pt_eta_tight_ele_%d",j,j));
+    FR_pt_eta_num_TT_ele[j] = (TH2F*)file_TT_ele->Get(Form("jetcut_%d/h_FR_pt_eta_tight_ele_%d",j,j));
     FR_pt_eta_num_DATA_mu[j] = (TH2F*)file_Data_mu->Get(Form("jetcut_%d/h_FR_pt_eta_tight_mu_%d",j,j));
     FR_pt_eta_num_DY_mu[j] = (TH2F*)file_DY_mu->Get(Form("jetcut_%d/h_FR_pt_eta_tight_mu_%d",j,j));
     FR_pt_eta_num_WJets_mu[j] = (TH2F*)file_WJets_mu->Get(Form("jetcut_%d/h_FR_pt_eta_tight_mu_%d",j,j));
+    FR_pt_eta_num_TT_mu[j] = (TH2F*)file_TT_mu->Get(Form("jetcut_%d/h_FR_pt_eta_tight_mu_%d",j,j));
     FR_pt_eta_den_DATA_ele[j] = (TH2F*)file_Data_ele->Get(Form("jetcut_%d/h_FR_pt_eta_loose_ele_%d",j,j));
     FR_pt_eta_den_DY_ele[j] = (TH2F*)file_DY_ele->Get(Form("jetcut_%d/h_FR_pt_eta_loose_ele_%d",j,j));
     FR_pt_eta_den_WJets_ele[j] = (TH2F*)file_WJets_ele->Get(Form("jetcut_%d/h_FR_pt_eta_loose_ele_%d",j,j));
+    FR_pt_eta_den_TT_ele[j] = (TH2F*)file_TT_ele->Get(Form("jetcut_%d/h_FR_pt_eta_loose_ele_%d",j,j));
     FR_pt_eta_den_DATA_mu[j] = (TH2F*)file_Data_mu->Get(Form("jetcut_%d/h_FR_pt_eta_loose_mu_%d",j,j));
     FR_pt_eta_den_DY_mu[j] = (TH2F*)file_DY_mu->Get(Form("jetcut_%d/h_FR_pt_eta_loose_mu_%d",j,j));
     FR_pt_eta_den_WJets_mu[j] = (TH2F*)file_WJets_mu->Get(Form("jetcut_%d/h_FR_pt_eta_loose_mu_%d",j,j));
+    FR_pt_eta_den_TT_mu[j] = (TH2F*)file_TT_mu->Get(Form("jetcut_%d/h_FR_pt_eta_loose_mu_%d",j,j));
   }
   gStyle->SetOptStat(0);
+  gStyle->SetFrameLineWidth(3);
+  gStyle->SetLabelSize(0.08);
+
   TH1F* h_num_ele[8];TH1F* h_den_ele[8];TH1F* h_div_ele[8];TH1F* h_div_noEWKcorr_ele[8];
   for(int j=0;j<8;j++){
     h_num_ele[j] = (TH1F*)h_DATA_ele[j]->Clone(Form("h_num_ele_%d",j));
     h_num_ele[j]->Add(h_DY_ele[j],-1);
     h_num_ele[j]->Add(h_WJets_ele[j],-1);
+    h_num_ele[j]->Add(h_TT_ele[j],-1);
     h_den_ele[j] = (TH1F*)h_denominator_DATA_ele[j]->Clone(Form("h_den_ele_%d",j));
     h_den_ele[j]->Add(h_denominator_DY_ele[j],-1);
     h_den_ele[j]->Add(h_denominator_WJets_ele[j],-1);
+    h_den_ele[j]->Add(h_denominator_TT_ele[j],-1);
     h_div_ele[j] = (TH1F*)h_num_ele[j]->Clone(Form("h_div_ele_%d",j));
     h_div_ele[j]->Divide(h_den_ele[j]);
     h_div_noEWKcorr_ele[j] = (TH1F*)h_DATA_ele[j]->Clone(Form("h_div_noEWKcorr_ele_%d",j));
@@ -112,9 +144,11 @@ void division_forfakes_withmc(TString year, TString dir)
     h_num_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_num_mu_%d",j));
     h_num_mu[j]->Add(h_DY_mu[j],-1);
     h_num_mu[j]->Add(h_WJets_mu[j],-1);
+    h_num_mu[j]->Add(h_TT_mu[j],-1);
     h_den_mu[j] = (TH1F*)h_denominator_DATA_mu[j]->Clone(Form("h_den_mu_%d",j));
     h_den_mu[j]->Add(h_denominator_DY_mu[j],-1);
     h_den_mu[j]->Add(h_denominator_WJets_mu[j],-1);
+    h_den_mu[j]->Add(h_denominator_TT_mu[j],-1);
     h_div_mu[j] = (TH1F*)h_num_mu[j]->Clone(Form("h_div_mu_%d",j));
     h_div_mu[j]->Divide(h_den_mu[j]);
     h_div_noEWKcorr_mu[j] = (TH1F*)h_DATA_mu[j]->Clone(Form("h_div_noEWKcorr_mu_%d",j));
@@ -125,10 +159,12 @@ void division_forfakes_withmc(TString year, TString dir)
   for(int j=0;j<8;j++){
     h_relEWKcont_ele[j] = (TH1F*)h_DY_ele[j]->Clone(Form("h_relEWKcont_ele_%d",j));
     h_relEWKcont_ele[j]->Add(h_WJets_ele[j],1);
+    h_relEWKcont_ele[j]->Add(h_TT_ele[j],1);
     h_relEWKcont_numerator_ele[j] = (TH1F*)h_relEWKcont_ele[j]->Clone(Form("h_relEWKcont_numerator_ele_%d",j));
     h_relEWKcont_numerator_ele[j]->Divide(h_DATA_ele[j]);
     h_relEWKcont2_ele[j] = (TH1F*)h_denominator_DY_ele[j]->Clone(Form("h_relEWKcont2_ele_%d",j));
     h_relEWKcont2_ele[j]->Add(h_denominator_WJets_ele[j],1);
+    h_relEWKcont2_ele[j]->Add(h_denominator_TT_ele[j],1);
     h_relEWKcont_denominator_ele[j] = (TH1F*)h_relEWKcont2_ele[j]->Clone(Form("h_relEWKcont_denominator_ele_%d",j));
     h_relEWKcont_denominator_ele[j]->Divide(h_denominator_DATA_ele[j]);
   }
@@ -150,9 +186,11 @@ void division_forfakes_withmc(TString year, TString dir)
     h_num_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_num_eta_ele_%d",j));
     h_num_eta_ele[j]->Add(h_DY_eta_ele[j],-1);
     h_num_eta_ele[j]->Add(h_WJets_eta_ele[j],-1);
+    h_num_eta_ele[j]->Add(h_TT_eta_ele[j],-1);
     h_den_eta_ele[j] = (TH1F*)h_denominator_DATA_eta_ele[j]->Clone(Form("h_den_eta_ele_%d",j));
     h_den_eta_ele[j]->Add(h_denominator_DY_eta_ele[j],-1);
     h_den_eta_ele[j]->Add(h_denominator_WJets_eta_ele[j],-1);
+    h_den_eta_ele[j]->Add(h_denominator_TT_eta_ele[j],-1);
     h_div_eta_ele[j] = (TH1F*)h_num_eta_ele[j]->Clone(Form("h_div_eta_ele_%d",j));
     h_div_eta_ele[j]->Divide(h_den_eta_ele[j]);
     h_div_noEWKcorr_eta_ele[j] = (TH1F*)h_DATA_eta_ele[j]->Clone(Form("h_div_noEWKcorr_eta_ele_%d",j));
@@ -164,9 +202,11 @@ void division_forfakes_withmc(TString year, TString dir)
     h_num_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_num_eta_mu_%d",j));
     h_num_eta_mu[j]->Add(h_DY_eta_mu[j],-1);
     h_num_eta_mu[j]->Add(h_WJets_eta_mu[j],-1);
+    h_num_eta_mu[j]->Add(h_TT_eta_mu[j],-1);
     h_den_eta_mu[j] = (TH1F*)h_denominator_DATA_eta_mu[j]->Clone(Form("h_den_eta_mu_%d",j));
     h_den_eta_mu[j]->Add(h_denominator_DY_eta_mu[j],-1);
     h_den_eta_mu[j]->Add(h_denominator_WJets_eta_mu[j],-1);
+    h_den_eta_mu[j]->Add(h_denominator_TT_eta_mu[j],-1);
     h_div_eta_mu[j] = (TH1F*)h_num_eta_mu[j]->Clone(Form("h_div_eta_mu_%d",j));
     h_div_eta_mu[j]->Divide(h_den_eta_mu[j]);
     h_div_noEWKcorr_eta_mu[j] = (TH1F*)h_DATA_eta_mu[j]->Clone(Form("h_div_noEWKcorr_eta_mu_%d",j));
@@ -197,26 +237,30 @@ void division_forfakes_withmc(TString year, TString dir)
     FR_pt_eta_EWKcorr_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone("FR_pt_eta_EWKcorr_numerator");
     FR_pt_eta_EWKcorr_numerator_ele[j]->Add(FR_pt_eta_num_DY_ele[j],-1);
     FR_pt_eta_EWKcorr_numerator_ele[j]->Add(FR_pt_eta_num_WJets_ele[j],-1);
+    FR_pt_eta_EWKcorr_numerator_ele[j]->Add(FR_pt_eta_num_TT_ele[j],-1);
     FR_pt_eta_EWKcorr_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone("FR_pt_eta_EWKcorr_denominator");
     FR_pt_eta_EWKcorr_denominator_ele[j]->Add(FR_pt_eta_den_DY_ele[j],-1);
     FR_pt_eta_EWKcorr_denominator_ele[j]->Add(FR_pt_eta_den_WJets_ele[j],-1);
-    FR_pt_eta_EWKcorr_ele[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_ele[j]->Clone("FR_pt_eta_EWKcorr");
+    FR_pt_eta_EWKcorr_denominator_ele[j]->Add(FR_pt_eta_den_TT_ele[j],-1);
+    FR_pt_eta_EWKcorr_ele[j] = (TH2F*) FR_pt_eta_EWKcorr_numerator_ele[j]->Clone("FR_pt_eta_EWKcorr");
     FR_pt_eta_EWKcorr_ele[j]->Divide(FR_pt_eta_EWKcorr_denominator_ele[j]);
     FR_pt_eta_numerator_ele[j] = (TH2F*) FR_pt_eta_num_DATA_ele[j]->Clone("FR_pt_eta_numerator");
     FR_pt_eta_denominator_ele[j] = (TH2F*) FR_pt_eta_den_DATA_ele[j]->Clone("FR_pt_eta_denominator");
-    FR_pt_eta_ele[j]= (TH2F*) FR_pt_eta_numerator_ele[j]->Clone("FR_pt_eta");
+    FR_pt_eta_ele[j] = (TH2F*) FR_pt_eta_numerator_ele[j]->Clone("FR_pt_eta");
     FR_pt_eta_ele[j]->Divide(FR_pt_eta_denominator_ele[j]);
     FR_pt_eta_EWKcorr_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone("FR_pt_eta_EWKcorr_numerator");
     FR_pt_eta_EWKcorr_numerator_mu[j]->Add(FR_pt_eta_num_DY_mu[j],-1);
     FR_pt_eta_EWKcorr_numerator_mu[j]->Add(FR_pt_eta_num_WJets_mu[j],-1);
+    FR_pt_eta_EWKcorr_numerator_mu[j]->Add(FR_pt_eta_num_TT_mu[j],-1);
     FR_pt_eta_EWKcorr_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone("FR_pt_eta_EWKcorr_denominator");
     FR_pt_eta_EWKcorr_denominator_mu[j]->Add(FR_pt_eta_den_DY_mu[j],-1);
     FR_pt_eta_EWKcorr_denominator_mu[j]->Add(FR_pt_eta_den_WJets_mu[j],-1);
-    FR_pt_eta_EWKcorr_mu[j]= (TH2F*) FR_pt_eta_EWKcorr_numerator_mu[j]->Clone("FR_pt_eta_EWKcorr");
+    FR_pt_eta_EWKcorr_denominator_mu[j]->Add(FR_pt_eta_den_TT_mu[j],-1);
+    FR_pt_eta_EWKcorr_mu[j] = (TH2F*) FR_pt_eta_EWKcorr_numerator_mu[j]->Clone("FR_pt_eta_EWKcorr");
     FR_pt_eta_EWKcorr_mu[j]->Divide(FR_pt_eta_EWKcorr_denominator_mu[j]);
     FR_pt_eta_numerator_mu[j] = (TH2F*) FR_pt_eta_num_DATA_mu[j]->Clone("FR_pt_eta_numerator");
     FR_pt_eta_denominator_mu[j] = (TH2F*) FR_pt_eta_den_DATA_mu[j]->Clone("FR_pt_eta_denominator");
-    FR_pt_eta_mu[j]= (TH2F*) FR_pt_eta_numerator_mu[j]->Clone("FR_pt_eta_mu");
+    FR_pt_eta_mu[j] = (TH2F*) FR_pt_eta_numerator_mu[j]->Clone("FR_pt_eta_mu");
     FR_pt_eta_mu[j]->Divide(FR_pt_eta_denominator_mu[j]);
      
   }
@@ -277,8 +321,13 @@ void division_forfakes_withmc(TString year, TString dir)
     }
    
   }
-  /////////////////////////////////////////////
+  //////////////////////Output plots///////////////////////
   
+  TString dirname= dir.ReplaceAll("outputsFR","plots");
+  system("mkdir "+dirname);
+  chdir(dirname);
+
+
   TCanvas *c[3][2][8];
   for(int j=0;j<8;j++){
     c[0][0][j]= new TCanvas();c[0][0][j]->cd();
@@ -327,7 +376,7 @@ void division_forfakes_withmc(TString year, TString dir)
   h_div_ele[5]->Draw("same"); h_div_ele[5]->SetLineColor(17); h_div_ele[5]->SetMarkerColor(17); h_div_ele[5]->SetLineWidth(2);  h_div_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_ele[j]->Draw("same"); h_div_ele[j]->SetLineColor(j+1); h_div_ele[j]->SetMarkerColor(j+1); h_div_ele[j]->SetLineWidth(2);  h_div_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw(); combined_pt_ele->SaveAs("combined_pt_eleFR.gif");
-  h_div_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_ele->SaveAs("combined_pt_eleFR_zoom.gif");
+  //h_div_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_ele->SaveAs("combined_pt_eleFR_zoom.gif");
   TCanvas* combined_pt_mu= new TCanvas();
   combined_pt_mu->cd();
   h_div_mu[0]->Draw(); h_div_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_mu[0]->SetTitle("Muon fake rate"); h_div_mu[0]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_pt_mu->SetGridx(1);combined_pt_mu->SetGridy(1); h_div_mu[0]->SetLineWidth(2);  h_div_mu[0]->SetMarkerStyle(kFullCircle); h_div_mu[0]->SetLineColor(6); h_div_mu[0]->SetMarkerColor(6);
@@ -335,7 +384,7 @@ void division_forfakes_withmc(TString year, TString dir)
   h_div_mu[5]->Draw("same"); h_div_mu[5]->SetLineColor(17); h_div_mu[5]->SetMarkerColor(17); h_div_mu[5]->SetLineWidth(2);  h_div_mu[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_mu[j]->Draw("same"); h_div_mu[j]->SetLineColor(j+1); h_div_mu[j]->SetMarkerColor(j+1); h_div_mu[j]->SetLineWidth(2);  h_div_mu[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_pt_mu->SaveAs("combined_pt_muFR.gif");
-  h_div_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_mu->SaveAs("combined_pt_muFR_zoom.gif");
+  //h_div_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_mu->SaveAs("combined_pt_muFR_zoom.gif");
   TCanvas* combined_eta_ele= new TCanvas(); 
   combined_eta_ele->cd();
   h_div_eta_ele[0]->Draw(); h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_ele[0]->SetTitle("Electron fake rate"); h_div_eta_ele[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_ele[0]->GetYaxis()->SetTitle("Ele fake rate");combined_eta_ele->SetGridx(1);combined_eta_ele->SetGridy(1); h_div_eta_ele[0]->SetLineWidth(2);  h_div_eta_ele[0]->SetMarkerStyle(kFullCircle); h_div_eta_ele[0]->SetLineColor(6); h_div_eta_ele[0]->SetMarkerColor(6);
@@ -343,7 +392,7 @@ void division_forfakes_withmc(TString year, TString dir)
   h_div_eta_ele[5]->Draw("same"); h_div_eta_ele[5]->SetLineColor(17); h_div_eta_ele[5]->SetMarkerColor(17); h_div_eta_ele[5]->SetLineWidth(2);  h_div_eta_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_eta_ele[j]->Draw("same"); h_div_eta_ele[j]->SetLineColor(j+1); h_div_eta_ele[j]->SetMarkerColor(j+1); h_div_eta_ele[j]->SetLineWidth(2);  h_div_eta_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_ele->SaveAs("combined_eta_eleFR.gif");
-  h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_ele->SaveAs("combined_eta_eleFR_zoom.gif");
+  //h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_ele->SaveAs("combined_eta_eleFR_zoom.gif");
   TCanvas* combined_eta_mu= new TCanvas();
   combined_eta_mu->cd();
   h_div_eta_mu[0]->Draw(); h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_mu[0]->SetTitle("Muon fake rate"); h_div_eta_mu[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_eta_mu->SetGridx(1);combined_eta_mu->SetGridy(1); h_div_eta_mu[0]->SetLineWidth(2);  h_div_eta_mu[0]->SetMarkerStyle(kFullCircle); h_div_eta_mu[0]->SetLineColor(6); h_div_eta_mu[0]->SetMarkerColor(6);
@@ -351,7 +400,7 @@ void division_forfakes_withmc(TString year, TString dir)
   h_div_eta_mu[5]->Draw("same"); h_div_eta_mu[5]->SetLineColor(17); h_div_eta_mu[5]->SetMarkerColor(17); h_div_eta_mu[5]->SetLineWidth(2);  h_div_eta_mu[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_eta_mu[j]->Draw("same"); h_div_eta_mu[j]->SetLineColor(j+1); h_div_eta_mu[j]->SetMarkerColor(j+1); h_div_eta_mu[j]->SetLineWidth(2);  h_div_eta_mu[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_mu->SaveAs("combined_eta_muFR.gif");
-  h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_mu->SaveAs("combined_eta_muFR_zoom.gif");
+  //h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_mu->SaveAs("combined_eta_muFR_zoom.gif");
   
 
   /////////Rootfiles with 2D histograms//////////

@@ -32,71 +32,74 @@ def submit():
 	print " Number of muon data files ", len(SAMPLESMU)
 	print " Number of electron data files ", len(SAMPLESELE)
 
-	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor/"
+	BtagWP={"no","loose","medium","tight"}
+	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
         queue="tomorrow"
 	musamples=0
         elesamples=0
 	
 	for s in SAMPLESMU:
 		CH="mu"
-		jobFileName = outputDir+s[:-5]+"_"+CH+"_FR.sh"
-		subFileName = outputDir+s[:-5]+"_"+CH+"_FR.sub"
-		errFileName = outputDir+s[:-5]+"_"+CH+"_FR.err"
-		outFileName = outputDir+s[:-5]+"_"+CH+"_FR.out"
-		logFileName = outputDir+s[:-5]+"_"+CH+"_FR.log"
-		jidFileName = outputDir+s[:-5]+"_"+CH+"_FR.jid"
+		for tag in BtagWP:
+			jobFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+			
+			jobFile = open(jobFileName, "w+")
+			jobFile.write("#!/bin/sh \n")
+			jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
+			jobFile.write("eval `scramv1 runtime -sh` \n")
+			jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\",\""+tag+"\")'")
+			jobFile.close()
 
-		jobFile = open(jobFileName, "w+")
-		jobFile.write("#!/bin/sh \n")
-		jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
-		jobFile.write("eval `scramv1 runtime -sh` \n")
-		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\")'")
-		jobFile.close()
+			subFile = open(subFileName, "w+")
+			subFile.write('executable = '+jobFileName+'\n')
+			subFile.write('universe = vanilla\n')
+			subFile.write('output = '+ outFileName +'\n')
+			subFile.write('error = '+ errFileName +'\n')
+			subFile.write('log = '+ logFileName +'\n')
+			subFile.write('+JobFlavour  = '+ queue +'\n')
+			subFile.write('queue \n')
+			subFile.close()
 
-		subFile = open(subFileName, "w+")
-		subFile.write('executable = '+jobFileName+'\n')
-		subFile.write('universe = vanilla\n')
-		subFile.write('output = '+ outFileName +'\n')
-		subFile.write('error = '+ errFileName +'\n')
-		subFile.write('log = '+ logFileName +'\n')
-		subFile.write('+JobFlavour  = '+ queue +'\n')
-		subFile.write('queue \n')
-		subFile.close()
-
-		os.system('condor_submit '+subFileName+' > ' +jidFileName)
-		print subFileName , "submitted"	
-		musamples+=1
+			os.system('condor_submit '+subFileName+' > ' +jidFileName)
+			print subFileName , "submitted"	
+			musamples+=1
 	print "muon data submission finished, "+ str(musamples) +" jobs have been submitted. \n"
 	
 	for s in SAMPLESELE:
 		CH="ele"
-		jobFileName = outputDir+s[:-5]+"_"+CH+"_FR.sh"
-		subFileName = outputDir+s[:-5]+"_"+CH+"_FR.sub"
-		errFileName = outputDir+s[:-5]+"_"+CH+"_FR.err"
-		outFileName = outputDir+s[:-5]+"_"+CH+"_FR.out"
-		logFileName = outputDir+s[:-5]+"_"+CH+"_FR.log"
-		jidFileName = outputDir+s[:-5]+"_"+CH+"_FR.jid"
+		for tag in BtagWP:
+			jobFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+		
+			jobFile = open(jobFileName, "w+")
+			jobFile.write("#!/bin/sh \n")
+			jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
+			jobFile.write("eval `scramv1 runtime -sh` \n")
+			jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\",\""+tag+"\")'")
+			jobFile.close()
 
-		jobFile = open(jobFileName, "w+")
-		jobFile.write("#!/bin/sh \n")
-		jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
-		jobFile.write("eval `scramv1 runtime -sh` \n")
-		jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+CH+"\",\""+year+"\")'")
-		jobFile.close()
+			subFile = open(subFileName, "w+")
+			subFile.write('executable = '+jobFileName+'\n')
+			subFile.write('universe = vanilla\n')
+			subFile.write('output = '+ outFileName +'\n')
+			subFile.write('error = '+ errFileName +'\n')
+			subFile.write('log = '+ logFileName +'\n')
+			subFile.write('+JobFlavour  = '+ queue +'\n')
+			subFile.write('queue \n')
+			subFile.close()
 
-		subFile = open(subFileName, "w+")
-		subFile.write('executable = '+jobFileName+'\n')
-		subFile.write('universe = vanilla\n')
-		subFile.write('output = '+ outFileName +'\n')
-		subFile.write('error = '+ errFileName +'\n')
-		subFile.write('log = '+ logFileName +'\n')
-		subFile.write('+JobFlavour  = '+ queue +'\n')
-		subFile.write('queue \n')
-		subFile.close()
-
-		os.system('condor_submit '+subFileName+' > ' +jidFileName)
-		print subFileName ," submitted"
-		elesamples+=1
+			os.system('condor_submit '+subFileName+' > ' +jidFileName)
+			print subFileName ," submitted"
+			elesamples+=1
 	print "electron data submission finished, "+ str(elesamples) +" jobs have been submitted. \n"
 
 

@@ -17,9 +17,10 @@ def submit():
                         elif '_WJetsToLNu__' in ii : SAMPLESMC.add(ii)
 			
 	if year=="2017":
-        #        for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):        #2017
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):        #2017
-			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii) 
+        #        for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):    #2017 No WJets or TTbar
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017
+			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
+				#if 'part75' not in ii and 'part2.' not in ii and 'part111' not in ii: SAMPLESMC.add(ii) 
 			elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
                         elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
 			#elif '_TTToSemiLeptonic__' in ii : SAMPLESMC.add(ii) 
@@ -29,40 +30,41 @@ def submit():
 	print " Number of files ", len(SAMPLESMC)
 
 	CHANNEL={"ele","mu"}
-	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor/"
+	BtagWP={"no","loose","medium","tight"}
+	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_mc/"
 	queue="tomorrow"
 	mcsamples=0
 
 	for s in SAMPLESMC:
 		for ch in CHANNEL:
+			for tag in BtagWP:
+				jobFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.sh"
+				subFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.sub"
+				errFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.err"
+				outFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.out"
+				logFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.log"
+				jidFileName = outputDir+s[:-5]+"_"+ch+"_"+tag+"_FR.jid"
 
-			jobFileName = outputDir+s[:-5]+"_"+ch+"_FR.sh"
-			subFileName = outputDir+s[:-5]+"_"+ch+"_FR.sub"
-			errFileName = outputDir+s[:-5]+"_"+ch+"_FR.err"
-			outFileName = outputDir+s[:-5]+"_"+ch+"_FR.out"
-			logFileName = outputDir+s[:-5]+"_"+ch+"_FR.log"
-			jidFileName = outputDir+s[:-5]+"_"+ch+"_FR.jid"
+				jobFile = open(jobFileName, "w+")
+				jobFile.write("#!/bin/sh \n")
+				jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
+				jobFile.write("eval `scramv1 runtime -sh` \n")
+				jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+ ch+"\",\""+ year +"\",\""+ tag +"\")'")
+				jobFile.close()
 
-			jobFile = open(jobFileName, "w+")
-			jobFile.write("#!/bin/sh \n")
-			jobFile.write("cd /afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code \n")
-			jobFile.write("eval `scramv1 runtime -sh` \n")
-			jobFile.write("root -l -b -q 'Fake_rates.C(\"" + s +"\",\""+ ch+"\",\""+ year +"\")'")
-			jobFile.close()
+				subFile = open(subFileName, "w+")
+				subFile.write('executable = '+jobFileName+'\n')
+				subFile.write('universe = vanilla\n')
+				subFile.write('output = '+ outFileName +'\n')
+				subFile.write('error = '+ errFileName +'\n')
+				subFile.write('log = '+ logFileName +'\n')
+				subFile.write('+JobFlavour  = '+ queue +'\n')
+				subFile.write('queue \n')
+				subFile.close()
 
-			subFile = open(subFileName, "w+")
-			subFile.write('executable = '+jobFileName+'\n')
-			subFile.write('universe = vanilla\n')
-			subFile.write('output = '+ outFileName +'\n')
-			subFile.write('error = '+ errFileName +'\n')
-			subFile.write('log = '+ logFileName +'\n')
-			subFile.write('+JobFlavour  = '+ queue +'\n')
-			subFile.write('queue \n')
-			subFile.close()
-
-			os.system('condor_submit '+subFileName+' > ' +jidFileName)
-			print subFileName , "submitted"
-			mcsamples+=1
+				os.system('condor_submit '+subFileName+' > ' +jidFileName)
+				print subFileName , "submitted"
+				mcsamples+=1
 
 	print "MC submission finished, "+ str(mcsamples) +" jobs have been submitted. \n"   
 
