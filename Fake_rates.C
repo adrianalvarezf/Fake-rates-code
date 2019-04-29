@@ -313,7 +313,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014829;} 
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;} //Weights for ele12 trigger 2017 (FIXME: 2016 has to be changed)
 	  
-	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
 	  h_elelosthits[jetcut]->Fill((int)Electron_lostHits[Lepton_electronIdx[0]]);
 	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
@@ -341,7 +341,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
 
-	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagCSVV2[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
+	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
 	  h_elelosthits[jetcut]->Fill((int)Electron_lostHits[Lepton_electronIdx[0]]);
 	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
@@ -374,7 +374,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if (HLT_Mu8_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.003910;}
 
-	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 
 	  muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
@@ -402,7 +402,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if (HLT_Mu17_TrkIsoVVL < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.281989;}
 
-	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagCSVV2[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
+	  if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 
 	  muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
