@@ -241,7 +241,8 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   TH2D *h_lepptvsjetpt_loose[8];
   TH1F *h_PV_tight[8];
   TH1F *h_PV_loose[8];
-  TH1I *h_elelosthits[8];
+  TH1F *h_elelosthits_tight[8];
+  TH1F *h_elelosthits_loose[8];
 
   TH2F * FR_pT_eta_loose_ele[8];
   TH2F * FR_pT_eta_tight_ele[8];
@@ -274,7 +275,8 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
     h_associated_genjet_flavour_loose[jet]= new TH1F(Form("h_associated_genjet_flavour_loose_%d",jet),Form("h_associated_genjet_flavour_loose_%d",jet),25,0,25);
     h_PV_tight[jet]   = new TH1F(Form("h_PV_tight_%d",jet),Form("h_PV_tight_%d",jet),25,0,50);
     h_PV_loose[jet]   = new TH1F(Form("h_PV_loose_%d",jet),Form("h_PV_loose_%d",jet),25,0,50);
-    h_elelosthits[jet]= new TH1I(Form("h_elelosthits_%d",jet),Form("h_elelosthits_%d",jet),8,0,8);
+    h_elelosthits_tight[jet]= new TH1F(Form("h_elelosthits_tight_%d",jet),Form("h_elelosthits_tight_%d",jet),8,0,8);
+    h_elelosthits_loose[jet]= new TH1F(Form("h_elelosthits_loose_%d",jet),Form("h_elelosthits_loose_%d",jet),8,0,8);
 
     FR_pT_eta_tight_ele[jet]= new TH2F(Form("h_FR_pT_eta_tight_ele_%d",jet),Form("h_FR_pT_eta_tight_ele_%d",jet),8,10,50,5,0,2.5);
     FR_pT_eta_loose_ele[jet]= new TH2F(Form("h_FR_pT_eta_loose_ele_%d",jet),Form("h_FR_pT_eta_loose_ele_%d",jet),8,10,50,5,0,2.5);
@@ -314,7 +316,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.014829;} //Weights for ele12 trigger 2017 (FIXME: 2016 has to be changed)
 	  
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
-	  h_elelosthits[jetcut]->Fill((int)Electron_lostHits[Lepton_electronIdx[0]]);
+	  h_elelosthits_loose[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
 	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -325,8 +327,9 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	  }
 	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight); 
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    h_elelosthits_tight[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -342,7 +345,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062702;}
 
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
-	  h_elelosthits[jetcut]->Fill((int)Electron_lostHits[Lepton_electronIdx[0]]);
+	  h_elelosthits_loose[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
 	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
@@ -355,6 +358,7 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
 	  if((year=="2016" && Lepton_isTightElectron_mva_90p_Iso2016[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
 	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
+	    h_elelosthits_tight[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -450,8 +454,10 @@ if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(C
     h_eta1_loose_high[jetcut]->Write();
     h_PV_loose[jetcut]->Write();
     h_PV_tight[jetcut]->Write();
-    h_elelosthits[jetcut]->Write();
-
+    if(channel=="ele"){
+      h_elelosthits_loose[jetcut]->Write();
+      h_elelosthits_tight[jetcut]->Write();
+    }
     FR_pT_eta_tight_mu[jetcut]->Write();
     FR_pT_eta_loose_mu[jetcut]->Write();
     FR_pT_eta_tight_ele[jetcut]->Write();
