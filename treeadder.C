@@ -19,13 +19,13 @@ void treeadder(TString dir ,TString channel){
     TString file = Form(channel+"FR_jet%d.root",jetcut);
     TString subdir = dir; subdir.ReplaceAll("FR","plots"); subdir.ReplaceAll("_exclusive","");
     TFile *f_all = new TFile(dir+"/"+file,"recreate");
-    TFile *f_no = new TFile(dir+"/"+ subdir +"_nobtag_exclusive"+"/"+file);
-    TFile *f_loose = new TFile(dir+"/"+ subdir +"_loosebtag_exclusive"+"/"+file);
-    TFile *f_medium = new TFile(dir+"/"+ subdir +"_mediumbtag_exclusive"+"/"+file);
-    TFile *f_tight = new TFile(dir+"/"+ subdir +"_tightbtag_exclusive"+"/"+file);
+    TFile *f_bveto = new TFile(dir+"/"+ subdir +"_bvetobtag"+"/"+file);
+    TFile *f_loose = new TFile(dir+"/"+ subdir +"_loosebtag"+"/"+file);
+    TFile *f_medium = new TFile(dir+"/"+ subdir +"_mediumbtag"+"/"+file);
+    TFile *f_tight = new TFile(dir+"/"+ subdir +"_tightbtag"+"/"+file);
   
     TFile *f[4];
-    f[0]=f_no; 
+    f[0]=f_bveto; 
     f[1]=f_loose; 
     f[2]=f_medium; 
     f[3]=f_tight; 

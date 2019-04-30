@@ -12,7 +12,8 @@ def submit():
 	year =	sys.argv[1]
 
 	if year == "2016":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"):   #2016
+		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"):   #2016
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"):   #2016
 			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
  
@@ -32,7 +33,7 @@ def submit():
 	print " Number of muon data files ", len(SAMPLESMU)
 	print " Number of electron data files ", len(SAMPLESELE)
 
-	BtagWP={"no","loose","medium","tight"}
+	BtagWP={"bveto","loose","medium","tight","none"}
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
         queue="tomorrow"
 	musamples=0
