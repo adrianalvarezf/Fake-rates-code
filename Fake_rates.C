@@ -43,9 +43,9 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_94X_nAODv3_Full2016v2/MCl1loose2016__MCCorr2016__fakeSelMC/";  //2016
 
-
-  TString dirname ="outputsFR_"+year+"_29apr_DeepCSV_"+btagWP+"btag_exclusive";
-  TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/";
+  TString subdirname ="outputsFR_"+year+"_29apr_DeepCSV_"+btagWP+"btag_exclusive";
+  TString dirname = subdirname; dirname.ReplaceAll("outputsFR","FR");
+  TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/"+subdirname;
   system("mkdir -p "+outputdir);
 
   TString file = "";

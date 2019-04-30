@@ -17,12 +17,12 @@ void treeadder(TString dir ,TString channel){
   for(int j=0;j<8;j++){
     int jetcut = 10 + j*5;
     TString file = Form(channel+"FR_jet%d.root",jetcut);
-
+    TString subdir = dir; subdir.ReplaceAll("FR","plots"); subdir.ReplaceAll("_exclusive","");
     TFile *f_all = new TFile(dir+"/"+file,"recreate");
-    TFile *f_no = new TFile(dir+"/"+ "plots_2017_23apr_DeepCSV_nobtag_exclusive"+"/"+file);
-    TFile *f_loose = new TFile(dir+"/"+ "plots_2017_23apr_DeepCSV_loosebtag_exclusive"+"/"+file);
-    TFile *f_medium = new TFile(dir+"/"+ "plots_2017_23apr_DeepCSV_mediumbtag_exclusive"+"/"+file);
-    TFile *f_tight = new TFile(dir+"/"+ "plots_2017_23apr_DeepCSV_tightbtag_exclusive"+"/"+file);
+    TFile *f_no = new TFile(dir+"/"+ subdir +"_nobtag_exclusive"+"/"+file);
+    TFile *f_loose = new TFile(dir+"/"+ subdir +"_loosebtag_exclusive"+"/"+file);
+    TFile *f_medium = new TFile(dir+"/"+ subdir +"_mediumbtag_exclusive"+"/"+file);
+    TFile *f_tight = new TFile(dir+"/"+ subdir +"_tightbtag_exclusive"+"/"+file);
   
     TFile *f[4];
     f[0]=f_no; 
@@ -35,12 +35,12 @@ void treeadder(TString dir ,TString channel){
     TH1F *FR_pT_eta; TH1F *FR_pT_eta_numerator; TH1F *FR_pT_eta_denominator; TH1F *FR_pT_eta_EWKcorr; TH1F *FR_pT_eta_EWKcorr_numerator; TH1F *FR_pT_eta_EWKcorr_denominator;
 
     for(int b=0;b<4;b++){
-      FR_pT_eta = (TH1F*)f[b]->Get("FR_pt_eta");
-      FR_pT_eta_numerator = (TH1F*)f[b]->Get("FR_pt_eta_numerator"); 
-      FR_pT_eta_denominator = (TH1F*)f[b]->Get("FR_pt_eta_denominator"); 
-      FR_pT_eta_EWKcorr = (TH1F*)f[b]->Get("FR_pt_eta_EWKcorr");
-      FR_pT_eta_EWKcorr_numerator = (TH1F*)f[b]->Get("FR_pt_eta_EWKcorr_numerator");
-      FR_pT_eta_EWKcorr_denominator = (TH1F*)f[b]->Get("FR_pt_eta_EWKcorr_denominator");
+      FR_pT_eta = (TH1F*)f[b]->Get("FR_pT_eta");
+      FR_pT_eta_numerator = (TH1F*)f[b]->Get("FR_pT_eta_numerator"); 
+      FR_pT_eta_denominator = (TH1F*)f[b]->Get("FR_pT_eta_denominator"); 
+      FR_pT_eta_EWKcorr = (TH1F*)f[b]->Get("FR_pT_eta_EWKcorr");
+      FR_pT_eta_EWKcorr_numerator = (TH1F*)f[b]->Get("FR_pT_eta_EWKcorr_numerator");
+      FR_pT_eta_EWKcorr_denominator = (TH1F*)f[b]->Get("FR_pT_eta_EWKcorr_denominator");
       if(b==0)btagwp[b]=f_all->mkdir("bveto");
       else if(b==1)btagwp[b]=f_all->mkdir("loosebtag");
       else if(b==2)btagwp[b]=f_all->mkdir("mediumbtag");
