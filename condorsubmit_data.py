@@ -33,7 +33,9 @@ def submit():
 	print " Number of muon data files ", len(SAMPLESMU)
 	print " Number of electron data files ", len(SAMPLESELE)
 
-	BtagWP={"bveto","loose","medium","tight","none"}
+	#BtagWP={"none"}
+        #BtagWP={"bveto","loose","medium","tight","none"}
+	BtagWP={"bveto","loose","mediumtight","none"}
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
         queue="tomorrow"
 	musamples=0

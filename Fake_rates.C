@@ -24,7 +24,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   //--------------------------------------------------------------------------------------------------------------------------------------
   if (channel != "ele" && channel != "mu") {printf("ERROR: Channel must be ele or mu \n");return -1;}
   if (year!="2016"&&year!="2017"&&year!="2018"){cout<<"ERROR: Year is not valid!"<<endl;return -1;}
-  if (btagWP!="loose"&&btagWP!="medium"&&btagWP!="tight"&&btagWP!="bveto"&&btagWP!="none"){cout<<"ERROR: BtagWP not valid!"<<endl;return -1;}
+  if (btagWP!="loose"&&btagWP!="mediumtight"&&btagWP!="medium"&&btagWP!="tight"&&btagWP!="bveto"&&btagWP!="none"){cout<<"ERROR: BtagWP not valid!"<<endl;return -1;}
 
   // Import the nanoLatino Tree
   //--------------------------------------------------------------------------------------------------------------------------------------
@@ -44,8 +44,9 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if(year=="2017") myFolderMC = "/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";  //2017  gamma +jets samples
   //if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_94X_nAODv3_Full2016v2/MCl1loose2016__MCCorr2016__fakeSelMC/";  //2016
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"; //2016
-  TString subdirname ="outputsFR_"+year+"_29apr_DeepCSV_"+btagWP+"btag"+"_exclusive";
-  TString dirname = subdirname; dirname.ReplaceAll("outputsFR","FR");
+
+  TString dirname = "FR_"+year+"_29apr_DeepCSV_exclusive";
+  TString subdirname =dirname; subdirname.ReplaceAll("FR","outputsFR");subdirname.ReplaceAll("_exclusive","");subdirname+="_"+btagWP+"btag"+"_exclusive";
   TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/"+subdirname+"/";
   system("mkdir -p "+outputdir);
 
@@ -66,6 +67,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
     if(btagWP=="loose"){btagdown=0.1522;btagup=0.4941;}  
     if(btagWP=="medium"){btagdown=0.4941;btagup=0.8001;} 
     if(btagWP=="tight"){btagdown=0.8001;btagup=1;}  
+    if(btagWP=="mediumtight"){btagdown=0.4941;btagup=1;}
   }  
   ////////////////////////////////////////////
 

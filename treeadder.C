@@ -10,28 +10,26 @@
 #include "TMath.h"
 using namespace std;
 
-void treeadder(TString dir ,TString channel){
+void treeadder(TString dir ,TString channel, int bins){
 
   //Channel is Ele or Muon
+  //Bins are 3 or 4
 
   for(int j=0;j<8;j++){
     int jetcut = 10 + j*5;
     TString file = Form(channel+"FR_jet%d.root",jetcut);
     TString subdir = dir; subdir.ReplaceAll("FR","plots"); subdir.ReplaceAll("_exclusive","");
     TFile *f_all = new TFile(dir+"/"+file,"recreate");
-    TFile *f_bveto = new TFile(dir+"/"+ subdir +"_bvetobtag"+"/"+file);
-    TFile *f_loose = new TFile(dir+"/"+ subdir +"_loosebtag"+"/"+file);
-    TFile *f_medium = new TFile(dir+"/"+ subdir +"_mediumbtag"+"/"+file);
-    TFile *f_tight = new TFile(dir+"/"+ subdir +"_tightbtag"+"/"+file);
-  
-    TFile *f[4];
-    f[0]=f_bveto; 
-    f[1]=f_loose; 
-    f[2]=f_medium; 
-    f[3]=f_tight; 
-
+    TFile *f[bins-1];
+    f[0]=new TFile(dir+"/"+ subdir +"_bvetobtag"+"/"+file);
+    f[1]=new TFile(dir+"/"+ subdir +"_loosebtag"+"/"+file);
+    if(bins==4){
+      f[2]=new TFile(dir+"/"+ subdir +"_mediumbtag"+"/"+file);
+      f[3]=new TFile(dir+"/"+ subdir +"_tightbtag"+"/"+file);
+    }
+    else if(bins==3) f[2]=new TFile(dir+"/"+ subdir +"_mediumtightbtag"+"/"+file);
+   
     TDirectory *btagwp[4];
-
     TH1F *FR_pT_eta; TH1F *FR_pT_eta_numerator; TH1F *FR_pT_eta_denominator; TH1F *FR_pT_eta_EWKcorr; TH1F *FR_pT_eta_EWKcorr_numerator; TH1F *FR_pT_eta_EWKcorr_denominator;
 
     for(int b=0;b<4;b++){
@@ -43,8 +41,9 @@ void treeadder(TString dir ,TString channel){
       FR_pT_eta_EWKcorr_denominator = (TH1F*)f[b]->Get("FR_pT_eta_EWKcorr_denominator");
       if(b==0)btagwp[b]=f_all->mkdir("bveto");
       else if(b==1)btagwp[b]=f_all->mkdir("loosebtag");
-      else if(b==2)btagwp[b]=f_all->mkdir("mediumbtag");
-      else if(b==3)btagwp[b]=f_all->mkdir("tightbtag");
+      else if(b==2&&bins==4)btagwp[b]=f_all->mkdir("mediumbtag");
+      else if(b==3&&bins==4)btagwp[b]=f_all->mkdir("tightbtag");
+      else if(b==3&&bins==3)btagwp[b]=f_all->mkdir("mediumtightbtag");
       btagwp[b]->cd();
       FR_pT_eta->Write();
       FR_pT_eta_numerator->Write();
@@ -56,7 +55,6 @@ void treeadder(TString dir ,TString channel){
     f_all->Close();
 
   }
-
 
   cout<<"...Done!"<<endl;
 
