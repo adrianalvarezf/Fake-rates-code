@@ -31,3 +31,5 @@ Now the FR is computed in bins of btagscore. In condorsubmit you can edit and ch
    root -b -q "treeadder.C(\"mainfoldername\",\"channel\",\"binnumber\")"
 
 Channel must be Ele or Muon for naming consistency and binnumber 4 (bveto,loose,medium,tight) or 3 (bveto,loose,mediumtight).
+
+You can also use the option "none" for btag in condorsubmit if you want to have the inclusive FR with no btag requirement. 
