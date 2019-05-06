@@ -18,7 +18,7 @@ void division_forfakes_withmc(TString dir)
   TFile* file_DY_mu= new TFile(dir+"/DY_mu.root");
   TFile* file_WJets_mu= new TFile(dir+"/WJets_mu.root");
   TFile* file_GJets_mu= new TFile(dir+"/GJets_mu.root");
- 
+
   TH1F* h_DATA_ele[8];
   TH1F* h_DY_ele[8]; 
   TH1F* h_WJets_ele[8];
@@ -105,19 +105,19 @@ void division_forfakes_withmc(TString dir)
     FR_pT_eta_num_DATA_ele[j] = (TH2F*)file_Data_ele->Get(Form("jetcut_%d/h_FR_pT_eta_tight_ele_%d",j,j));
     FR_pT_eta_num_DY_ele[j] = (TH2F*)file_DY_ele->Get(Form("jetcut_%d/h_FR_pT_eta_tight_ele_%d",j,j));
     FR_pT_eta_num_WJets_ele[j] = (TH2F*)file_WJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_tight_ele_%d",j,j));
-    //FR_pT_eta_num_GJets_ele[j] = (TH2F*)file_GJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_tight_ele_%d",j,j));
+    FR_pT_eta_num_GJets_ele[j] = (TH2F*)file_GJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_tight_ele_%d",j,j));
     FR_pT_eta_num_DATA_mu[j] = (TH2F*)file_Data_mu->Get(Form("jetcut_%d/h_FR_pT_eta_tight_mu_%d",j,j));
     FR_pT_eta_num_DY_mu[j] = (TH2F*)file_DY_mu->Get(Form("jetcut_%d/h_FR_pT_eta_tight_mu_%d",j,j));
     FR_pT_eta_num_WJets_mu[j] = (TH2F*)file_WJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_tight_mu_%d",j,j));
-    //FR_pT_eta_num_GJets_mu[j] = (TH2F*)file_GJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_tight_mu_%d",j,j));
+    FR_pT_eta_num_GJets_mu[j] = (TH2F*)file_GJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_tight_mu_%d",j,j));
     FR_pT_eta_den_DATA_ele[j] = (TH2F*)file_Data_ele->Get(Form("jetcut_%d/h_FR_pT_eta_loose_ele_%d",j,j));
     FR_pT_eta_den_DY_ele[j] = (TH2F*)file_DY_ele->Get(Form("jetcut_%d/h_FR_pT_eta_loose_ele_%d",j,j));
     FR_pT_eta_den_WJets_ele[j] = (TH2F*)file_WJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_loose_ele_%d",j,j));
-    //FR_pT_eta_den_GJets_ele[j] = (TH2F*)file_GJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_loose_ele_%d",j,j));
+    FR_pT_eta_den_GJets_ele[j] = (TH2F*)file_GJets_ele->Get(Form("jetcut_%d/h_FR_pT_eta_loose_ele_%d",j,j));
     FR_pT_eta_den_DATA_mu[j] = (TH2F*)file_Data_mu->Get(Form("jetcut_%d/h_FR_pT_eta_loose_mu_%d",j,j));
     FR_pT_eta_den_DY_mu[j] = (TH2F*)file_DY_mu->Get(Form("jetcut_%d/h_FR_pT_eta_loose_mu_%d",j,j));
     FR_pT_eta_den_WJets_mu[j] = (TH2F*)file_WJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_loose_mu_%d",j,j));
-    //FR_pT_eta_den_GJets_mu[j] = (TH2F*)file_GJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_loose_mu_%d",j,j));
+    FR_pT_eta_den_GJets_mu[j] = (TH2F*)file_GJets_mu->Get(Form("jetcut_%d/h_FR_pT_eta_loose_mu_%d",j,j));
   }
   gStyle->SetOptStat(0);
   gStyle->SetFrameLineWidth(3);
@@ -178,7 +178,7 @@ void division_forfakes_withmc(TString dir)
     h_relEWKcont_numerator_mu[j]->Divide(h_DATA_mu[j]);
     h_relEWKcont2_mu[j] = (TH1F*)h_denominator_DY_mu[j]->Clone(Form("h_relEWKcont2_mu_%d",j));
     h_relEWKcont2_mu[j]->Add(h_denominator_WJets_mu[j],1);
-    h_relEWKcont2_mu[j]->Add(h_denominator_WJets_mu[j],1);
+    h_relEWKcont2_mu[j]->Add(h_denominator_GJets_mu[j],1);
     h_relEWKcont_denominator_mu[j] = (TH1F*)h_relEWKcont2_mu[j]->Clone(Form("h_relEWKcont_denominator_mu_%d",j));
     h_relEWKcont_denominator_mu[j]->Divide(h_denominator_DATA_mu[j]);
   }
@@ -378,7 +378,7 @@ void division_forfakes_withmc(TString dir)
   h_div_ele[5]->Draw("same"); h_div_ele[5]->SetLineColor(17); h_div_ele[5]->SetMarkerColor(17); h_div_ele[5]->SetLineWidth(2);  h_div_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_ele[j]->Draw("same"); h_div_ele[j]->SetLineColor(j+1); h_div_ele[j]->SetMarkerColor(j+1); h_div_ele[j]->SetLineWidth(2);  h_div_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw(); combined_pt_ele->SaveAs("combined_pt_eleFR.gif");
-  h_div_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_ele->SaveAs("combined_pt_eleFR_zoom.gif");
+  //h_div_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_ele->SaveAs("combined_pt_eleFR_zoom.gif");
   TCanvas* combined_pt_mu= new TCanvas();
   combined_pt_mu->cd();
   h_div_mu[0]->Draw(); h_div_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_mu[0]->SetTitle("Muon fake rate"); h_div_mu[0]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_pt_mu->SetGridx(1);combined_pt_mu->SetGridy(1); h_div_mu[0]->SetLineWidth(2);  h_div_mu[0]->SetMarkerStyle(kFullCircle); h_div_mu[0]->SetLineColor(6); h_div_mu[0]->SetMarkerColor(6);
@@ -386,7 +386,7 @@ void division_forfakes_withmc(TString dir)
   h_div_mu[5]->Draw("same"); h_div_mu[5]->SetLineColor(17); h_div_mu[5]->SetMarkerColor(17); h_div_mu[5]->SetLineWidth(2);  h_div_mu[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_mu[j]->Draw("same"); h_div_mu[j]->SetLineColor(j+1); h_div_mu[j]->SetMarkerColor(j+1); h_div_mu[j]->SetLineWidth(2);  h_div_mu[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_pt_mu->SaveAs("combined_pt_muFR.gif");
-  h_div_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_mu->SaveAs("combined_pt_muFR_zoom.gif");
+  //h_div_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_pt_mu->SaveAs("combined_pt_muFR_zoom.gif");
   TCanvas* combined_eta_ele= new TCanvas(); 
   combined_eta_ele->cd();
   h_div_eta_ele[0]->Draw(); h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_ele[0]->SetTitle("Electron fake rate"); h_div_eta_ele[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_ele[0]->GetYaxis()->SetTitle("Ele fake rate");combined_eta_ele->SetGridx(1);combined_eta_ele->SetGridy(1); h_div_eta_ele[0]->SetLineWidth(2);  h_div_eta_ele[0]->SetMarkerStyle(kFullCircle); h_div_eta_ele[0]->SetLineColor(6); h_div_eta_ele[0]->SetMarkerColor(6);
@@ -394,7 +394,7 @@ void division_forfakes_withmc(TString dir)
   h_div_eta_ele[5]->Draw("same"); h_div_eta_ele[5]->SetLineColor(17); h_div_eta_ele[5]->SetMarkerColor(17); h_div_eta_ele[5]->SetLineWidth(2);  h_div_eta_ele[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_eta_ele[j]->Draw("same"); h_div_eta_ele[j]->SetLineColor(j+1); h_div_eta_ele[j]->SetMarkerColor(j+1); h_div_eta_ele[j]->SetLineWidth(2);  h_div_eta_ele[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_ele->SaveAs("combined_eta_eleFR.gif");
-  h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_ele->SaveAs("combined_eta_eleFR_zoom.gif");
+  //h_div_eta_ele[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_ele->SaveAs("combined_eta_eleFR_zoom.gif");
   TCanvas* combined_eta_mu= new TCanvas();
   combined_eta_mu->cd();
   h_div_eta_mu[0]->Draw(); h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0,1); h_div_eta_mu[0]->SetTitle("Muon fake rate"); h_div_eta_mu[0]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_mu[0]->GetYaxis()->SetTitle("Mu fake rate");combined_eta_mu->SetGridx(1);combined_eta_mu->SetGridy(1); h_div_eta_mu[0]->SetLineWidth(2);  h_div_eta_mu[0]->SetMarkerStyle(kFullCircle); h_div_eta_mu[0]->SetLineColor(6); h_div_eta_mu[0]->SetMarkerColor(6);
@@ -402,7 +402,7 @@ void division_forfakes_withmc(TString dir)
   h_div_eta_mu[5]->Draw("same"); h_div_eta_mu[5]->SetLineColor(17); h_div_eta_mu[5]->SetMarkerColor(17); h_div_eta_mu[5]->SetLineWidth(2);  h_div_eta_mu[5]->SetMarkerStyle(kFullCircle);
   for(int j=6;j<8;j++){h_div_eta_mu[j]->Draw("same"); h_div_eta_mu[j]->SetLineColor(j+1); h_div_eta_mu[j]->SetMarkerColor(j+1); h_div_eta_mu[j]->SetLineWidth(2);  h_div_eta_mu[j]->SetMarkerStyle(kFullCircle);}
   combinedleg->Draw();combined_eta_mu->SaveAs("combined_eta_muFR.gif");
-  h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_mu->SaveAs("combined_eta_muFR_zoom.gif");
+  //h_div_eta_mu[0]->GetYaxis()->SetRangeUser(0.1,0.5);combined_eta_mu->SaveAs("combined_eta_muFR_zoom.gif");
   
 
   /////////Rootfiles with 2D histograms//////////
