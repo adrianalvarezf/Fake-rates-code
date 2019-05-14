@@ -20,20 +20,20 @@ def submit():
 			
 	if year=="2017":
         #        for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):    #2017 No WJets or TTbar
-	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017
-	#		if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
-	#		elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
-        #               elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-		for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
-			if '_GJets' in ii : SAMPLESMC.add(ii)
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017
+			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
+			elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
+			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+		#for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
+		#	if '_GJets' in ii : SAMPLESMC.add(ii)
 
 	print "MC file list loaded..."		
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
 
 	CHANNEL={"ele","mu"}
-	BtagWP={"bveto","loose","medium","tight","none"}
-	#BtagWP={"bveto","loose","mediumtight","none"}
+	#BtagWP={"bveto","loose","medium","tight","none"}
+	BtagWP={"bveto","loose","mediumtight"}
 	#BtagWP={"none"}
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_mc/"
 	queue="tomorrow"
