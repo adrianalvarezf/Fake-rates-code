@@ -35,7 +35,10 @@ def submit():
 
 	#BtagWP={"none"}
         #BtagWP={"bveto","loose","medium","tight","none"}
-	BtagWP={"bveto","loose","mediumtight"}
+	if year=="2017":
+		BtagWP={"bveto","loose","mediumtight"}
+	else :
+		BtagWP={"none"}  
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
         queue="tomorrow"
 	musamples=0
