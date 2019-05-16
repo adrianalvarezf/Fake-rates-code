@@ -31,21 +31,21 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   TChain* tree = new TChain("Events");
   //DATA
   TString myFolderData ="";
-  if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/";  //2018
+  if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/";  //2018 
   //if(year=="2018") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/";  //2018
   if(year=="2017") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"; //2017
   //if(year=="2016") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"; //2016
   if(year=="2016") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"; //2016  
   //MC
   TString myFolderMC ="";
-  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/";  //2018
-  //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017 missing some samples
+  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"; //2018
+//if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017 missing some samples
   if(year=="2017"&&sample.Contains("DY")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2017"&&sample.Contains("WJets")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2017"&&sample.Contains("GJets")) myFolderMC = "/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";  //2017  gamma +jets samples
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"; //2016
 
-  TString dirname = "FR_"+year+"_15may_DeepCSV";
+  TString dirname = "FR_"+year+"_16may_DeepCSV";
   TString subdirname =dirname; subdirname.ReplaceAll("FR","outputsFR");subdirname+="_"+btagWP+"btag";
   //subdirname.ReplaceAll("_exclusive","");subdirname+="_"+btagWP+"btag"+"_exclusive";
   TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/"+subdirname+"/";
@@ -318,7 +318,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	if (Lepton_pt[0] <= 25.){
 	  if (HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  //if (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
-	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014851;if(year=="2018")weight*=0.038849} //Ele12
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.027699; if(year=="2016")weight*=0.014851;if(year=="2018")weight*=0.038849;} //Ele12
 	  //if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.006980;if(year=="2018")weight*=0.006412;}   //Ele8
 	  if(btagWP!="none"){
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <=btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
@@ -349,7 +349,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 
 	if (Lepton_pt[0] > 25.){
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
-	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062808;if(year=="2018")weight*=0.038906;}}
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062808;if(year=="2018")weight*=0.038906;}
 	  if(btagWP!="none"){
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
 	  }	  
@@ -384,7 +384,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	if (Lepton_pt[0]<10 || fabs(Lepton_eta[0])>=2.4)continue;
 	if (Lepton_pt[0] <= 20.){
 	  if (HLT_Mu8_TrkIsoVVL < 0.5 && isQCD==false)continue;
-	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.007801;if(year="2018")weight*=0.008561;}
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.002903; if(year=="2016")weight*=0.007801;if(year=="2018")weight*=0.008561;}
 	  if(btagWP!="none"){
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 	  }
@@ -412,7 +412,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 
 	if (Lepton_pt[0] > 20.){
 	  if (HLT_Mu17_TrkIsoVVL < 0.5 && isQCD==false)continue;
-	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.216748;if(year=="2018")weight*=0.045781}}
+	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.065944; if(year=="2016")weight*=0.216748;if(year=="2018")weight*=0.045781;}
 	  if(btagWP!="none"){
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 	  }
