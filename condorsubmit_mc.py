@@ -24,8 +24,8 @@ def submit():
 			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 			elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
 			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-		#for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
-		#	if '_GJets' in ii : SAMPLESMC.add(ii)
+		for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
+			if '_GJets' in ii : SAMPLESMC.add(ii)
 
 	print "MC file list loaded..."		
 	print " Year " ,year
