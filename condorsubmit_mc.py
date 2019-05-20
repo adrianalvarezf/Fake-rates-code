@@ -27,6 +27,11 @@ def submit():
 		for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
 			if '_GJets' in ii : SAMPLESMC.add(ii)
 
+	if year=="2018":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"):
+			if '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
+                        elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+       
 	print "MC file list loaded..."		
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
@@ -35,7 +40,9 @@ def submit():
 	#BtagWP={"bveto","loose","medium","tight","none"}
 	if year=="2017":
 		BtagWP={"bveto","loose","mediumtight"}
-	else:
+	elif year=="2018":
+		BtagWP={"bveto","loose","mediumtight","none"}
+	else :
 		BtagWP={"none"}
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_mc/"
 	queue="tomorrow"

@@ -23,7 +23,7 @@ def submit():
 			elif 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
 
 	if year == "2018":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Sep_Full2018/DATAl1loose2018__fakeSel/"):          #2018      
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/"):          #2018
 			if   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
 			elif 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
 		
@@ -37,6 +37,8 @@ def submit():
         #BtagWP={"bveto","loose","medium","tight","none"}
 	if year=="2017":
 		BtagWP={"bveto","loose","mediumtight"}
+	elif year=="2018":
+		BtagWP={"bveto","loose","mediumtight","none"}
 	else :
 		BtagWP={"none"}  
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
