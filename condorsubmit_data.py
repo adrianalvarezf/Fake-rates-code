@@ -12,7 +12,6 @@ def submit():
 	year =	sys.argv[1]
 
 	if year == "2016":
-		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_94X_nAODv3_Full2016v2/DATAl1loose2016__fakeSel/"):   #2016
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"):   #2016
 			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
@@ -33,10 +32,11 @@ def submit():
 	print " Number of muon data files ", len(SAMPLESMU)
 	print " Number of electron data files ", len(SAMPLESELE)
 
-	#BtagWP={"none"}
+	
         #BtagWP={"bveto","loose","medium","tight","none"}
 	if year=="2017":
-		BtagWP={"bveto","loose","mediumtight"}
+		#BtagWP={"bveto","loose","mediumtight"}
+		BtagWP={"none"}
 	elif year=="2018":
 		BtagWP={"bveto","loose","mediumtight","none"}
 	else :
@@ -49,12 +49,12 @@ def submit():
 	for s in SAMPLESMU:
 		CH="mu"
 		for tag in BtagWP:
-			jobFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
-			subFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
-			errFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
-			outFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
-			logFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
-			jidFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+			jobFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
 			
 			jobFile = open(jobFileName, "w+")
 			jobFile.write("#!/bin/sh \n")
@@ -81,12 +81,12 @@ def submit():
 	for s in SAMPLESELE:
 		CH="ele"
 		for tag in BtagWP:
-			jobFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
-			subFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
-			errFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
-			outFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
-			logFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
-			jidFileName = outputDir+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+			jobFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
 		
 			jobFile = open(jobFileName, "w+")
 			jobFile.write("#!/bin/sh \n")

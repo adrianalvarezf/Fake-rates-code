@@ -39,7 +39,8 @@ def submit():
 	CHANNEL={"ele","mu"}
 	#BtagWP={"bveto","loose","medium","tight","none"}
 	if year=="2017":
-		BtagWP={"bveto","loose","mediumtight"}
+		#BtagWP={"bveto","loose","mediumtight"}
+		BtagWP={"none"}
 	elif year=="2018":
 		BtagWP={"bveto","loose","mediumtight","none"}
 	else :
