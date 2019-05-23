@@ -317,8 +317,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
       afterjetcut[jetcut]+=weight;      
       if (channel=="ele"){
 	if (abs(Lepton_pdgId[0])!=11) continue;
-	//if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>2.5)continue;
-	//eleselection[jetcut]+=weight;
+	if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>2.5)continue;
 	if (Lepton_pt[0] <= 25.){
 
 	  if(eletrig=="12"){
