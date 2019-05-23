@@ -37,9 +37,10 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if(year=="2016") myFolderData = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"; //2016  
   //MC
   TString myFolderMC ="";
-  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"; //2018
-//if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017 missing some samples
-  if(year=="2017"&&sample.Contains("DY")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
+  //if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"; //2018
+  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"; //2018  
+  //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017 missing some samples
+  if(year=="2017"&&sample.Contains("DY")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017
   if(year=="2017"&&sample.Contains("WJets")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2017"&&sample.Contains("GJets")) myFolderMC = "/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";  //2017  gamma +jets samples
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"; //2016
@@ -65,7 +66,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   bool useDeepCSV=true;
   //DeepCSV 
   if(useDeepCSV==true){  
-    if(btagWP=="bveto"){btagdown=-3;btagup=0.1522;} 
+    if(btagWP=="bveto"){btagdown=0;btagup=0.1522;} 
     if(btagWP=="loose"){btagdown=0.1522;btagup=0.4941;}  
     if(btagWP=="medium"){btagdown=0.4941;btagup=0.8001;} 
     if(btagWP=="tight"){btagdown=0.8001;btagup=1;}  
@@ -117,8 +118,6 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if (tree->GetBranch("Electron_mva_90p_Iso2016"))tree->SetBranchAddress("Electron_mva_90p_Iso2016",&Electron_mva_90p_Iso2016);
   Int_t Electron_cutBased[200];
   tree->SetBranchAddress("Electron_cutBased",&Electron_cutBased);
-  UChar_t Electron_lostHits[200];
-  tree->SetBranchAddress("Electron_lostHits",&Electron_lostHits);
   Float_t Electron_dxy[200];
   tree->SetBranchAddress("Electron_dxy",&Electron_dxy);
   Float_t Electron_dz[200];
@@ -167,10 +166,8 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if (tree->GetBranch("baseW"))tree->SetBranchAddress("baseW",&baseW);
   Float_t Generator_weight;
   if (tree->GetBranch("Generator_weight"))tree->SetBranchAddress("Generator_weight",&Generator_weight);
-  Int_t PV_npvsGood; 
-  tree->SetBranchAddress("PV_npvsGood",&PV_npvsGood);
-  Int_t event;
-  tree->SetBranchAddress("event",&event);
+  //Int_t event;
+  //tree->SetBranchAddress("event",&event);
   Bool_t HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30;
   tree->SetBranchAddress("HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30",&HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30);
   Bool_t HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30;
@@ -217,6 +214,14 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   Float_t mutight_high[8] = {0};
   Float_t muloose_high[8] = {0};
 
+  Float_t afterpreselection=0;
+  Float_t afterjetcut[8]={0};
+  Float_t eleselection=0;
+  Float_t afterelelow[8]={0};
+  Float_t afterelelowandbtag[8]={0};
+  Float_t afterelehigh[8]={0};
+  Float_t afterelehighandbtag[8]={0};
+
   cout<<"Begin..."<<endl;
 
   // Create the output histograms
@@ -246,10 +251,6 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   TH1F* h_leppt_dividedby_jet_pt_loose[8];
   TH2D *h_lepptvsjetpt_tight[8];
   TH2D *h_lepptvsjetpt_loose[8];
-  TH1F *h_PV_tight[8];
-  TH1F *h_PV_loose[8];
-  TH1F *h_elelosthits_tight[8];
-  TH1F *h_elelosthits_loose[8];
 
   TH2D * FR_pT_eta_loose_ele[8];
   TH2D * FR_pT_eta_tight_ele[8];
@@ -258,37 +259,33 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 
 
   for(int jet=0;jet<8;jet++){
-    h_pt1_tight[jet]   = new TH1F(Form("h_pt1_tight_%d",jet),Form("h_pt1_tight_%d",jet),8,10,50);
-    h_eta1_tight[jet]  = new TH1F(Form("h_eta1_tight_%d",jet),Form("h_eta1_tight_%d",jet),5,0,2.5);
-    h_pt1_loose[jet]   = new TH1F(Form("h_pt1_loose_%d",jet),Form("h_pt1_loose_%d",jet),8,10,50);
-    h_eta1_loose[jet]  = new TH1F(Form("h_eta1_loose_%d",jet),Form("h_eta1_loose_%d",jet),5,0,2.5);
-    h_pt1_tight_low[jet]   = new TH1F(Form("h_pt1_tight_low_%d",jet),Form("h_pt1_tight_low_%d",jet),8,10,50);
-    h_eta1_tight_low[jet]  = new TH1F(Form("h_eta1_tight_low_%d",jet),Form("h_eta1_tight_low_%d",jet),5,0,2.5);
-    h_pt1_loose_low[jet]   = new TH1F(Form("h_pt1_loose_low_%d",jet),Form("h_pt1_loose_low_%d",jet),8,10,50);
-    h_eta1_loose_low[jet]  = new TH1F(Form("h_eta1_loose_low_%d",jet),Form("h_eta1_loose_low_%d",jet),5,0,2.5);
-    h_pt1_tight_high[jet]   = new TH1F(Form("h_pt1_tight_high_%d",jet),Form("h_pt1_tight_high_%d",jet),8,10,50);
-    h_eta1_tight_high[jet]  = new TH1F(Form("h_eta1_tight_high_%d",jet),Form("h_eta1_tight_high_%d",jet),5,0,2.5);
-    h_pt1_loose_high[jet]   = new TH1F(Form("h_pt1_loose_high_%d",jet),Form("h_pt1_loose_high_%d",jet),8,10,50);
-    h_eta1_loose_high[jet]  = new TH1F(Form("h_eta1_loose_high_%d",jet),Form("h_eta1_loose_high_%d",jet),5,0,2.5);
-    h_associated_jet_pt_tight[jet]= new TH1F(Form("h_associated_jet_pt_tight_%d",jet),Form("h_associated_jet_pt_tight_%d",jet),18,10,100);
-    h_associated_jet_pt_loose[jet]= new TH1F(Form("h_associated_jet_pt_loose_%d",jet),Form("h_associated_jet_pt_loose_%d",jet),18,10,100);
-    h_leppt_dividedby_jet_pt_tight[jet]= new TH1F(Form("h_leppt_jet_pt_tight_%d",jet),Form("h_leppt_jet_pt_tight_%d",jet),10,0,1);
-    h_leppt_dividedby_jet_pt_loose[jet]= new TH1F(Form("h_leppt_jet_pt_loose_%d",jet),Form("h_leppt_jet_pt_loose_%d",jet),10,0,1);
-    h_lepptvsjetpt_tight[jet] = new TH2D(Form("h_leptonpt_vs_associatedjetpt_tight_%d",jet),Form("h_leptonpt_vs_associatedjetpt_tight_%d",jet),8,10,50,18,10,100);
-    h_lepptvsjetpt_loose[jet] = new TH2D(Form("h_leptonpt_vs_associatedjetpt_loose_%d",jet),Form("h_leptonpt_vs_associatedjetpt_loose_%d",jet),8,10,50,18,10,100);
-    h_associated_jet_flavour_tight[jet]= new TH1F(Form("h_associated_jet_flavour_tight_%d",jet),Form("h_associated_jet_flavour_tight_%d",jet),25,0,25);
-    h_associated_jet_flavour_loose[jet]= new TH1F(Form("h_associated_jet_flavour_loose_%d",jet),Form("h_associated_jet_flavour_loose_%d",jet),25,0,25);
-    h_associated_genjet_flavour_tight[jet]= new TH1F(Form("h_associated_genjet_flavour_tight_%d",jet),Form("h_associated_genjet_flavour_tight_%d",jet),25,0,25);
-    h_associated_genjet_flavour_loose[jet]= new TH1F(Form("h_associated_genjet_flavour_loose_%d",jet),Form("h_associated_genjet_flavour_loose_%d",jet),25,0,25);
-    h_PV_tight[jet]   = new TH1F(Form("h_PV_tight_%d",jet),Form("h_PV_tight_%d",jet),25,0,50);
-    h_PV_loose[jet]   = new TH1F(Form("h_PV_loose_%d",jet),Form("h_PV_loose_%d",jet),25,0,50);
-    h_elelosthits_tight[jet]= new TH1F(Form("h_elelosthits_tight_%d",jet),Form("h_elelosthits_tight_%d",jet),8,0,8);
-    h_elelosthits_loose[jet]= new TH1F(Form("h_elelosthits_loose_%d",jet),Form("h_elelosthits_loose_%d",jet),8,0,8);
+    h_pt1_tight[jet]   = new TH1F(Form("h_pt1_tight_%d",10+5*jet),Form("h_pt1_tight_%d",10+5*jet),8,10,50);
+    h_eta1_tight[jet]  = new TH1F(Form("h_eta1_tight_%d",10+5*jet),Form("h_eta1_tight_%d",10+5*jet),5,0,2.5);
+    h_pt1_loose[jet]   = new TH1F(Form("h_pt1_loose_%d",10+5*jet),Form("h_pt1_loose_%d",10+5*jet),8,10,50);
+    h_eta1_loose[jet]  = new TH1F(Form("h_eta1_loose_%d",10+5*jet),Form("h_eta1_loose_%d",10+5*jet),5,0,2.5);
+    h_pt1_tight_low[jet]   = new TH1F(Form("h_pt1_tight_low_%d",10+5*jet),Form("h_pt1_tight_low_%d",10+5*jet),8,10,50);
+    h_eta1_tight_low[jet]  = new TH1F(Form("h_eta1_tight_low_%d",10+5*jet),Form("h_eta1_tight_low_%d",10+5*jet),5,0,2.5);
+    h_pt1_loose_low[jet]   = new TH1F(Form("h_pt1_loose_low_%d",10+5*jet),Form("h_pt1_loose_low_%d",10+5*jet),8,10,50);
+    h_eta1_loose_low[jet]  = new TH1F(Form("h_eta1_loose_low_%d",10+5*jet),Form("h_eta1_loose_low_%d",10+5*jet),5,0,2.5);
+    h_pt1_tight_high[jet]   = new TH1F(Form("h_pt1_tight_high_%d",10+5*jet),Form("h_pt1_tight_high_%d",10+5*jet),8,10,50);
+    h_eta1_tight_high[jet]  = new TH1F(Form("h_eta1_tight_high_%d",10+5*jet),Form("h_eta1_tight_high_%d",10+5*jet),5,0,2.5);
+    h_pt1_loose_high[jet]   = new TH1F(Form("h_pt1_loose_high_%d",10+5*jet),Form("h_pt1_loose_high_%d",10+5*jet),8,10,50);
+    h_eta1_loose_high[jet]  = new TH1F(Form("h_eta1_loose_high_%d",10+5*jet),Form("h_eta1_loose_high_%d",10+5*jet),5,0,2.5);
+    h_associated_jet_pt_tight[jet]= new TH1F(Form("h_associated_jet_pt_tight_%d",10+5*jet),Form("h_associated_jet_pt_tight_%d",10+5*jet),18,10,100);
+    h_associated_jet_pt_loose[jet]= new TH1F(Form("h_associated_jet_pt_loose_%d",10+5*jet),Form("h_associated_jet_pt_loose_%d",10+5*jet),18,10,100);
+    h_leppt_dividedby_jet_pt_tight[jet]= new TH1F(Form("h_leppt_jet_pt_tight_%d",10+5*jet),Form("h_leppt_jet_pt_tight_%d",10+5*jet),10,0,1);
+    h_leppt_dividedby_jet_pt_loose[jet]= new TH1F(Form("h_leppt_jet_pt_loose_%d",10+5*jet),Form("h_leppt_jet_pt_loose_%d",10+5*jet),10,0,1);
+    h_lepptvsjetpt_tight[jet] = new TH2D(Form("h_leptonpt_vs_associatedjetpt_tight_%d",10+5*jet),Form("h_leptonpt_vs_associatedjetpt_tight_%d",10+5*jet),8,10,50,18,10,100);
+    h_lepptvsjetpt_loose[jet] = new TH2D(Form("h_leptonpt_vs_associatedjetpt_loose_%d",10+5*jet),Form("h_leptonpt_vs_associatedjetpt_loose_%d",10+5*jet),8,10,50,18,10,100);
+    h_associated_jet_flavour_tight[jet]= new TH1F(Form("h_associated_jet_flavour_tight_%d",10+5*jet),Form("h_associated_jet_flavour_tight_%d",10+5*jet),25,0,25);
+    h_associated_jet_flavour_loose[jet]= new TH1F(Form("h_associated_jet_flavour_loose_%d",10+5*jet),Form("h_associated_jet_flavour_loose_%d",10+5*jet),25,0,25);
+    h_associated_genjet_flavour_tight[jet]= new TH1F(Form("h_associated_genjet_flavour_tight_%d",10+5*jet),Form("h_associated_genjet_flavour_tight_%d",10+5*jet),25,0,25);
+    h_associated_genjet_flavour_loose[jet]= new TH1F(Form("h_associated_genjet_flavour_loose_%d",10+5*jet),Form("h_associated_genjet_flavour_loose_%d",10+5*jet),25,0,25);
 
-    FR_pT_eta_tight_ele[jet]= new TH2D(Form("h_FR_pT_eta_tight_ele_%d",jet),Form("h_FR_pT_eta_tight_ele_%d",jet),8,10,50,5,0,2.5);
-    FR_pT_eta_loose_ele[jet]= new TH2D(Form("h_FR_pT_eta_loose_ele_%d",jet),Form("h_FR_pT_eta_loose_ele_%d",jet),8,10,50,5,0,2.5);
-    FR_pT_eta_tight_mu[jet]= new TH2D(Form("h_FR_pT_eta_tight_mu_%d",jet),Form("h_FR_pT_eta_tight_mu_%d",jet),8,10,50,5,0,2.5);
-    FR_pT_eta_loose_mu[jet]= new TH2D(Form("h_FR_pT_eta_loose_mu_%d",jet),Form("h_FR_pT_eta_loose_mu_%d",jet),8,10,50,5,0,2.5);
+    FR_pT_eta_tight_ele[jet]= new TH2D(Form("h_FR_pT_eta_tight_ele_%d",10+5*jet),Form("h_FR_pT_eta_tight_ele_%d",10+5*jet),8,10,50,5,0,2.5);
+    FR_pT_eta_loose_ele[jet]= new TH2D(Form("h_FR_pT_eta_loose_ele_%d",10+5*jet),Form("h_FR_pT_eta_loose_ele_%d",10+5*jet),8,10,50,5,0,2.5);
+    FR_pT_eta_tight_mu[jet]= new TH2D(Form("h_FR_pT_eta_tight_mu_%d",10+5*jet),Form("h_FR_pT_eta_tight_mu_%d",10+5*jet),8,10,50,5,0,2.5);
+    FR_pT_eta_loose_mu[jet]= new TH2D(Form("h_FR_pT_eta_loose_mu_%d",10+5*jet),Form("h_FR_pT_eta_loose_mu_%d",10+5*jet),8,10,50,5,0,2.5);
   }
 
   // Loop over the tree events
@@ -298,24 +295,30 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
     int nentries = tree->GetEntriesFast();
     if(fmod(j,100000)==0) Printf(" ..... event %d of %d", int(j), int(nentries));
 
+
     //------------------------------ Preselection --------------------------------------
     if (nLepton!=1){continue;}
     if (PuppiMET_pt>20){continue;}
     if (mtw1>20){continue;}
-     
-    //-------------------- jet cuts------------------------------------------
+    afterpreselection++;
+    //if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>2.5 || fabs(Lepton_pdgId[0])!=11)continue;
+    //eleselection++;
+    
+    //-------------------- Jet cuts------------------------------------------
+        
     for(int jetcut=0;jetcut<8;jetcut++){
       if(isMC==true && isQCD==false) weight=baseW*Generator_weight*puWeight;
       int passjets =0;
       for (int jet=0; jet<nCleanJet; jet++){
-	//if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1. && Jet_btagCSVV2[CleanJet_jetIdx[jet]]>btagcut) passjets=1;
-	if(CleanJet_pt[jet]>=(10.+5*jetcut) && CleanJet_eta[jet]<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
+	//if(CleanJet_pt[jet]>=(10.+5*jetcut) && fabs(CleanJet_eta[jet])<=2.5 && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1. && Jet_btagCSVV2[CleanJet_jetIdx[jet]]>btagcut) passjets=1;
+	if(CleanJet_pt[jet]>=(10.+5*jetcut) && fabs(CleanJet_eta[jet])<=2.5  && sqrt(deltaPhi(CleanJet_phi[jet],Lepton_phi[0])*deltaPhi(CleanJet_phi[jet],Lepton_phi[0])+(CleanJet_eta[jet]-Lepton_eta[0])*(CleanJet_eta[jet]-Lepton_eta[0]))>=1.) passjets=1;
       }
       if (passjets==0)continue;
-
+      afterjetcut[jetcut]+=weight;      
       if (channel=="ele"){
 	if (abs(Lepton_pdgId[0])!=11) continue;
-	if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>2.5)continue;
+	//if (Lepton_pt[0]<13 || fabs(Lepton_eta[0])>2.5)continue;
+	//eleselection[jetcut]+=weight;
 	if (Lepton_pt[0] <= 25.){
 
 	  if(eletrig=="12"){
@@ -326,11 +329,13 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if (HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	    if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.003973; if(year=="2016")weight*=0.006980;if(year=="2018")weight*=0.006412;}   //Ele8
 	  }	  
+	  afterelelow[jetcut]+=weight;
 	  if(btagWP!="none"){
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <=btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
 	  }
-	  h_elelosthits_loose[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
-	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  afterelelowandbtag[jetcut]+=weight;
+
+	  eleloose[jetcut]+=weight;eleloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -340,9 +345,9 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	  }
 	  if((year=="2016" && Lepton_isTightElectron_cut_WP_Tight80X[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight); 
+	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	    h_elelosthits_tight[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
+
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -356,11 +361,13 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	if (Lepton_pt[0] > 25.){
 	  if (HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 < 0.5 && isQCD==false)continue;
 	  if(isMC==true && isQCD==false){ if(year=="2017")weight*=0.043469; if(year=="2016")weight*=0.062808;if(year=="2018")weight*=0.038906;}
+	  afterelehigh[jetcut]+=weight;
 	  if(btagWP!="none"){
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]<0 || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] <btagdown || Jet_btagDeepB[Electron_jetIdx[Lepton_electronIdx[0]]] >btagup)continue;
 	  }	  
-	  h_elelosthits_loose[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
-	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  afterelehighandbtag[jetcut]+=weight;
+
+	  eleloose[jetcut]+=weight;eleloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	  FR_pT_eta_loose_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -370,9 +377,9 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
 	  }
 	  if((year=="2016" && Lepton_isTightElectron_cut_WP_Tight80X[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
-	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
-	    h_elelosthits_tight[jetcut]->Fill((double)Electron_lostHits[Lepton_electronIdx[0]]);
+
 	    if(Electron_jetIdx[Lepton_electronIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
 	      h_leppt_dividedby_jet_pt_tight[jetcut]->Fill((double)Lepton_pt[0]/Jet_pt[Electron_jetIdx[Lepton_electronIdx[0]]]);
@@ -394,7 +401,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	  if(btagWP!="none"){
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 	  }
-	  muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  muloose[jetcut]+=weight;muloose_low[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	  FR_pT_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){ 
 	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -404,7 +411,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	  }
 	  if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	    mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    mutight[jetcut]+=weight;mutight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -422,7 +429,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	  if(btagWP!="none"){
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]<0 || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] <btagdown || Jet_btagDeepB[Muon_jetIdx[Lepton_muonIdx[0]]] >btagup)continue;
 	  }
-	  muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_loose[jetcut]->Fill(PV_npvsGood,weight);
+	  muloose[jetcut]+=weight;muloose_high[jetcut]+=weight; h_pt1_loose[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_loose_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_loose_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); 
 	  FR_pT_eta_loose_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	  if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 	    h_associated_jet_pt_loose[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -432,7 +439,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Muon_jetIdx[Lepton_muonIdx[0]]]));
 	  }
 	  if(( (year=="2017"||year=="2018") && Lepton_isTightMuon_cut_Tight_HWWW[0]>0.5)|| (year=="2016" && Lepton_isTightMuon_cut_Tight80x[0]>0.5)){
-	    mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_PV_tight[jetcut]->Fill(PV_npvsGood,weight);
+	    mutight[jetcut]+=weight;mutight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_mu[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 	    if(Muon_jetIdx[Lepton_muonIdx[0]]>=0){
 	      h_associated_jet_pt_tight[jetcut]->Fill(Jet_pt[Muon_jetIdx[Lepton_muonIdx[0]]]);
@@ -452,7 +459,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   //Write histograms in root output
   TDirectory *dir[8];
   for(int jetcut=0;jetcut<8;jetcut++){
-    dir[jetcut] = root_output->mkdir(Form("jetcut_%d",jetcut));
+    dir[jetcut] = root_output->mkdir(Form("jetcut_%d",10+5*jetcut));
     dir[jetcut]->cd();
     h_pt1_tight[jetcut] ->Write();
     h_eta1_tight[jetcut]->Write();
@@ -466,12 +473,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
     h_eta1_tight_high[jetcut]->Write();
     h_pt1_loose_high[jetcut] ->Write();
     h_eta1_loose_high[jetcut]->Write();
-    h_PV_loose[jetcut]->Write();
-    h_PV_tight[jetcut]->Write();
-    if(channel=="ele"){
-      h_elelosthits_loose[jetcut]->Write();
-      h_elelosthits_tight[jetcut]->Write();
-    }
+
     FR_pT_eta_tight_mu[jetcut]->Write();
     FR_pT_eta_loose_mu[jetcut]->Write();
     FR_pT_eta_tight_ele[jetcut]->Write();
@@ -494,24 +496,38 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   root_output->Close();
  
   //Print number of events
+
+  cout<<"After preselection "<<afterpreselection<<endl;
+     
   for(int jetcut=0;jetcut<8;jetcut++){
-    cout<< "-----------Jet pt >"<<jetcut*5+10<<"-------"<<endl;
-    if(channel=="mu"){
-      printf("loose muons: %f \n", muloose[jetcut]);
-      printf("loose muons low: %f \n", muloose_low[jetcut]);
-      printf("loose muons high: %f \n", muloose_high[jetcut]);
-      printf("tight muons: %f \n", mutight[jetcut]);
-      printf("tight muons low: %f \n", mutight_low[jetcut]);
-      printf("tight muons high: %f \n", mutight_high[jetcut]);
-    }  
-    if(channel=="ele"){
-      printf("loose electrons: %f \n",  eleloose[jetcut]);
-      printf("loose electrons low: %f \n",  eleloose_low[jetcut]);
-      printf("loose electrons high: %f \n",  eleloose_high[jetcut]);
-      printf("tight electrons: %f \n",  eletight[jetcut]);
-      printf("tight electrons low: %f \n",  eletight_low[jetcut]);
-      printf("tight electrons high: %f \n",  eletight_high[jetcut]);
+   
+    if(jetcut==5 && channel=="ele"){
+      cout<< "-----------Jet pt >"<<jetcut*5+10<<"-------"<<endl;
+      //cout<<"After ele selection         :"<<eleselection<<endl;
+      cout<<"After jet cut               :"<< afterjetcut[jetcut]<<endl;
+      cout<<"After trigger low           :"<< afterelelow[jetcut]<<endl;
+      cout<<"After trigger low and btag  :"<< afterelelowandbtag[jetcut]<<endl;
+      cout<<"After trigger high          :"<< afterelehigh[jetcut]<<endl;
+      cout<<"After trigger high and btag :"<< afterelehighandbtag[jetcut]<<endl;
+
+      printf("loose electrons      : %.2f \n",  eleloose[jetcut]);
+      printf("loose electrons low  : %.2f \n",  eleloose_low[jetcut]);
+      printf("loose electrons high : %.2f \n",  eleloose_high[jetcut]);
+      printf("tight electrons      : %.2f \n",  eletight[jetcut]);
+      printf("tight electrons low  : %.2f \n",  eletight_low[jetcut]);
+      printf("tight electrons high : %.2f \n",  eletight_high[jetcut]);
     }
+
+    if(jetcut==3 && channel=="mu"){
+      cout<< "-----------Jet pt >"<<jetcut*5+10<<"-------"<<endl;
+      printf("loose muons      : %.2f \n", muloose[jetcut]);
+      printf("loose muons low  : %.2f \n", muloose_low[jetcut]);
+      printf("loose muons high : %.2f \n", muloose_high[jetcut]);
+      printf("tight muons      : %.2f \n", mutight[jetcut]);
+      printf("tight muons low  : %.2f \n", mutight_low[jetcut]);
+      printf("tight muons high : %.2f \n", mutight_high[jetcut]);
+    }  
+
   }
   cout << endl;
   cout << "-------- Done ---------";

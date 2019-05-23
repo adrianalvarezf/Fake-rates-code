@@ -33,10 +33,9 @@ def submit():
 	print " Number of electron data files ", len(SAMPLESELE)
 
 	
-        #BtagWP={"bveto","loose","medium","tight","none"}
 	if year=="2017":
-		#BtagWP={"bveto","loose","mediumtight"}
-		BtagWP={"none"}
+		BtagWP={"bveto","loose","mediumtight","none"}
+		#BtagWP={"bveto"}
 	elif year=="2018":
 		BtagWP={"bveto","loose","mediumtight","none"}
 	else :
