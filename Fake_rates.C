@@ -39,13 +39,14 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   TString myFolderMC ="";
   //if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"; //2018
   if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"; //2018  
+  if(year=="2018") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018/"; //2018 Wjets 
   //if(year=="2017") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017 missing some samples
   if(year=="2017"&&sample.Contains("DY")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/";  //2017
   if(year=="2017"&&sample.Contains("WJets")) myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/";  //2017
   if(year=="2017"&&sample.Contains("GJets")) myFolderMC = "/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/";  //2017  gamma +jets samples
   if(year=="2016") myFolderMC = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"; //2016
 
-  TString dirname = "FR_"+year+"_10may_DeepCSV";
+  TString dirname = "FR_"+year+"_31may_DeepCSV";
   TString subdirname =dirname; subdirname.ReplaceAll("FR","outputsFR");subdirname+="_"+btagWP+"btag";
   //subdirname.ReplaceAll("_exclusive","");subdirname+="_"+btagWP+"btag"+"_exclusive";
   TString outputdir ="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/"+dirname+"/"+subdirname+"/";
@@ -344,6 +345,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));
 	  }
 	  if((year=="2016" && Lepton_isTightElectron_cut_WP_Tight80X[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	    if (Electron_pfRelIso03_all[Lepton_electronIdx[0]]>=0.057)continue;
 	    eletight[jetcut]+=weight;eletight_low[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight);h_pt1_tight_low[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_low[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 
@@ -376,6 +378,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
 	    if(isMC==true)h_associated_genjet_flavour_loose[jetcut]->Fill(fabs(GenJet_partonFlavour[Electron_jetIdx[Lepton_electronIdx[0]]]));	    
 	  }
 	  if((year=="2016" && Lepton_isTightElectron_cut_WP_Tight80X[0]>0.5)|| (year=="2017" && Lepton_isTightElectron_mvaFall17Iso_WP90[0]>0.5)||(year=="2018" && Lepton_isTightElectron_mvaFall17V1Iso_WP90[0]>0.5)){
+	    if (Electron_pfRelIso03_all[Lepton_electronIdx[0]]>=0.057)continue;
 	    eletight[jetcut]+=weight;eletight_high[jetcut]+=weight; h_pt1_tight[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight[jetcut]->Fill(fabs(Lepton_eta[0]),weight); h_pt1_tight_high[jetcut]->Fill(Lepton_pt[0],weight); h_eta1_tight_high[jetcut]->Fill(fabs(Lepton_eta[0]),weight);
 	    FR_pT_eta_tight_ele[jetcut]->Fill(Lepton_pt[0],fabs(Lepton_eta[0]),weight);
 

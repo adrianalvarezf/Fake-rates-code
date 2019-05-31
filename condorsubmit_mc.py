@@ -12,7 +12,6 @@ def submit():
 	year =  sys.argv[1]
 	#year="2017"
         if year=="2016":
-		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_94X_nAODv3_Full2016v2/MCl1loose2016__MCCorr2016__fakeSelMC/"):        #2016
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"):        #2016
                         if '_DYJetsToLL_M-50_ext2__' in ii : SAMPLESMC.add(ii)
                         elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
@@ -28,12 +27,12 @@ def submit():
 			if '_GJets' in ii : SAMPLESMC.add(ii)
 
 	if year=="2018":
-		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__fakeSelKinMC/"):
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):
-			if '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
-                        elif '_DYJetsToLL_M-50-LO__' in ii : SAMPLESMC.add(ii)
-			elif '_GJets' in ii : SAMPLESMC.add(ii)
-
+	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):
+	#		if '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
+        #               elif '_DYJetsToLL_M-50-LO__' in ii : SAMPLESMC.add(ii)
+	#		elif '_GJets' in ii : SAMPLESMC.add(ii)
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018/"):
+			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 	print "MC file list loaded..."		
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
