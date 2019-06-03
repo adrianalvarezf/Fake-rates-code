@@ -123,6 +123,8 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   tree->SetBranchAddress("Electron_dxy",&Electron_dxy);
   Float_t Electron_dz[200];
   tree->SetBranchAddress("Electron_dz",&Electron_dz);
+  Float_t Electron_pfRelIso03_all[200];
+  tree->SetBranchAddress("Electron_pfRelIso03_all",&Electron_pfRelIso03_all);
   Float_t Muon_dxy[200];
   tree->SetBranchAddress("Muon_dxy",&Muon_dxy);
   Float_t Muon_dz[200];
@@ -167,6 +169,7 @@ void Fake_rates(TString sample,  TString channel, TString year, TString btagWP) 
   if (tree->GetBranch("baseW"))tree->SetBranchAddress("baseW",&baseW);
   Float_t Generator_weight;
   if (tree->GetBranch("Generator_weight"))tree->SetBranchAddress("Generator_weight",&Generator_weight);
+
   //Int_t event;
   //tree->SetBranchAddress("event",&event);
   Bool_t HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30;
