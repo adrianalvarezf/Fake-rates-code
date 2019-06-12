@@ -37,8 +37,8 @@ def submit():
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
 
-	#CHANNEL={"ele","mu"}
-	CHANNEL={"mu"}
+	CHANNEL={"ele","mu"}
+	#CHANNEL={"mu"}
 
 	if year=="2017":
 		BtagWP={"bveto","loose","mediumtight","none"}
