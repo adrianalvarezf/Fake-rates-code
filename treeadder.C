@@ -10,13 +10,14 @@
 #include "TMath.h"
 using namespace std;
 
-void treeadder(TString dir ,TString channel, int bins){
+void treeadder(TString dir ,TString channel){
 
   //Channel is Ele or Muon
   if(channel!="Ele" && channel!="Muon"){cout<<"Error: channel must be Ele or Muon"<<endl;return -1;}
   //Bins are 3 or 4
-  if(bins!=3 && bins!=4){cout<<"Error: number of bins must be 3 or 4"<<endl;return -1;}
-  
+  //if(bins!=3 && bins!=4){cout<<"Error: number of bins must be 3 or 4"<<endl;return -1;}
+  int bins=3;// 4 bins not used anymore
+
   system("mkdir -p "+dir+"/"+Form("files_%dbins",bins));
 
   for(int j=0;j<8;j++){

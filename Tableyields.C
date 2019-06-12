@@ -80,7 +80,7 @@ void Tableyields(int jetcut, TString dir)
   Double_t y_WJets_ele_loose_high_ratio =y_WJets_ele_loose_high/y_WJets_ele_loose_high_noweight;
   Double_t y_WJets_mu_loose_high_ratio =y_WJets_mu_loose_high/y_WJets_mu_loose_high_noweight;
 
-  ofstream Table(Form("yields_jetcut%d.txt",jetcut*5+10));
+  ofstream Table(Form("yields_jetcut%d.txt",jetcut));
   Table<< " ...............Trigger...........Data.....................W+Jets...............................Z+Jets................. "  <<endl;
   Table<< " ............................................w/o noweight.....with....Ratio........w/o noweight.....with.....Ratio..... "  <<endl;
   Table<<"Loose Muons"<<"     low pt            "<<Form("%.0f",y_data_mu_loose_low)<<"     "<<Form("%.0f",y_WJets_mu_loose_low_noweight)<<"         "<<Form("%.0f",y_WJets_mu_loose_low)<<"         "<<Form("%.3f",y_WJets_mu_loose_low_ratio)<<"          "<<Form("%.0f",y_DY_mu_loose_low_noweight)<<"          "<<Form("%.0f",y_DY_mu_loose_low)<<"         "<<Form("%.3f",y_DY_mu_loose_low_ratio)<<"    "<<endl;
