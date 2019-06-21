@@ -1,4 +1,6 @@
 
+https://github.com/adrianalvarezf/Fake-rates-code
+
 # How to get the fake rates : 
 
 First of all,
