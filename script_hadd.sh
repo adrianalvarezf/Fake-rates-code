@@ -1,6 +1,11 @@
 
-cd $1
+pwd
 
+btagWP=("_none")
+
+for btagbin in ${btagWP[@]} 
+do
+cd $1"/outputs"$1$btagbin"btag"
 pwd
 
 rm -r WJets_mu.root
@@ -31,3 +36,4 @@ elif [[ $1 == *"2018"* ]]; then
 fi
 
 cd -
+done
