@@ -17,10 +17,11 @@ def submit():
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
  
 	if year == "2017":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2LP19/DATAl1loose2017LP19__fakeSel/"):   #2017 v2 new definitions
 	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017 v2
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v4/DATAl1loose2017__fakeSel/"):   #2017 v4
+	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v4/DATAl1loose2017__fakeSel/"):   #2017 v4
 			if 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
-			if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
+			#if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
 			
 
 	if year == "2018":

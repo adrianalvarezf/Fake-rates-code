@@ -14,33 +14,31 @@ def submit():
         if year=="2016":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"):        #2016
                         if '_DYJetsToLL_M-50_ext2__' in ii : SAMPLESMC.add(ii)
-                        elif '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
+                        elif '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
 			elif '_WJetsToLNu__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2017":
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2LP19/MCl1loose2017__fakeSelKinMC/"):    #2017 v2 new definitions
               #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):    #2017 v2 No WJets or GJets 
-                 for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017__fakeSelMC/"):     #2017 v4 No WJets or GJets
-			if '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
-			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-	     #	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017 WJets v2
-		 for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017/"):                #2017 WJets v4
-			 if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
-		#for ii in os.listdir("/eos/cms/store/user/yiiyama/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017/"):                #2017 gamma+jets
-		#	if '_GJets' in ii : SAMPLESMC.add(ii)
+              #   for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017__fakeSelMC/"):     #2017 v4 No WJets or GJets
+			#if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
+			#elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
+	   #  	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017 WJets v2
+		# for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017/"):                #2017 WJets v4
 
 	if year=="2018":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):
-			if '_DYJetsToLL_M-10to50-LO_' in ii : SAMPLESMC.add(ii)
+			if '_DYJetsToLL_M-10to50-LO_-' in ii : SAMPLESMC.add(ii)
 			elif '_DYJetsToLL_M-50-LO__' in ii : SAMPLESMC.add(ii)
-			#elif '_GJets' in ii : SAMPLESMC.add(ii)
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018/"):
 			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 	print "MC file list loaded..."		
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
 
-	CHANNEL={"ele","mu"}
-	#CHANNEL={"ele"}
+	#CHANNEL={"ele","mu"}
+	CHANNEL={"ele"}
 
 	if year=="2017":
 		#BtagWP={"bveto","loose","mediumtight","none"}
