@@ -17,13 +17,11 @@ def submit():
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
  
 	if year == "2017":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2LP19/DATAl1loose2017LP19__fakeSel/"):   #2017 v2 new definitions
-	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2/DATAl1loose2017v2__DATACorr2017__fakeSel/"):   #2017 v2
-	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v4/DATAl1loose2017__fakeSel/"):   #2017 v4
+	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2LP19/DATAl1loose2017LP19__fakeSel/"):   #2017 v2 LP
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v5/DATAl1loose2017v5__fakeSel/"):   #2017 v5
 			if 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
-			#if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
-			
-
+			elif   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
+	
 	if year == "2018":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/"):          #2018
 			if 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
@@ -41,7 +39,8 @@ def submit():
 		#BtagWP={"bveto","loose","mediumtight","none"}
 		BtagWP={"none"}
 	elif year=="2018":
-		BtagWP={"bveto","loose","mediumtight","none"}
+		#BtagWP={"bveto","loose","mediumtight","none"}
+                BtagWP={"none"}
 	else :
 		BtagWP={"none"}  
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"

@@ -18,14 +18,13 @@ def submit():
 			elif '_WJetsToLNu__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2017":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2LP19/MCl1loose2017__fakeSelKinMC/"):    #2017 v2 new definitions
+              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2LP19/MCl1loose2017__fakeSelKinMC__puW/"):    #2017 v2 new definitions
               #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):    #2017 v2 No WJets or GJets 
-              #   for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017__fakeSelMC/"):     #2017 v4 No WJets or GJets
-			#if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
-			#elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
-	   #  	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent/"):                #2017 WJets v2
-		# for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017/"):                #2017 WJets v4
+              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017__fakeSelMC/"):     #2017 v4 No WJets or GJets
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__fakeSelKinMC/"):  #2017 v5 
+			if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
+			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+			elif '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2018":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):
@@ -37,8 +36,9 @@ def submit():
 	print " Year " ,year
 	print " Number of files ", len(SAMPLESMC)
 
-	#CHANNEL={"ele","mu"}
-	CHANNEL={"ele"}
+	CHANNEL={"ele","mu"}
+	#CHANNEL={"ele"}
+	#CHANNEL={"mu"}
 
 	if year=="2017":
 		#BtagWP={"bveto","loose","mediumtight","none"}
