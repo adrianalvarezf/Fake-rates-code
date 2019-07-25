@@ -36,13 +36,13 @@ def submit():
 
 	
 	if year=="2017":
-		#BtagWP={"bveto","loose","mediumtight","none"}
-		BtagWP={"none"}
+		#BtagWP={"bveto","loose","mediumtight",""}
+		BtagWP={""}
 	elif year=="2018":
-		#BtagWP={"bveto","loose","mediumtight","none"}
-                BtagWP={"none"}
+		#BtagWP={"bveto","loose","mediumtight",""}
+                BtagWP={""}
 	else :
-		BtagWP={"none"}  
+		BtagWP={""}  
 	outputDir="/afs/cern.ch/work/a/alvareza/public/CMSSW_9_4_7/src/PlotsConfigurations/Configurations/Fake-rates-code/jobscondor_data/"
         queue="tomorrow"
 	musamples=0
@@ -51,12 +51,12 @@ def submit():
 	for s in SAMPLESMU:
 		CH="mu"
 		for tag in BtagWP:
-			jobFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
-			subFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
-			errFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
-			outFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
-			logFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
-			jidFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+			jobFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
 			
 			jobFile = open(jobFileName, "w+")
 			jobFile.write("#!/bin/sh \n")
@@ -83,12 +83,12 @@ def submit():
 	for s in SAMPLESELE:
 		CH="ele"
 		for tag in BtagWP:
-			jobFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
-			subFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
-			errFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
-			outFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
-			logFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
-			jidFileName = outputDir+tag+"btag/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
+			jobFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sh"
+			subFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.sub"
+			errFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.err"
+			outFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.out"
+			logFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.log"
+			jidFileName = outputDir+tag+"/"+s[:-5]+"_"+CH+"_"+tag+"_FR.jid"
 		
 			jobFile = open(jobFileName, "w+")
 			jobFile.write("#!/bin/sh \n")
