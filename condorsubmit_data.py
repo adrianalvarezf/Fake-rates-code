@@ -12,7 +12,8 @@ def submit():
 	year =	sys.argv[1]
 
 	if year == "2016":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"):   #2016
+		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"):   #2016 v4
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v5/DATAl1loose2016v5__fakeSel/"):   #2016 v5
 			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
  

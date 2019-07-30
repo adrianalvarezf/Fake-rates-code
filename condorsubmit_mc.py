@@ -12,19 +12,19 @@ def submit():
 	year =  sys.argv[1]
 
         if year=="2016":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"):        #2016
+		# for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v4/MCl1loose2016__MCCorr2016__fakeSelMC/"):        #2016 v4
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer16_102X_nAODv4_Full2016v5/MCl1loose2016v5__MCCorr2016v5__fakeSelMC/"):        #2016 v5
                         if '_DYJetsToLL_M-50_ext2__' in ii : SAMPLESMC.add(ii)
                         elif '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
 			elif '_WJetsToLNu__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2017":
               #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2LP19/MCl1loose2017__fakeSelKinMC__puW/"):    #2017 v2 new definitions
-              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2/MCl1loose2017v2__MCCorr2017__btagPerEvent__fakeSelMC/"):    #2017 v2 No WJets or GJets 
-              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v4/MCl1loose2017__MCCorr2017__fakeSelMC/"):     #2017 v4 No WJets or GJets
-                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__fakeSelKinMC/"):  #2017 v5 
-			if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
-			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
-			elif '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
+              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__MCCorr2017v5__fakeSelMC/"):  #2017 v5 
+		#	if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
+		#	elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__MCCorr2017v5"):  #2017 v5 W+jets 
+			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2018":
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):

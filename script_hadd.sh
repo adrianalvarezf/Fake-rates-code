@@ -1,7 +1,7 @@
 
 pwd
 
-btagWP=("_none")
+btagWP=("_")
 
 for btagbin in ${btagWP[@]} 
 do
