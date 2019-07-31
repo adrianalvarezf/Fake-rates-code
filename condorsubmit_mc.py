@@ -20,9 +20,9 @@ def submit():
 
 	if year=="2017":
               #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_nAOD_v1_Full2017v2LP19/MCl1loose2017__fakeSelKinMC__puW/"):    #2017 v2 new definitions
-              #  for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__MCCorr2017v5__fakeSelMC/"):  #2017 v5 
-		#	if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
-		#	elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__MCCorr2017v5__fakeSelMC/"):  #2017 v5 
+			if '_DYJetsToLL_M-10to50-LO__' in ii : SAMPLESMC.add(ii)
+			elif '_DYJetsToLL_M-50__' in ii : SAMPLESMC.add(ii)
                 for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Fall2017_102X_nAODv4_Full2017v5/MCl1loose2017v5__MCCorr2017v5"):  #2017 v5 W+jets 
 			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 
