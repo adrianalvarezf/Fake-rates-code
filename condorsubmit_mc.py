@@ -27,10 +27,12 @@ def submit():
 			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 
 	if year=="2018":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):
+		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018__fakeSelMC/"):   #2018 v4
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv5_Full2018v5/MCl1loose2018v5__MCCorr2018v5__fakeSelMC/"):
 			if '_DYJetsToLL_M-10to50-LO_-' in ii : SAMPLESMC.add(ii)
 			elif '_DYJetsToLL_M-50-LO__' in ii : SAMPLESMC.add(ii)
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018/"):
+	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv4_GTv16_Full2018v4/MCl1loose2018__MCCorr2018/"): #2018 v4
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Autumn18_102X_nAODv5_Full2018v5/MCl1loose2018v5__MCCorr2018v5/"): #2018 v5
 			if '_WJetsToLNu-LO__' in ii : SAMPLESMC.add(ii)
 	print "MC file list loaded..."		
 	print " Year " ,year

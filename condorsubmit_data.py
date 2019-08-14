@@ -24,7 +24,8 @@ def submit():
 			elif   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
 	
 	if year == "2018":
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/"):          #2018
+	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/"):          #2018 v4
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv5_Full2018v5/DATAl1loose2018v5__fakeSel/"):          #2018 v4
 			if 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
 			elif   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
 			
