@@ -294,11 +294,20 @@ void division_forfakes_withmc(TString dir)
     c[0][0][j]= new TCanvas();c[0][0][j]->cd();
     h_div_ele[j]->Draw("E"); h_div_ele[j]->GetYaxis()->SetRangeUser(0,1); h_div_ele[j]->SetTitle(Form("Electron FR (jet pt > %dGeV)",j*5+10)); h_div_ele[j]->SetLineColor(2); h_div_ele[j]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_ele[j]->GetYaxis()->SetTitle("Ele fake rate");c[0][0][j]->SetGridx(1);c[0][0][j]->SetGridy(1); h_div_ele[j]->SetLineWidth(2); h_div_ele[j]->SetMarkerColor(2);  h_div_ele[j]->SetMarkerStyle(kFullCircle);
     h_div_noEWKcorr_ele[j]->Draw("sameE"); h_div_noEWKcorr_ele[j]->SetLineColor(1);h_div_noEWKcorr_ele[j]->SetLineWidth(2); h_div_noEWKcorr_ele[j]->SetMarkerColor(1);  h_div_noEWKcorr_ele[j]->SetMarkerStyle(kFullCircle);
-    leg->Draw();c[0][0][j]->SaveAs(Form("eleFR_pt_jet%d.png",j*5+10));
+    leg->Draw();c[0][0][j]->SaveAs(Form("eleFR_pt_jet%d.png",j*5+10));h_div_ele[j]->SaveAs(Form("eleFR_pt_jet%d.root",j*5+10));
     c[0][1][j]= new TCanvas();c[0][1][j]->cd();
     h_div_mu[j]->Draw("E"); h_div_mu[j]->GetYaxis()->SetRangeUser(0,1); h_div_mu[j]->SetTitle(Form("Muon FR (jet pt > %dGeV)",j*5+10)); h_div_mu[j]->SetLineColor(2); h_div_mu[j]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_div_mu[j]->GetYaxis()->SetTitle("Mu fake rate");c[0][1][j]->SetGridx(1);c[0][1][j]->SetGridy(1); h_div_mu[j]->SetLineWidth(2); h_div_mu[j]->SetMarkerColor(2);  h_div_mu[j]->SetMarkerStyle(kFullCircle);
     h_div_noEWKcorr_mu[j]->Draw("sameE"); h_div_noEWKcorr_mu[j]->SetLineColor(1);h_div_noEWKcorr_mu[j]->SetLineWidth(2); h_div_noEWKcorr_mu[j]->SetMarkerColor(1);  h_div_noEWKcorr_mu[j]->SetMarkerStyle(kFullCircle);
-    leg->Draw();c[0][1][j]->SaveAs(Form("muFR_pt_jet%d.png",j*5+10));
+    leg->Draw();c[0][1][j]->SaveAs(Form("muFR_pt_jet%d.png",j*5+10));h_div_mu[j]->SaveAs(Form("muFR_pt_jet%d.root",j*5+10));
+
+    c[2][0][j]= new TCanvas();c[2][0][j]->cd();
+    h_div_eta_ele[j]->Draw("E"); h_div_eta_ele[j]->GetYaxis()->SetRangeUser(0,1); h_div_eta_ele[j]->SetTitle(Form("Electron FR (jet pt > %dGeV)",j*5+10)); h_div_eta_ele[j]->SetLineColor(2); h_div_eta_ele[j]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_ele[j]->GetYaxis()->SetTitle("Ele fake rate");c[2][0][j]->SetGridx(1);c[2][0][j]->SetGridy(1); h_div_eta_ele[j]->SetLineWidth(2); h_div_eta_ele[j]->SetMarkerColor(2);  h_div_eta_ele[j]->SetMarkerStyle(kFullCircle);
+    h_div_noEWKcorr_eta_ele[j]->Draw("sameE"); h_div_noEWKcorr_eta_ele[j]->SetLineColor(1);h_div_noEWKcorr_eta_ele[j]->SetLineWidth(2); h_div_noEWKcorr_eta_ele[j]->SetMarkerColor(1);  h_div_noEWKcorr_eta_ele[j]->SetMarkerStyle(kFullCircle);
+    leg->Draw();c[2][0][j]->SaveAs(Form("eleFR_eta_jet%d.png",j*5+10));h_div_eta_ele[j]->SaveAs(Form("eleFR_eta_jet%d.root",j*5+10));
+    c[2][1][j]= new TCanvas();c[2][1][j]->cd();
+    h_div_eta_mu[j]->Draw("E"); h_div_eta_mu[j]->GetYaxis()->SetRangeUser(0,1); h_div_eta_mu[j]->SetTitle(Form("Muon FR (jet pt > %dGeV)",j*5+10)); h_div_eta_mu[j]->SetLineColor(2); h_div_eta_mu[j]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_mu[j]->GetYaxis()->SetTitle("Mu fake rate");c[2][1][j]->SetGridx(1);c[2][1][j]->SetGridy(1); h_div_eta_mu[j]->SetLineWidth(2); h_div_eta_mu[j]->SetMarkerColor(2);  h_div_eta_mu[j]->SetMarkerStyle(kFullCircle);
+    h_div_noEWKcorr_eta_mu[j]->Draw("sameE"); h_div_noEWKcorr_eta_mu[j]->SetLineColor(1);h_div_noEWKcorr_eta_mu[j]->SetLineWidth(2); h_div_noEWKcorr_eta_mu[j]->SetMarkerColor(1);  h_div_noEWKcorr_eta_mu[j]->SetMarkerStyle(kFullCircle);
+    leg->Draw();c[2][1][j]->SaveAs(Form("muFR_eta_jet%d.png",j*5+10));h_div_eta_mu[j]->SaveAs(Form("muFR_eta_jet%d.root",j*5+10));
 
     c[1][0][j]= new TCanvas();c[1][0][j]->cd();
     h_relEWKcont_numerator_ele[j]->Draw();h_relEWKcont_numerator_ele[j]->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator_ele[j]->SetTitle(Form("Electron EWK contamination (numerator) (jet pt > %dGeV)",j*5+10)); h_relEWKcont_numerator_ele[j]->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator_ele[j]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_relEWKcont_numerator_ele[j]->SetLineWidth(2); c[1][0][j]->SetGridx(1);c[1][0][j]->SetGridy(1);c[1][0][j]->SaveAs(Form("EWK_contamination_ele_numerator_jet%d.png",j*5+10));
@@ -306,15 +315,6 @@ void division_forfakes_withmc(TString dir)
     c[1][1][j]= new TCanvas();c[1][1][j]->cd();
     h_relEWKcont_numerator_mu[j]->Draw();h_relEWKcont_numerator_mu[j]->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_numerator_mu[j]->SetTitle(Form("Muon EWK contamination (numerator) (jet pt > %dGeV)",j*5+10)); h_relEWKcont_numerator_mu[j]->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_numerator_mu[j]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_relEWKcont_numerator_mu[j]->SetLineWidth(2); c[1][1][j]->SetGridx(1);c[1][1][j]->SetGridy(1);c[1][1][j]->SaveAs(Form("EWK_contamination_mu_numerator_jet%d.png",j*5+10));
     h_relEWKcont_denominator_mu[j]->Draw();h_relEWKcont_denominator_mu[j]->GetYaxis()->SetRangeUser(0,1);h_relEWKcont_denominator_mu[j]->SetTitle(Form("Muon EWK contamination (denominator) (jet pt > %dGeV)",j*5+10)); h_relEWKcont_denominator_mu[j]->GetYaxis()->SetTitle("EWK MC/DATA");h_relEWKcont_denominator_mu[j]->GetXaxis()->SetTitle("p_{T} [GeV]"); h_relEWKcont_denominator_mu[j]->SetLineWidth(2); c[1][1][j]->SetGridx(1);c[1][1][j]->SetGridy(1);c[1][1][j]->SaveAs(Form("EWK_contamination_mu_denominator_jet%d.png",j*5+10));
-
-    c[2][0][j]= new TCanvas();c[2][0][j]->cd();
-    h_div_eta_ele[j]->Draw("E"); h_div_eta_ele[j]->GetYaxis()->SetRangeUser(0,1); h_div_eta_ele[j]->SetTitle(Form("Electron FR (jet pt > %dGeV)",j*5+10)); h_div_eta_ele[j]->SetLineColor(2); h_div_eta_ele[j]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_ele[j]->GetYaxis()->SetTitle("Ele fake rate");c[2][0][j]->SetGridx(1);c[2][0][j]->SetGridy(1); h_div_eta_ele[j]->SetLineWidth(2); h_div_eta_ele[j]->SetMarkerColor(2);  h_div_eta_ele[j]->SetMarkerStyle(kFullCircle);
-    h_div_noEWKcorr_eta_ele[j]->Draw("sameE"); h_div_noEWKcorr_eta_ele[j]->SetLineColor(1);h_div_noEWKcorr_eta_ele[j]->SetLineWidth(2); h_div_noEWKcorr_eta_ele[j]->SetMarkerColor(1);  h_div_noEWKcorr_eta_ele[j]->SetMarkerStyle(kFullCircle);
-    leg->Draw();c[2][0][j]->SaveAs(Form("eleFR_eta_jet%d.png",j*5+10));
-    c[2][1][j]= new TCanvas();c[2][1][j]->cd();
-    h_div_eta_mu[j]->Draw("E"); h_div_eta_mu[j]->GetYaxis()->SetRangeUser(0,1); h_div_eta_mu[j]->SetTitle(Form("Muon FR (jet pt > %dGeV)",j*5+10)); h_div_eta_mu[j]->SetLineColor(2); h_div_eta_mu[j]->GetXaxis()->SetTitle("|#eta|"); h_div_eta_mu[j]->GetYaxis()->SetTitle("Mu fake rate");c[2][1][j]->SetGridx(1);c[2][1][j]->SetGridy(1); h_div_eta_mu[j]->SetLineWidth(2); h_div_eta_mu[j]->SetMarkerColor(2);  h_div_eta_mu[j]->SetMarkerStyle(kFullCircle);
-    h_div_noEWKcorr_eta_mu[j]->Draw("sameE"); h_div_noEWKcorr_eta_mu[j]->SetLineColor(1);h_div_noEWKcorr_eta_mu[j]->SetLineWidth(2); h_div_noEWKcorr_eta_mu[j]->SetMarkerColor(1);  h_div_noEWKcorr_eta_mu[j]->SetMarkerStyle(kFullCircle);
-    leg->Draw();c[2][1][j]->SaveAs(Form("muFR_eta_jet%d.png",j*5+10));
 
   }
   
