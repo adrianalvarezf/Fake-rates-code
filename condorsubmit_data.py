@@ -12,19 +12,18 @@ def submit():
 	year =	sys.argv[1]
 
 	if year == "2016":
-		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v4/DATAl1loose2016__fakeSel/"):   #2016 v4
-                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v5/DATAl1loose2016v5__fakeSel/"):   #2016 v5
+            #    for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv4_Full2016v5/DATAl1loose2016v5__fakeSel/"):   #2016 v5
+                for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_102X_nAODv5_Full2016v6/DATAl1loose2016v6/"):       #2016 v6
 			if   'DoubleMuon_Run2016' in ii : SAMPLESMU.add(ii)
                         elif 'DoubleEG_Run2016' in ii : SAMPLESELE.add(ii)
  
 	if year == "2017":
-	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_nAOD_v1_Full2017v2LP19/DATAl1loose2017LP19__fakeSel/"):   #2017 v2 LP
-		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v5/DATAl1loose2017v5__fakeSel/"):   #2017 v5
+		#for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv4_Full2017v5/DATAl1loose2017v5__fakeSel/"):   #2017 v5
+		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_102X_nAODv5_Full2017v6/DATAl1loose2017v6/"): #2017 v6
 			if 'SingleElectron_Run2017' in ii and '2017B' not in ii: SAMPLESELE.add(ii)
-			elif   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
+			if   'DoubleMuon_Run2017' in ii and '2017B' not in ii: SAMPLESMU.add(ii)
 	
 	if year == "2018":
-	#	for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv4_14Dec_Full2018v4/DATAl1loose2018__fakeSel/"):          #2018 v4
 		for ii in os.listdir("/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_102X_nAODv5_Full2018v5/DATAl1loose2018v5__fakeSel/"):          #2018 v5
 			if 'EGamma_Run2018'     in ii : SAMPLESELE.add(ii)
 			elif   'DoubleMuon_Run2018' in ii : SAMPLESMU.add(ii)
